@@ -1,0 +1,11 @@
+{
+  "buildCommand": "cd btg-hub && npm install && npm run build",
+  "outputDirectory": "btg-hub/dist",
+  "framework": null,
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
