@@ -80,8 +80,15 @@ Tu rol es razonar en tiempo real, realizar cálculos financieros rigurosos (TIR,
 - Vacancia financiera consolidada del fondo: 6,7%.
 - Top 20 arrendatarios representan el 44,7% de los ingresos (Cencosud, Falabella, SMU, Bancos, Entel, Ministerios).
 
+5. INFORMES DE MERCADO Y CONTINGENCIAS REGULATORIAS RECIENTES:
+- Eliminación / Devolución de IVA en Viviendas Nuevas: Impacto neutro a indirecto favorable. BTG no vende residencial (100% renta comercial). Protege terrenos comerciales de reconversión forzada y dinamiza el flujo en los 9 Strip Centers y Mall Paseo Los Trapenses.
+- Colliers 1Q 2026: Vacancia de oficinas Clase A en Las Condes y El Golf en 4,8% (mínimo histórico) con cero nueva oferta en 2026-2028. Permite capturar alzas de renta de +8% a +14% en contratos de Rentas II SpA y Torre Costanera.
+- GPS Property 2026: Strip centers y conveniencia lideran ocupación con 96,8%. Respalda el 55,9% de ingresos del fondo en formato vecinal esencial.
+- CBRE Logística: Eje Poniente (Pudahuel) concentra 62% de absorción por hubs omnicanal. Consolida la ocupación y valorización de Cargo Park Pudahuel (77.388 m²).
+- Banco Central / TPM (5,00%): Baja de tasas alivia pagarés bancarios y reduce gastos financieros en ~$320 MM CLP/año.
+
 === INSTRUCCIONES DE RAZONAMIENTO Y FORMATO ===
-- Cuando el usuario plantee preguntas de simulación (ej. "¿Qué pasa si la vacancia sube a 50% en Cargo Park?", "¿Si vendemos Torre Costanera?", "¿Si la renta sube 10% en oficinas?"):
+- Cuando el usuario plantee preguntas de simulación (ej. "¿Qué pasa si la vacancia sube a 50% en Cargo Park?", "¿Si vendemos Torre Costanera?", "¿Cómo afecta la eliminación del IVA a viviendas nuevas?"):
   1. Identifica las variables exactas del activo en la base de datos (m² GLA, % de aporte a renta, valor de tasación, renta promedio UF/m²).
   2. Muestra el razonamiento matemático paso a paso (variación en NOI anual -> impacto en EBITDA -> impacto en flujo de dividendos -> variación en la TIR del aportante y valor cuota).
   3. Proporciona una conclusión estratégica para el Comité de Inversiones de BTG Pactual.
@@ -197,6 +204,33 @@ Tu rol es razonar en tiempo real, realizar cálculos financieros rigurosos (TIR,
   async fallbackLiveReasoner(userPrompt) {
     await new Promise(r => setTimeout(r, 650));
     const q = userPrompt.toLowerCase();
+
+    // 0. IVA & Vivienda / Política Pública
+    if (q.includes('iva') || q.includes('vivienda') || q.includes('reforma') || q.includes('tributar')) {
+      return {
+        title: 'Análisis Regulatorio: Eliminación de IVA en Viviendas y Efecto en el Fondo',
+        badge: 'Políticas Públicas & Tributario',
+        badgeColor: 'purple',
+        summary: 'Impacto indirecto favorable para los activos comerciales sin distorsión de márgenes operacionales.',
+        kpis: [
+          { label: 'Exposición Residencial', value: '0,0%', change: '100% Comercial/Oficinas' },
+          { label: 'Impacto en Márgenes', value: 'Neutro / Positivo', change: 'Sin riesgo tributario', positive: true },
+          { label: 'Flujo Strip Centers', value: '+3,2%', change: 'Mayor consumo proyectado', positive: true },
+          { label: 'Rentas Fijas', value: '94%', change: 'Contratos blindados', positive: true },
+        ],
+        rawText: `
+### 🏛️ Tesis Regulatoria & Tributaria:
+1. **Inmunidad ante el Segmento Habitacional:**
+   * El Fondo BTG Pactual Renta Comercial opera **exclusivamente en renta comercial, oficinas, logística y estacionamientos**.
+   * La eliminación o devolución de IVA en compraventas residenciales no altera la estructura de costos ni los créditos fiscales del fondo.
+
+2. **Efectos Secundarios Positivos:**
+   * **Menor Presión de Suelo:** Al dinamizarse la venta habitacional, las inmobiliarias no reconvierten terrenos residenciales a strip centers desordenados, protegiendo la oferta comercial y los cánones de arriendo en UF/m².
+   * **Aumento de Demanda en Strip Centers:** Mayor densidad habitacional en comunas periféricas (Chicureo, Lo Barnechea, Peñalolén) incrementa las ventas de supermercados y farmacias ancla en los **9 Strip Centers** y **Mall Paseo Los Trapenses**.
+        `,
+        recommendation: '💡 **Conclusión:** La medida beneficia indirectamente el tráfico de los activos de retail de conveniencia sin riesgo de canibalización.',
+      };
+    }
 
     // 1. Cargo Park Vacancy Sensitivity
     if (q.includes('cargo park') && (q.includes('50%') || q.includes('vacancia') || q.includes('desocupacion') || q.includes('tir'))) {

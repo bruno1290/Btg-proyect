@@ -536,3 +536,129 @@ export const marketData = {
     trend: 'Baja',
   },
 };
+
+// ──────────────────────────────────────────────
+// NOTICIAS, INFORMES DE MERCADO & CONTINGENCIAS
+// ──────────────────────────────────────────────
+export const marketNewsAndContingencies = {
+  summaryKpis: {
+    regulatorioImpact: '🟢 Favorable / Defensivo',
+    sourcesMonitored: 'Colliers · GPS · CBRE · JLL · CChC',
+    absorptionTrend: '+18.400 m² (1Q 2026)',
+    tpmRate: '5.00% (↓ -50 bps)',
+  },
+  items: [
+    {
+      id: 'iva-vivienda-reforma',
+      category: 'regulatorio',
+      categoryLabel: 'Políticas Públicas & Tributario',
+      source: 'Ministerio de Hacienda / CChC',
+      date: 'Mayo 2026',
+      title: 'Propuesta de Eliminación / Devolución de IVA en Viviendas Nuevas y Reactivación Inmobiliaria',
+      summary: 'El Ejecutivo y gremios de la construcción discuten incentivos tributarios y subsidios para acelerar la venta del stock habitacional acumulado y destrabar permisos de edificación.',
+      impactLevel: 'positive',
+      impactBadge: '🟢 Respaldo Indirecto Favorable',
+      fundImpactAnalysis: `
+**Impacto Directo en BTG Renta Comercial:**
+1. **Sin Riesgo de Margen Comercial:** El fondo opera 100% en renta comercial, oficinas y logística (no venta residencial), por lo que las exenciones tributarias residenciales no erosionan los márgenes del fondo.
+2. **Protección de Terrenos & Oferta Controlada:** Al reactivarse el sector residencial, disminuye la presión por reconvertir suelos a proyectos comerciales masivos, manteniendo la oferta de strip centers y oficinas acotada y las rentas en UF/m² protegidas.
+3. **Mayor Dinamismo en Consumo:** La aceleración de entregas de viviendas en comunas periféricas y oriente (Chicureo, Lo Barnechea, Peñalolén) impulsa el flujo peatonal en los **9 Strip Centers** y **Mall Paseo Los Trapenses** del fondo.
+      `,
+      affectedAssets: ['Mall Paseo Los Trapenses', 'Strip Centers RM (Chicureo, Peñalolén)', 'Inmobiliaria Centros Comerciales I SpA'],
+      copilotPrompt: '¿Cómo afecta la eliminación del IVA a viviendas nuevas a nuestro portafolio de Renta Comercial y Malls de barrio?',
+    },
+    {
+      id: 'colliers-oficinas-1q26',
+      category: 'colliers',
+      categoryLabel: 'Colliers International',
+      source: 'Colliers Research 1Q 2026',
+      date: 'Abril 2026',
+      title: 'Colliers: Vacancia de Oficinas Clase A en Las Condes y El Golf Cae a 4,8% por Escasez de Nueva Oferta',
+      summary: 'El informe destaca absorción neta positiva en el eje Apoquindo / El Golf y proyecta nula entrada de metros cuadrados nuevos para el trienio 2026-2028, generando presión alcista en cánones de arriendo.',
+      impactLevel: 'positive',
+      impactBadge: '🟢 Impacto Altamente Favorable',
+      fundImpactAnalysis: `
+**Impacto Directo en BTG Renta Comercial:**
+1. **Poder de Fijación de Precios:** Beneficia directamente a los **11 edificios de Inmobiliaria Rentas II SpA** (El Bosque 500, Gertrudis Echeñique 30, Cruz del Sur) y **Torre Costanera** (Nueva Las Condes).
+2. **Potencial de Re-negociación:** En los contratos con vencimiento 2026-2028 (16% de los flujos de oficinas), el fondo puede capturar incrementos de renta de entre **+8% y +14% en UF/m²**.
+3. **Apreciación del NAV:** La menor vacancia de mercado reduce el Cap Rate exigido por los tasadores independientes (Sitka y MCYA), impulsando el valor libro de la cuota.
+      `,
+      affectedAssets: ['Torre Costanera', 'Edificio El Bosque 500', 'Gertrudis Echeñique 30', 'Rentas II SpA'],
+      copilotPrompt: '¿Cuánto aumentaría el NOI de oficinas si capturamos el alza de rentas proyectada por Colliers en El Golf?',
+    },
+    {
+      id: 'gps-strip-centers',
+      category: 'gps',
+      categoryLabel: 'GPS Property',
+      source: 'GPS Property Retail Index',
+      date: 'Mayo 2026',
+      title: 'GPS Property: Strip Centers y Tiendas de Conveniencia Lideran Resiliencia con 96,8% de Ocupación',
+      summary: 'El informe sectorial confirma que el retail vecinal anclado a farmacias, supermercados y servicios esenciales superó ampliamente al formato tradicional de grandes tiendas departamentales.',
+      impactLevel: 'positive',
+      impactBadge: '🟢 Validación Estratégica',
+      fundImpactAnalysis: `
+**Impacto Directo en BTG Renta Comercial:**
+1. **Defensa del Flujo Operacional:** El **55,9% de los ingresos del fondo** proviene de centros comerciales y strip centers de conveniencia, de los cuales el **94% corresponde a rentas fijas**.
+2. **Riesgo de Incumplimiento Mínimo:** Los inquilinos ancla (Cencosud, Falabella, Farmacias Ahumada, SMU) mantienen ratios de cobertura de arriendo sobre 4.5x, garantizando estabilidad en el reparto de dividendos trimestrales.
+      `,
+      affectedAssets: ['Inmobiliaria Centros Comerciales I SpA', 'Inmobiliaria CR SpA', 'Mall Paseo Quilpué'],
+      copilotPrompt: 'Analiza la resiliencia de los contratos de strip centers de BTG frente al informe de GPS Property.',
+    },
+    {
+      id: 'cbre-logistica-aeropuerto',
+      category: 'cbre',
+      categoryLabel: 'CBRE Logistics',
+      source: 'CBRE Industrial & Logistics MarketView',
+      date: 'Marzo 2026',
+      title: 'CBRE: Eje Poniente (Pudahuel/Aeropuerto) Concentra 62% de la Demanda por Centros de Distribución',
+      summary: 'La expansión del comercio omnicanal y requerimientos farmacéuticos mantienen la vacancia de bodegas Clase A en el sector poniente de Santiago en niveles históricamente bajos (< 3,5%).',
+      impactLevel: 'positive',
+      impactBadge: '🟢 Consolidación Logística',
+      fundImpactAnalysis: `
+**Impacto Directo en BTG Renta Comercial:**
+1. **Fortaleza de Cargo Park Pudahuel:** El centro logístico de **77.388 m² GLA** del fondo se sitúa en el epicentro de mayor demanda de la Región Metropolitana.
+2. **Opción Estratégica de Liquidez / M&A:** El alto apetito de fondos institucionales internacionales por activos logísticos en Pudahuel otorga una atractiva opción de desinversión sobre UF 1,8 mm si el fondo decide acelerar su desapalancamiento.
+      `,
+      affectedAssets: ['Centro Logístico Cargo Park Pudahuel', 'Inmobiliaria Cargo Park SpA'],
+      copilotPrompt: '¿Cuál es el valor de mercado estimado para Cargo Park según las métricas de CBRE?',
+    },
+    {
+      id: 'banco-central-tpm',
+      category: 'banco-central',
+      categoryLabel: 'Banco Central de Chile',
+      source: 'Informe de Política Monetaria (IPoM)',
+      date: 'Mayo 2026',
+      title: 'Banco Central Recorta TPM a 5,00% y Anticipa Convergencia hacia Tasa Neutral',
+      summary: 'La reducción de tasas alivia los costos de financiamiento comercial e hipotecario en Chile, fomentando la liquidez en el mercado de capitales y transacciones corporativas.',
+      impactLevel: 'positive',
+      impactBadge: '🟢 Alivio en Costo de Deuda',
+      fundImpactAnalysis: `
+**Impacto Directo en BTG Renta Comercial:**
+1. **Menor Costo de Pagarés Bancarios:** El fondo mantiene un 31% de deuda en pagarés a tasa variable/renovable que se benefician de inmediato de la caída de tasas.
+2. **Expansión del Margen Distribuible:** Reducción estimada de gastos financieros en **~$320 MM CLP anuales**, aumentando el flujo libre de caja para dividendos a los aportantes.
+3. **Compresión de Cap Rates:** Mayor atractivo relativo del dividend yield del fondo (~7,2% UF) frente a depósitos a plazo y bonos soberanos.
+      `,
+      affectedAssets: ['Estructura de Deuda', 'Fondo Matriz BTG Pactual Renta Comercial'],
+      copilotPrompt: 'Calcula el ahorro en gastos financieros para el fondo si la TPM baja otros 50 bps.',
+    },
+    {
+      id: 'santiago-centro-jll',
+      category: 'colliers',
+      categoryLabel: 'JLL Research',
+      source: 'JLL Real Estate Outlook',
+      date: 'Abril 2026',
+      title: 'JLL: Ocupación de Oficinas en Santiago Centro Inicia Recuperación con Ingreso de Sector Público y Educación',
+      summary: 'La vacancia en Santiago Centro desciende de 8,1% a 7,1%, con 14.200 m² absorbidos por organismos estatales y centros médicos universitarios durante el primer trimestre de 2026.',
+      impactLevel: 'neutral',
+      impactBadge: '🟡 Monitoreo & Recuperación',
+      fundImpactAnalysis: `
+**Impacto Directo en BTG Renta Comercial:**
+1. **Activos Beneficiados:** Edificio Torre París, Miraflores 222, Bandera 150 y Huérfanos 835.
+2. **Ahorro en Gastos Comunes por Vacancia:** Disminuye el arrastre de gastos de administración no recuperables en edificios céntricos.
+3. **Contratos Estatales AAA:** El Estado de Chile ya representa el 8,7% de los ingresos totales del fondo, consolidando su rol como el principal pagador soberano.
+      `,
+      affectedAssets: ['Torre París', 'Miraflores 222', 'Bandera 150', 'Huérfanos 835'],
+      copilotPrompt: '¿Qué peso tienen los edificios de Santiago Centro en el patrimonio de Inmobiliaria Rentas II SpA?',
+    },
+  ],
+};

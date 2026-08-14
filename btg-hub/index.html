@@ -27,6 +27,7 @@
         <li><a href="#debt">Deuda</a></li>
         <li><a href="#market">Mercado</a></li>
         <li><a href="#simulator">Simulador</a></li>
+        <li><a href="#news">Noticias & Mercado</a></li>
       </ul>
       <div class="nav-actions">
         <button class="nav-btn" id="btnExecutiveSummary">
@@ -543,6 +544,41 @@
           <!-- Dynamically populated -->
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ═══ NOTICIAS & CONTINGENCIAS DE MERCADO ═══ -->
+  <section class="section" id="news">
+    <div class="section-header reveal">
+      <div class="section-label"><span class="dot"></span> Sección 08</div>
+      <h2 class="section-title">Noticias & <span class="gradient">Contingencias de Mercado</span></h2>
+      <p class="section-subtitle">Monitoreo estratégico de consultoras líderes (Colliers, GPS, CBRE, JLL), reformas tributarias y políticas públicas con análisis de impacto directo en el Fondo</p>
+    </div>
+
+    <!-- Summary KPI Row -->
+    <div class="grid-4 reveal reveal-delay-1" id="newsKpisContainer" style="margin-bottom: var(--space-xl);">
+      <!-- Dynamically populated -->
+    </div>
+
+    <!-- Controls: Filter Pills & Search -->
+    <div class="controls-bar reveal reveal-delay-2" style="margin-bottom: var(--space-xl);">
+      <div class="filter-pills" id="newsFilterPills">
+        <button class="filter-pill active" data-filter="all">Todas las Fuentes (6)</button>
+        <button class="filter-pill" data-filter="regulatorio">Políticas Públicas & IVA</button>
+        <button class="filter-pill" data-filter="colliers">Colliers International</button>
+        <button class="filter-pill" data-filter="gps">GPS Property</button>
+        <button class="filter-pill" data-filter="cbre">CBRE Logistics</button>
+        <button class="filter-pill" data-filter="banco-central">Banco Central / TPM</button>
+      </div>
+      <div class="search-box">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7a9bb5" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="newsSearchInput" placeholder="Buscar noticia, reforma o activo..." />
+      </div>
+    </div>
+
+    <!-- News & Contingencies Grid -->
+    <div class="news-grid reveal reveal-delay-3" id="newsCardsGrid">
+      <!-- Dynamically populated by main.js -->
     </div>
   </section>
 

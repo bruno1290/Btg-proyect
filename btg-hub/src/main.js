@@ -7,7 +7,7 @@ import {
   fundInfo, kpis, balanceSheet, incomeStatement,
   corporateStructure, assetPortfolio, tasaciones,
   capRates, valuations, tenants, debtStructure,
-  historicalData, marketData,
+  historicalData, marketData, marketNewsAndContingencies,
 } from './data/fund-data.js';
 import {
   renderPatrimonioChart, renderNoiDscrChart,
@@ -854,6 +854,156 @@ function renderMarketSection() {
   }
 }
 
+// ── 16. NOTICIAS & CONTINGENCIAS DE MERCADO ──────────────
+let newsCurrentFilter = 'all';
+let newsSearchQuery = '';
+
+function renderNewsSection() {
+  const kpiContainer = document.getElementById('newsKpisContainer');
+  const gridContainer = document.getElementById('newsCardsGrid');
+  const filterPills = document.querySelectorAll('#newsFilterPills .filter-pill');
+  const searchInput = document.getElementById('newsSearchInput');
+
+  if (!gridContainer || !marketNewsAndContingencies) return;
+
+  // Render KPI summary
+  if (kpiContainer) {
+    const kpisData = marketNewsAndContingencies.summaryKpis;
+    kpiContainer.innerHTML = `
+      <div class="kpi-card" style="border-top: 3px solid var(--accent-success);">
+        <div class="kpi-label">Impacto Regulatorio Neto</div>
+        <div class="kpi-value" style="font-size: 1.3rem; color: var(--accent-success);">${kpisData.regulatorioImpact}</div>
+        <div class="kpi-sub">Foco en Renta Comercial & Flujo</div>
+      </div>
+      <div class="kpi-card" style="border-top: 3px solid var(--accent-primary);">
+        <div class="kpi-label">Fuentes Monitoreadas</div>
+        <div class="kpi-value" style="font-size: 1.15rem; color: #ffffff;">5 Consultoras</div>
+        <div class="kpi-sub">${kpisData.sourcesMonitored}</div>
+      </div>
+      <div class="kpi-card" style="border-top: 3px solid var(--accent-light-blue);">
+        <div class="kpi-label">Absorción Neta 1Q</div>
+        <div class="kpi-value" style="font-size: 1.3rem; color: var(--accent-light-blue);">${kpisData.absorptionTrend}</div>
+        <div class="kpi-sub">Reactivación Las Condes / Apoquindo</div>
+      </div>
+      <div class="kpi-card" style="border-top: 3px solid var(--accent-tertiary);">
+        <div class="kpi-label">Tasa Política Monetaria</div>
+        <div class="kpi-value" style="font-size: 1.3rem; color: var(--accent-tertiary);">${kpisData.tpmRate}</div>
+        <div class="kpi-sub">Alivio en Gastos Financieros</div>
+      </div>
+    `;
+  }
+
+  // Filter cards function
+  function updateNewsCards() {
+    const filtered = marketNewsAndContingencies.items.filter(item => {
+      const matchFilter = (newsCurrentFilter === 'all') || (item.category === newsCurrentFilter);
+      const matchSearch = !newsSearchQuery ||
+        item.title.toLowerCase().includes(newsSearchQuery.toLowerCase()) ||
+        item.summary.toLowerCase().includes(newsSearchQuery.toLowerCase()) ||
+        item.categoryLabel.toLowerCase().includes(newsSearchQuery.toLowerCase()) ||
+        (item.affectedAssets || []).some(a => a.toLowerCase().includes(newsSearchQuery.toLowerCase()));
+      return matchFilter && matchSearch;
+    });
+
+    if (filtered.length === 0) {
+      gridContainer.innerHTML = `
+        <div style="grid-column: 1 / -1; padding: 40px; text-align: center; color: var(--text-muted); background: var(--bg-card); border-radius: var(--radius-lg); border: 1px dashed var(--border-subtle);">
+          🔍 No se encontraron reportes o contingencias que coincidan con la búsqueda.
+        </div>
+      `;
+      return;
+    }
+
+    gridContainer.innerHTML = filtered.map(item => {
+      const isPositive = item.impactLevel === 'positive';
+      const isNeutral = item.impactLevel === 'neutral';
+      const impactClass = isPositive ? '' : isNeutral ? 'neutral' : 'risk';
+
+      return `
+        <div class="news-card">
+          <div>
+            <div class="news-header-meta">
+              <span class="news-source-tag ${item.category}">
+                <span>●</span> ${item.categoryLabel}
+              </span>
+              <span class="news-date">${item.date} · ${item.source}</span>
+            </div>
+
+            <h3 class="news-title">${item.title}</h3>
+            <p class="news-summary-text">${item.summary}</p>
+
+            <div class="contingency-impact-box ${impactClass}">
+              <div class="contingency-impact-header">
+                <span class="contingency-impact-label">Impacto en BTG Renta Comercial:</span>
+                <span class="tag ${isPositive ? 'green' : isNeutral ? 'gold' : 'red'}" style="font-size: 0.65rem;">
+                  ${item.impactBadge}
+                </span>
+              </div>
+              <div class="contingency-impact-body">
+                ${item.fundImpactAnalysis
+                  .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                  .replace(/\n\n/g, '<br/>')
+                }
+              </div>
+              ${item.affectedAssets ? `
+                <div class="affected-assets-row">
+                  <span style="font-size: 0.65rem; color: var(--text-muted); align-self: center; margin-right: 4px;">Activos Vinculados:</span>
+                  ${item.affectedAssets.map(a => `<span class="affected-asset-tag">${a}</span>`).join('')}
+                </div>
+              ` : ''}
+            </div>
+          </div>
+
+          <div class="news-card-actions">
+            <button class="btn-news-copilot" data-prompt="${item.copilotPrompt}">
+              <span>✨</span> Analizar con Copilot IA
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Connect Copilot buttons on cards
+    gridContainer.querySelectorAll('.btn-news-copilot').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const prompt = btn.dataset.prompt;
+        const drawer = document.getElementById('aiChatDrawer');
+        const chatInput = document.getElementById('aiChatInput');
+        const chatForm = document.getElementById('aiChatForm');
+
+        if (drawer && chatInput && chatForm) {
+          drawer.classList.add('active');
+          chatInput.value = prompt;
+          setTimeout(() => {
+            chatForm.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+          }, 150);
+        }
+      });
+    });
+  }
+
+  // Filter Pills Event
+  filterPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      filterPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      newsCurrentFilter = pill.dataset.filter;
+      updateNewsCards();
+    });
+  });
+
+  // Search Input Event
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      newsSearchQuery = e.target.value;
+      updateNewsCards();
+    });
+  }
+
+  // Initial render
+  updateNewsCards();
+}
+
 import { BTGAIEngine } from './ai-engine.js';
 
 // ── 16. AI Real Estate Copilot Chat ──────────────────────
@@ -1112,6 +1262,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderTenantMetrics();
   renderDebtKpis();
   renderMarketSection();
+  renderNewsSection();
 
   // Initialize simulator
   initSimulator();
