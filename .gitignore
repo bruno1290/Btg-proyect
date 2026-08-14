@@ -1,0 +1,13 @@
+# Dependencies
+btg-hub/node_modules/
+node_modules/
+
+# Production build
+btg-hub/dist/
+dist/
+
+# OS and Editor files
+.DS_Store
+.vscode/
+.idea/
+*.log
