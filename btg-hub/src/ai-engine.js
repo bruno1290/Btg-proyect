@@ -121,28 +121,92 @@ Tu rol es razonar en tiempo real, realizar cálculos financieros rigurosos (TIR,
   async callLiveLLM(userPrompt) {
     const systemPrompt = this.buildSystemPrompt();
 
-    // Prepare API endpoint & headers based on provider
+    // ── GOOGLE GEMINI (With auto-fallback and model discovery) ──
+    if (this.provider === 'gemini') {
+      const candidateModels = [
+        this.model || 'gemini-1.5-flash',
+        'gemini-2.0-flash',
+        'gemini-1.5-flash-latest',
+        'gemini-1.5-flash-001',
+        'gemini-1.5-flash-002',
+        'gemini-1.5-pro-latest',
+        'gemini-1.5-pro',
+        'gemini-pro',
+      ];
+
+      let lastError = null;
+
+      for (const m of candidateModels) {
+        try {
+          const endpoints = [
+            `https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${encodeURIComponent(this.apiKey)}`,
+            `https://generativelanguage.googleapis.com/v1/models/${m}:generateContent?key=${encodeURIComponent(this.apiKey)}`,
+          ];
+
+          for (const url of endpoints) {
+            const body = {
+              contents: [
+                {
+                  role: 'user',
+                  parts: [{ text: `${systemPrompt}\n\n=== CONSULTA DEL COMITÉ / USUARIO ===\n${userPrompt}` }]
+                }
+              ],
+              generationConfig: {
+                temperature: 0.2,
+                maxOutputTokens: 1500,
+              }
+            };
+
+            const resp = await fetch(url, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-goog-api-key': this.apiKey,
+              },
+              body: JSON.stringify(body),
+            });
+
+            if (resp.ok) {
+              const data = await resp.json();
+              const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+              if (aiText) {
+                // Save working model for next time
+                this.model = m;
+                localStorage.setItem('btg_ai_model', m);
+
+                return {
+                  isLiveLLM: true,
+                  modelUsed: m,
+                  providerUsed: 'Google Gemini',
+                  title: 'Análisis de Inteligencia Artificial en Vivo',
+                  badge: `Google Gemini (${m})`,
+                  badgeColor: 'green',
+                  summary: 'Razonamiento financiero generado en tiempo real con datos 1Q 2026.',
+                  rawText: aiText,
+                };
+              }
+            } else {
+              const errData = await resp.json().catch(() => ({}));
+              lastError = errData.error?.message || `HTTP ${resp.status}`;
+            }
+          }
+        } catch (e) {
+          lastError = e.message;
+        }
+      }
+
+      console.warn('All Gemini candidate models failed:', lastError);
+      const fallback = await this.fallbackLiveReasoner(userPrompt);
+      fallback.apiError = lastError;
+      return fallback;
+    }
+
+    // ── OTHER PROVIDERS (Groq, OpenAI, OpenRouter) ────────────
     let url = '';
     let headers = { 'Content-Type': 'application/json' };
     let body = {};
 
-    if (this.provider === 'gemini') {
-      const geminiModel = this.model || 'gemini-1.5-flash';
-      url = `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${encodeURIComponent(this.apiKey)}`;
-      headers['x-goog-api-key'] = this.apiKey;
-      body = {
-        system_instruction: {
-          parts: [{ text: systemPrompt }]
-        },
-        contents: [
-          { role: 'user', parts: [{ text: userPrompt }] }
-        ],
-        generationConfig: {
-          temperature: 0.2,
-          maxOutputTokens: 1500,
-        }
-      };
-    } else if (this.provider === 'groq') {
+    if (this.provider === 'groq') {
       url = 'https://api.groq.com/openai/v1/chat/completions';
       headers['Authorization'] = `Bearer ${this.apiKey}`;
       body = {
@@ -194,13 +258,7 @@ Tu rol es razonar en tiempo real, realizar cálculos financieros rigurosos (TIR,
       }
 
       const data = await resp.json();
-      let aiText = '';
-
-      if (this.provider === 'gemini') {
-        aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Sin respuesta.';
-      } else {
-        aiText = data.choices?.[0]?.message?.content || 'Sin respuesta.';
-      }
+      const aiText = data.choices?.[0]?.message?.content || 'Sin respuesta.';
 
       return {
         isLiveLLM: true,
