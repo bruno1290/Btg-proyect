@@ -863,6 +863,15 @@ function initAICopilot() {
   const triggerBtn = document.getElementById('btnOpenAICopilot');
   const closeBtn = document.getElementById('btnCloseAIChat');
   const clearBtn = document.getElementById('btnClearAIChat');
+  const settingsBtn = document.getElementById('btnAISettings');
+  const settingsCloseBtn = document.getElementById('btnCloseAISettings');
+  const settingsPanel = document.getElementById('aiSettingsPanel');
+  const providerSelect = document.getElementById('aiProviderSelect');
+  const apiKeyInput = document.getElementById('aiApiKeyInput');
+  const modelInput = document.getElementById('aiModelInput');
+  const saveSettingsBtn = document.getElementById('btnSaveAISettings');
+  const clearKeyBtn = document.getElementById('btnClearAIKey');
+
   const drawer = document.getElementById('aiChatDrawer');
   const chatForm = document.getElementById('aiChatForm');
   const chatInput = document.getElementById('aiChatInput');
@@ -870,6 +879,12 @@ function initAICopilot() {
   const promptChips = document.querySelectorAll('#aiSuggestions .ai-prompt-chip');
 
   if (!triggerBtn || !drawer || !chatForm || !chatInput || !messagesContainer) return;
+
+  // Load existing credentials into settings panel
+  const creds = aiEngine.getCredentials();
+  if (providerSelect) providerSelect.value = creds.provider;
+  if (apiKeyInput) apiKeyInput.value = creds.apiKey;
+  if (modelInput) modelInput.value = creds.model;
 
   // Toggle drawer
   triggerBtn.addEventListener('click', () => {
@@ -881,6 +896,64 @@ function initAICopilot() {
 
   if (closeBtn) {
     closeBtn.addEventListener('click', () => drawer.classList.remove('active'));
+  }
+
+  // Toggle Settings Panel
+  if (settingsBtn && settingsPanel) {
+    settingsBtn.addEventListener('click', () => {
+      settingsPanel.style.display = settingsPanel.style.display === 'none' ? 'block' : 'none';
+    });
+  }
+
+  if (settingsCloseBtn && settingsPanel) {
+    settingsCloseBtn.addEventListener('click', () => {
+      settingsPanel.style.display = 'none';
+    });
+  }
+
+  // Auto update model name on provider change
+  if (providerSelect && modelInput) {
+    providerSelect.addEventListener('change', () => {
+      const p = providerSelect.value;
+      if (p === 'groq') modelInput.value = 'llama-3.3-70b-versatile';
+      else if (p === 'openai') modelInput.value = 'gpt-4o-mini';
+      else if (p === 'openrouter') modelInput.value = 'deepseek/deepseek-chat';
+      else if (p === 'gemini') modelInput.value = 'gemini-1.5-flash';
+    });
+  }
+
+  // Save Settings
+  if (saveSettingsBtn && settingsPanel) {
+    saveSettingsBtn.addEventListener('click', () => {
+      const p = providerSelect.value;
+      const key = apiKeyInput.value.trim();
+      const m = modelInput.value.trim();
+      aiEngine.setCredentials(p, key, m);
+      settingsPanel.style.display = 'none';
+
+      // Notification bubble
+      const notifMsg = document.createElement('div');
+      notifMsg.className = 'ai-msg-assistant';
+      notifMsg.innerHTML = `
+        <div class="ai-response-card green">
+          <div class="ai-response-title" style="color: var(--accent-success);">⚙️ Configuración Guardada</div>
+          <div class="ai-response-text">
+            Conectado al proveedor: <strong>${p.toUpperCase()}</strong> (${m}). ${key ? 'Clave de API activa para razonamiento LLM en vivo.' : 'Usando motor matemático local.'}
+          </div>
+        </div>
+      `;
+      messagesContainer.appendChild(notifMsg);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    });
+  }
+
+  // Clear Key
+  if (clearKeyBtn && settingsPanel) {
+    clearKeyBtn.addEventListener('click', () => {
+      if (apiKeyInput) apiKeyInput.value = '';
+      aiEngine.setCredentials('groq', '', 'llama-3.3-70b-versatile');
+      settingsPanel.style.display = 'none';
+    });
   }
 
   // Clear chat
@@ -939,7 +1012,7 @@ function initAICopilot() {
         <span class="dot"></span>
         <span class="dot"></span>
         <span class="dot"></span>
-        <span style="margin-left: 6px;">Analizando modelos y datos financieros...</span>
+        <span style="margin-left: 6px;">Razonando en vivo con datos del fondo...</span>
       </div>
     `;
     messagesContainer.appendChild(typingMsg);
@@ -966,8 +1039,9 @@ function initAICopilot() {
         </div>
       `).join('');
 
-      // Simple Markdown converter for lists and bold
-      const formattedContent = res.content
+      // Simple Markdown converter for lists, bold, and math
+      const textToFormat = res.rawText || res.content || '';
+      const formattedContent = textToFormat
         .replace(/### (.*?)\n/g, '<h3>$1</h3>')
         .replace(/#### (.*?)\n/g, '<h4>$1</h4>')
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
@@ -984,6 +1058,7 @@ function initAICopilot() {
           ${kpisHtml ? `<div class="ai-response-kpis">${kpisHtml}</div>` : ''}
           <div class="ai-response-text">${formattedContent}</div>
           ${res.recommendation ? `<div class="ai-recommendation-box">${res.recommendation}</div>` : ''}
+          ${res.apiError ? `<div style="font-size: 0.65rem; color: var(--accent-danger); margin-top: 6px;">(Nota: LLM API error: ${res.apiError}, calculado con motor analítico local)</div>` : ''}
         </div>
       `;
 

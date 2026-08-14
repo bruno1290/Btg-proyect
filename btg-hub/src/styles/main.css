@@ -1596,6 +1596,19 @@ input[type="range"]::-webkit-slider-thumb:hover {
   background: rgba(255, 255, 255, 0.08);
 }
 
+.ai-settings-panel {
+  position: absolute;
+  top: 56px;
+  left: 0;
+  right: 0;
+  background: rgba(6, 26, 46, 0.98);
+  border-bottom: 1px solid var(--border-glow);
+  padding: var(--space-md) var(--space-lg);
+  z-index: 10;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  animation: fadeInDown 0.25s ease-out;
+}
+
 .ai-chat-messages {
   flex: 1;
   overflow-y: auto;

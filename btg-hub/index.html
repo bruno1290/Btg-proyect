@@ -601,12 +601,57 @@
         </div>
       </div>
       <div class="ai-chat-header-actions">
+        <button class="ai-chat-btn-icon" id="btnAISettings" title="Configurar modelo LLM en vivo">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
         <button class="ai-chat-btn-icon" id="btnClearAIChat" title="Limpiar conversación">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
         </button>
         <button class="ai-chat-btn-icon" id="btnCloseAIChat" title="Cerrar chat">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
+      </div>
+    </div>
+
+    <!-- Live LLM Settings Overlay -->
+    <div class="ai-settings-panel" id="aiSettingsPanel" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <h5 style="margin: 0; font-size: 0.88rem; color: #ffffff; font-weight: 700;">⚙️ Conexión de IA en Vivo (LLM)</h5>
+        <button class="ai-chat-btn-icon" id="btnCloseAISettings">&times;</button>
+      </div>
+      <p style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4;">
+        Conecta un modelo LLM en vivo (Groq, OpenAI, DeepSeek o Gemini). Si no ingresas clave, se usará el motor financiero matemático local.
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div>
+          <label style="font-size: 0.7rem; color: var(--text-secondary); font-weight: 600; display: block; margin-bottom: 4px;">Proveedor de IA:</label>
+          <select id="aiProviderSelect" style="width: 100%; background: var(--bg-deep); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 6px 10px; color: #ffffff; font-size: 0.78rem; outline: none;">
+            <option value="groq">Groq (Ultra-Rápido · Llama 3.3 70B / DeepSeek R1)</option>
+            <option value="openai">OpenAI (GPT-4o / GPT-4o-mini)</option>
+            <option value="openrouter">OpenRouter (DeepSeek R1 / Claude / Llama 3)</option>
+            <option value="gemini">Google Gemini (Gemini 1.5 Flash)</option>
+          </select>
+        </div>
+
+        <div>
+          <label style="font-size: 0.7rem; color: var(--text-secondary); font-weight: 600; display: block; margin-bottom: 4px;">API Key:</label>
+          <input type="password" id="aiApiKeyInput" placeholder="sk-..." style="width: 100%; background: var(--bg-deep); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 6px 10px; color: #ffffff; font-size: 0.78rem; outline: none;" />
+        </div>
+
+        <div>
+          <label style="font-size: 0.7rem; color: var(--text-secondary); font-weight: 600; display: block; margin-bottom: 4px;">Nombre del Modelo:</label>
+          <input type="text" id="aiModelInput" value="llama-3.3-70b-versatile" style="width: 100%; background: var(--bg-deep); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 6px 10px; color: #ffffff; font-size: 0.78rem; outline: none;" />
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-top: 6px;">
+          <button id="btnSaveAISettings" style="flex: 1; padding: 7px; background: var(--accent-primary); border: none; border-radius: var(--radius-sm); color: #ffffff; font-size: 0.75rem; font-weight: 700; cursor: pointer;">
+            Guardar Configuración
+          </button>
+          <button id="btnClearAIKey" style="padding: 7px 12px; background: rgba(239, 68, 68, 0.2); border: 1px solid var(--accent-danger); border-radius: var(--radius-sm); color: var(--accent-danger); font-size: 0.72rem; cursor: pointer;">
+            Desconectar
+          </button>
+        </div>
       </div>
     </div>
 
