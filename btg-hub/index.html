@@ -11,6 +11,7 @@
 
   <!-- ═══ NAVIGATION ═══ -->
   <nav class="navbar" id="navbar">
+    <div id="nav-gradient"></div>
     <div class="navbar-inner">
       <a href="#hero" class="navbar-brand">
         <div class="logo-icon">
@@ -34,6 +35,9 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
           Resumen Ejecutivo
         </button>
+        <a href="https://www.mercadosenlinea.cl/invertir/instrumento/fondo-de-inversion/cfibtgrca" target="_blank" rel="noopener" class="btn-invertir-top">
+          Invertir ↗
+        </a>
       </div>
       <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -41,8 +45,8 @@
     </div>
   </nav>
 
-  <!-- ═══ HERO SECTION ═══ -->
-  <section class="hero section" id="hero">
+  <!-- ═══ HERO SECTION (Official Style) ═══ -->
+  <section class="hero section official-hero" id="hero" style="background-image: linear-gradient(rgba(6, 26, 46, 0.75), rgba(6, 26, 46, 0.95)), url('https://btgpactual.cl/rentacomercial/wp-content/uploads/2023/10/banner_home_RC.jpg'); background-size: cover; background-position: center;">
     <div class="hero-badge">
       <span class="live-dot"></span>
       Datos al 1Q 2026 · RUN CMF 7224-9
@@ -59,17 +63,42 @@
       </div>
     </div>
 
-    <h1>
-      <span class="gradient">Intelligence Hub</span><br/>
-      <strong>Renta Comercial</strong> Fondo de Inversión
+    <h1 style="font-size: 2.8rem; font-weight: 800; line-height: 1.2; max-width: 900px; margin: 0 auto var(--space-md);">
+      Portafolio diversificado de <br/>
+      <span class="gradient">centros comerciales, oficinas y bodegas</span>
     </h1>
 
-    <p class="hero-subtitle">
-      Plataforma integral de análisis del fondo de inversión inmobiliario líder del mercado chileno. 
-      34 activos · 357.000+ m² · 5 sociedades de inversión.
+    <p class="hero-subtitle" style="font-size: 1.1rem; max-width: 750px; color: #b8cfe0;">
+      Fondo de Inversión BTG Pactual Renta Comercial · Líder en renta inmobiliaria en Chile. 
+      <strong>34 activos · 357.394 m² GLA · USD 870M+ valorizados</strong>.
     </p>
 
-    <div class="hero-kpis" id="heroKpis">
+    <!-- Official 3 Calugas (Cards) -->
+    <div class="calugas-grid" id="calugasHero">
+      <div class="caluga-card" onclick="document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' })">
+        <div class="caluga-num">01</div>
+        <h3>¿Por qué invertir?</h3>
+        <p>Acceso a renta inmobiliaria de alta calidad en Chile con dividendos periódicos indexados a la UF y respaldo defensivo.</p>
+        <span class="caluga-link">Ver análisis financiero →</span>
+      </div>
+
+      <div class="caluga-card" onclick="document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth' })">
+        <div class="caluga-num">02</div>
+        <h3>¿En qué invertimos?</h3>
+        <p>Portafolio diversificado en centros comerciales (55,9%), oficinas corporativas (42,4%) y bodegas logísticas (1,7%).</p>
+        <span class="caluga-link">Ver portafolio 3D →</span>
+      </div>
+
+      <div class="caluga-card" onclick="window.open('https://www.mercadosenlinea.cl/invertir/instrumento/fondo-de-inversion/cfibtgrca', '_blank')">
+        <div class="caluga-num">03</div>
+        <h3>¿Cómo invertir?</h3>
+        <p>100% online a través de <strong>Mercados en Línea</strong> de BTG Pactual o con tu corredor de bolsa habitual.</p>
+        <span class="caluga-link" style="color: var(--accent-tertiary);">Plataforma Mercados en Línea ↗</span>
+      </div>
+    </div>
+
+    <!-- Hero KPIs -->
+    <div class="hero-kpis" id="heroKpis" style="margin-top: var(--space-xl);">
       <div class="hero-kpi">
         <div class="kpi-label">Patrimonio Neto</div>
         <div class="kpi-value" data-counter="355182">M$0</div>
@@ -91,14 +120,9 @@
     <div class="hero-highlights">
       <span class="highlight-badge accent-green">✓ Renovación del Fondo por 5 años</span>
       <span class="highlight-badge accent-gold">↗ Tasación de activos sube 2,5%</span>
-      <span class="highlight-badge">📊 Valorización sube respecto 1°S 2025</span>
+      <span class="highlight-badge">📊 Sitka: $35.390 · MCYA: $37.288</span>
       <span class="highlight-badge accent-green">💰 Pago bono corporativo UF 1,5 mm</span>
-      <span class="highlight-badge accent-gold">🏢 Reactivación oficinas Santiago Centro</span>
-    </div>
-
-    <div class="scroll-indicator">
-      <div class="mouse"></div>
-      <span>Scroll</span>
+      <span class="highlight-badge accent-gold">🏢 Vacancia oficinas cae a 7,1%</span>
     </div>
   </section>
 
@@ -582,10 +606,11 @@
     </div>
   </section>
 
-  <!-- ═══ FOOTER ═══ -->
+  <!-- ═══ FOOTER (Official BTG Pactual Style) ═══ -->
   <footer class="footer">
     <div class="footer-inner">
-      <div class="footer-top">
+      <div class="footer-top" style="display: grid; grid-template-columns: 280px 1fr 220px; gap: var(--space-2xl); align-items: start;">
+        <!-- Brand -->
         <div class="footer-logo">
           <div class="footer-logo-circle">
             <span>btg</span>
@@ -593,21 +618,57 @@
           <div class="footer-logo-text">
             <strong>pactual</strong> asset management
           </div>
-        </div>
-        <div class="footer-contact">
-          <div>800 386 800</div>
-          <div><a href="mailto:rentacomercial@btgpactual.com">rentacomercial@btgpactual.com</a></div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <div class="footer-text">
-          <p>BTG Pactual Renta Comercial – Intelligence Hub · 2026</p>
-          <p class="disclaimer">
-            Este material no debe servir como la única fuente de información en el proceso de decisión de los inversionistas. La rentabilidad o ganancia obtenida en el pasado por este fondo, no garantiza que ella se repita en el futuro. Los valores de las cuotas de los fondos son variables. BTG Pactual no asegura o garantiza de ningún modo el resultado o rendimiento de las inversiones. Infórmese de las características esenciales de la inversión en este fondo, las que se encuentran contenidas en su reglamento interno.
+          <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: var(--space-md); line-height: 1.6;">
+            Fondo de Inversión BTG Pactual Renta Comercial (RUN CMF 7224-9). Administrado por BTG Pactual Chile S.A. Administradora General de Fondos.
           </p>
         </div>
+
+        <!-- Multi-Column Links -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl);" class="footer-columns">
+          <div>
+            <h5 style="font-size: 0.82rem; font-weight: 700; color: #ffffff; text-transform: uppercase; margin-bottom: var(--space-md);">Acerca del Fondo</h5>
+            <ul style="list-style: none; font-size: 0.75rem; display: flex; flex-direction: column; gap: 8px; color: var(--text-secondary);">
+              <li><a href="#dashboard" style="color: inherit; text-decoration: none;">Dashboard Financiero</a></li>
+              <li><a href="#portfolio" style="color: inherit; text-decoration: none;">Estructura Societaria</a></li>
+              <li><a href="#news" style="color: inherit; text-decoration: none;">Contingencias de Mercado</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h5 style="font-size: 0.82rem; font-weight: 700; color: #ffffff; text-transform: uppercase; margin-bottom: var(--space-md);">Portafolio de Activos</h5>
+            <ul style="list-style: none; font-size: 0.75rem; display: flex; flex-direction: column; gap: 8px; color: var(--text-secondary);">
+              <li><a href="#portfolio" style="color: inherit; text-decoration: none;">Proyección 3D de Activos</a></li>
+              <li><a href="#tenants" style="color: inherit; text-decoration: none;">Top 20 Arrendatarios</a></li>
+              <li><a href="#valuations" style="color: inherit; text-decoration: none;">Tasaciones & Cap Rates</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h5 style="font-size: 0.82rem; font-weight: 700; color: #ffffff; text-transform: uppercase; margin-bottom: var(--space-md);">Inversionistas</h5>
+            <ul style="list-style: none; font-size: 0.75rem; display: flex; flex-direction: column; gap: 8px; color: var(--text-secondary);">
+              <li><a href="#simulator" style="color: inherit; text-decoration: none;">Simulador de Valor Cuota</a></li>
+              <li><a href="https://www.mercadosenlinea.cl/invertir/instrumento/fondo-de-inversion/cfibtgrca" target="_blank" rel="noopener" style="color: var(--accent-tertiary); text-decoration: none;">Mercados en Línea ↗</a></li>
+              <li><a href="https://www.rentacomercial.cl" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">www.rentacomercial.cl ↗</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Contact info -->
+        <div class="footer-contact" style="text-align: right;">
+          <div style="font-size: 1.15rem; font-weight: 800; color: #ffffff; margin-bottom: 4px;">800 386 800</div>
+          <div style="font-size: 0.8rem; margin-bottom: var(--space-md);"><a href="mailto:rentacomercial@btgpactual.com" style="color: var(--accent-light-blue); text-decoration: none;">rentacomercial@btgpactual.com</a></div>
+          <a href="https://www.mercadosenlinea.cl/invertir/instrumento/fondo-de-inversion/cfibtgrca" target="_blank" class="btn-invertir-top" style="display: inline-block;">
+            Invertir en el Fondo ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom" style="margin-top: var(--space-2xl); padding-top: var(--space-lg); border-top: 1px solid var(--border-subtle);">
         <div class="footer-text">
-          <a href="https://www.rentacomercial.cl" target="_blank">www.rentacomercial.cl</a>
+          <p style="font-size: 0.8rem; font-weight: 600; color: #ffffff; margin-bottom: 8px;">BTG Pactual Renta Comercial – Intelligence Hub · 2026</p>
+          <p class="disclaimer" style="font-size: 0.7rem; line-height: 1.6; color: var(--text-muted); text-align: justify;">
+            Este material no debe servir como la única fuente de información en el proceso de decisión de los inversionistas, quienes, antes de tomar cualquier decisión, deben realizar una evaluación a fondo del producto y sus riesgos y contrastarlos con sus objetivos personales y su perfil de riesgo. Es importante tener en cuenta que “La rentabilidad o ganancia obtenida en el pasado por este fondo, no garantiza que ella se repita en el futuro. Los valores de las cuotas de los fondos son variables”. BTG Pactual no asegura o garantiza de ningún modo el resultado o rendimiento de las inversiones; y por lo tanto, esta información no constituye en caso alguna garantía o declaración respecto del éxito, la rentabilidad, el rendimiento, el resultado, la consecuencia o el beneficio esperado o proyectado. Infórmese de las características esenciales de la inversión en este fondo, las que se encuentran contenidas en su reglamento interno.
+          </p>
         </div>
       </div>
     </div>

@@ -269,6 +269,30 @@ body::before {
   transform: translateY(-1px);
 }
 
+.btn-invertir-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  background: var(--accent-tertiary);
+  border: 1px solid var(--accent-tertiary);
+  border-radius: var(--radius-sm);
+  color: var(--bg-deep);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(240, 180, 41, 0.3);
+}
+
+.btn-invertir-top:hover {
+  background: #f5c453;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(240, 180, 41, 0.5);
+}
+
 .nav-mobile-toggle {
   display: none;
   background: none;
@@ -276,6 +300,88 @@ body::before {
   color: var(--text-primary);
   cursor: pointer;
   padding: var(--space-sm);
+}
+
+/* ── Official Calugas Grid ─────────────────────────────── */
+.calugas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  max-width: 1100px;
+  width: 100%;
+  margin: var(--space-2xl) auto var(--space-lg);
+  text-align: left;
+}
+
+@media (max-width: 900px) {
+  .calugas-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.caluga-card {
+  background: rgba(6, 26, 46, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-top: 3px solid var(--accent-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.caluga-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-light-blue);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(43, 140, 255, 0.2);
+}
+
+.caluga-card:nth-child(2) {
+  border-top-color: var(--accent-light-blue);
+}
+
+.caluga-card:nth-child(3) {
+  border-top-color: var(--accent-tertiary);
+}
+
+.caluga-num {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--accent-primary);
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.caluga-card h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: var(--space-sm);
+}
+
+.caluga-card p {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+}
+
+.caluga-link {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-light-blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap 0.2s ease;
+}
+
+.caluga-card:hover .caluga-link {
+  gap: 8px;
 }
 
 /* ── Sections ──────────────────────────────────────────── */
