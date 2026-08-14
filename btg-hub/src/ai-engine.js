@@ -119,7 +119,10 @@ Razona en profundidad como un Director de Private Equity Real Estate. Desglosa l
     // ── GOOGLE GEMINI ──
     if (this.provider === 'gemini') {
       const candidateModels = [
+        'gemini-3-flash-preview',
+        'gemini-2.5-flash',
         'gemini-2.0-flash',
+        'gemini-2.0-flash-exp',
         'gemini-1.5-flash-latest',
         'gemini-1.5-flash',
         'gemini-1.5-pro-latest',
