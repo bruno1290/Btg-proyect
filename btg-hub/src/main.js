@@ -81,39 +81,7 @@ function initNavbarAndScroll() {
   }
 }
 
-// ── 2. Executive Summary Modal ───────────────────────────
-function initExecutiveModal() {
-  const modal = document.getElementById('executiveModal');
-  const btnOpen = document.getElementById('btnExecutiveSummary');
-  const btnClose = document.getElementById('modalClose');
-
-  if (!modal || !btnOpen || !btnClose) return;
-
-  function openModal() {
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  btnOpen.addEventListener('click', openModal);
-  btnClose.addEventListener('click', closeModal);
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) {
-      closeModal();
-    }
-  });
-}
-
-// ── 3. Animated Counters ─────────────────────────────────
+// ── 2. Animated Counters ─────────────────────────────────
 function initCounters() {
   const counters = document.querySelectorAll('[data-counter]');
   const observer = new IntersectionObserver((entries) => {
@@ -1235,9 +1203,6 @@ function initAICopilot() {
 document.addEventListener('DOMContentLoaded', () => {
   // Navigation & Scroll
   initNavbarAndScroll();
-
-  // Executive Summary Modal
-  initExecutiveModal();
 
   // AI Real Estate Copilot
   initAICopilot();

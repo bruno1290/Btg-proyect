@@ -3,24 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BTG Pactual Renta Comercial – Intelligence Hub</title>
+  <title>BTG Pactual Renta Comercial – Hub</title>
   <meta name="description" content="Dashboard interactivo del Fondo BTG Pactual Renta Comercial. Portafolio inmobiliario, indicadores financieros, tasaciones, arrendatarios y simulador de valor cuota." />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230a2d4d'/><text x='16' y='22' font-size='14' text-anchor='middle' fill='%23ffffff' font-family='Inter' font-weight='800'>btg</text></svg>" />
 </head>
 <body>
 
-  <!-- ═══ NAVIGATION ═══ -->
+  <!-- ═══ NAVIGATION (Minimalist) ═══ -->
   <nav class="navbar" id="navbar">
     <div id="nav-gradient"></div>
     <div class="navbar-inner">
-      <a href="#hero" class="navbar-brand" style="display: flex; align-items: center; gap: 10px;">
-        <img src="/btg-logo-white.png" alt="BTG Pactual Asset Management" style="height: 34px; width: auto; object-fit: contain;" />
-        <div style="width: 1px; height: 24px; background: rgba(255, 255, 255, 0.2);"></div>
-        <div class="logo-icon">
-          <span class="logo-dot"></span>
-          <span class="brand-text">FI Renta<strong>Comercial</strong></span>
-        </div>
-        <span class="brand-sub">Intelligence Hub</span>
+      <a href="#hero" class="navbar-brand" style="display: flex; align-items: center; gap: 8px;">
+        <img src="/logo-fi.png" alt="BTG Pactual FI Renta Comercial" style="height: 26px; width: auto; object-fit: contain;" />
+        <span class="brand-sub">Hub</span>
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#dashboard" class="active">Dashboard</a></li>
@@ -32,69 +27,30 @@
         <li><a href="#simulator">Simulador</a></li>
         <li><a href="#news">Noticias & Mercado</a></li>
       </ul>
-      <div class="nav-actions">
-        <button class="nav-btn" id="btnExecutiveSummary">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          Resumen Ejecutivo
-        </button>
-        <a href="https://www.mercadosenlinea.cl/invertir/instrumento/fondo-de-inversion/cfibtgrca" target="_blank" rel="noopener" class="btn-invertir-top">
-          Invertir ↗
-        </a>
-      </div>
       <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
     </div>
   </nav>
 
-  <!-- ═══ HERO SECTION (Official Style) ═══ -->
-  <section class="hero section official-hero" id="hero" style="background-image: linear-gradient(rgba(6, 26, 46, 0.75), rgba(6, 26, 46, 0.95)), url('https://btgpactual.cl/rentacomercial/wp-content/uploads/2023/10/banner_home_RC.jpg'); background-size: cover; background-position: center;">
-    <div class="hero-badge">
+  <!-- ═══ HERO SECTION (Minimalist) ═══ -->
+  <section class="hero section official-hero" id="hero" style="background-image: linear-gradient(rgba(6, 26, 46, 0.82), rgba(6, 26, 46, 0.96)), url('https://btgpactual.cl/rentacomercial/wp-content/uploads/2023/10/banner_home_RC.jpg'); background-size: cover; background-position: center; min-height: 80vh; padding: 120px 20px 60px;">
+    <div class="hero-badge" style="margin-bottom: var(--space-md);">
       <span class="live-dot"></span>
       Datos al 1Q 2026 · RUN CMF 7224-9
     </div>
 
-    <!-- BTG Pactual Logo (Official) -->
-    <div class="hero-logo" style="margin-bottom: var(--space-xl);">
-      <img src="/btg-logo-white.png" alt="BTG Pactual Asset Management" style="height: 76px; width: auto; object-fit: contain; filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.6));" />
-    </div>
-
-    <h1 style="font-size: 2.8rem; font-weight: 800; line-height: 1.2; max-width: 900px; margin: 0 auto var(--space-md);">
+    <h1 style="font-size: 2.6rem; font-weight: 800; line-height: 1.25; max-width: 850px; margin: 0 auto var(--space-md);">
       Portafolio diversificado de <br/>
       <span class="gradient">centros comerciales, oficinas y bodegas</span>
     </h1>
 
-    <p class="hero-subtitle" style="font-size: 1.1rem; max-width: 750px; color: #b8cfe0;">
-      Fondo de Inversión BTG Pactual Renta Comercial · Líder en renta inmobiliaria en Chile. 
-      <strong>34 activos · 357.394 m² GLA · USD 870M+ valorizados</strong>.
+    <p class="hero-subtitle" style="font-size: 1rem; max-width: 650px; color: #b8cfe0; margin: 0 auto var(--space-2xl);">
+      BTG Pactual Renta Comercial Fondo de Inversión · 34 activos · 357.394 m² GLA
     </p>
 
-    <!-- Official 3 Calugas (Cards) -->
-    <div class="calugas-grid" id="calugasHero">
-      <div class="caluga-card" onclick="document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' })">
-        <div class="caluga-num">01</div>
-        <h3>¿Por qué invertir?</h3>
-        <p>Acceso a renta inmobiliaria de alta calidad en Chile con dividendos periódicos indexados a la UF y respaldo defensivo.</p>
-        <span class="caluga-link">Ver análisis financiero →</span>
-      </div>
-
-      <div class="caluga-card" onclick="document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth' })">
-        <div class="caluga-num">02</div>
-        <h3>¿En qué invertimos?</h3>
-        <p>Portafolio diversificado en centros comerciales (55,9%), oficinas corporativas (42,4%) y bodegas logísticas (1,7%).</p>
-        <span class="caluga-link">Ver portafolio 3D →</span>
-      </div>
-
-      <div class="caluga-card" onclick="window.open('https://www.mercadosenlinea.cl/invertir/instrumento/fondo-de-inversion/cfibtgrca', '_blank')">
-        <div class="caluga-num">03</div>
-        <h3>¿Cómo invertir?</h3>
-        <p>100% online a través de <strong>Mercados en Línea</strong> de BTG Pactual o con tu corredor de bolsa habitual.</p>
-        <span class="caluga-link" style="color: var(--accent-tertiary);">Plataforma Mercados en Línea ↗</span>
-      </div>
-    </div>
-
-    <!-- Hero KPIs -->
-    <div class="hero-kpis" id="heroKpis" style="margin-top: var(--space-xl);">
+    <!-- Hero KPIs (Clean 4 Grid) -->
+    <div class="hero-kpis" id="heroKpis" style="margin: 0 auto var(--space-xl); max-width: 900px;">
       <div class="hero-kpi">
         <div class="kpi-label">Patrimonio Neto</div>
         <div class="kpi-value" data-counter="355182">M$0</div>
@@ -111,14 +67,11 @@
         <div class="kpi-label">DSCR</div>
         <div class="kpi-value" data-counter="2.08" data-decimal="true" data-suffix="x">0x</div>
       </div>
-    </div>
-
-    <div class="hero-highlights">
+    <div class="hero-highlights" style="margin-top: var(--space-sm);">
       <span class="highlight-badge accent-green">✓ Renovación del Fondo por 5 años</span>
-      <span class="highlight-badge accent-gold">↗ Tasación de activos sube 2,5%</span>
+      <span class="highlight-badge accent-gold">↗ Tasación activos +2,5%</span>
       <span class="highlight-badge">📊 Sitka: $35.390 · MCYA: $37.288</span>
-      <span class="highlight-badge accent-green">💰 Pago bono corporativo UF 1,5 mm</span>
-      <span class="highlight-badge accent-gold">🏢 Vacancia oficinas cae a 7,1%</span>
+      <span class="highlight-badge accent-green">💰 Desapalancamiento -31%</span>
     </div>
   </section>
 
@@ -792,56 +745,6 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
       </button>
     </form>
-  </div>
-
-  <!-- ═══ EXECUTIVE SUMMARY MODAL ═══ -->
-  <div class="modal-overlay" id="executiveModal">
-    <div class="modal-content">
-      <button class="modal-close" id="modalClose">&times;</button>
-      <div class="section-label"><span class="dot"></span> Informe Institucional</div>
-      <h2 style="font-size: 1.6rem; font-weight: 800; color: #ffffff; margin-bottom: 6px;">
-        Resumen Ejecutivo – Fondo BTG Pactual Renta Comercial
-      </h2>
-      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: var(--space-xl);">
-        Consolidación estratégica al 1Q 2026 (RUN CMF 7224-9)
-      </p>
-
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); margin-bottom: var(--space-xl);">
-        <div style="background: var(--bg-secondary); padding: var(--space-md); border-radius: var(--radius-md);">
-          <div class="metric-label">Patrimonio Neto</div>
-          <div style="font-size: 1.3rem; font-weight: 800; color: #ffffff;">M$355.182</div>
-          <div style="font-size: 0.7rem; color: var(--accent-success);">+0,4% vs 1Q25</div>
-        </div>
-        <div style="background: var(--bg-secondary); padding: var(--space-md); border-radius: var(--radius-md);">
-          <div class="metric-label">Superficie Arrendable</div>
-          <div style="font-size: 1.3rem; font-weight: 800; color: #ffffff;">357.394 m²</div>
-          <div style="font-size: 0.7rem; color: var(--accent-primary);">34 Activos</div>
-        </div>
-        <div style="background: var(--bg-secondary); padding: var(--space-md); border-radius: var(--radius-md);">
-          <div class="metric-label">Valor Cuota Serie A</div>
-          <div style="font-size: 1.3rem; font-weight: 800; color: var(--accent-primary);">$33.840</div>
-          <div style="font-size: 0.7rem; color: var(--accent-tertiary);">Sitka: $35.390</div>
-        </div>
-      </div>
-
-      <h3 style="font-size: 1.05rem; font-weight: 700; color: #ffffff; margin-bottom: var(--space-sm);">
-        Principales Conclusiones y Tesis de Inversión
-      </h3>
-      <ul style="color: var(--text-secondary); font-size: 0.82rem; line-height: 1.8; padding-left: 20px; margin-bottom: var(--space-xl);">
-        <li><strong>Renovación Exitosa:</strong> El fondo fue renovado por 5 años en Asamblea Extraordinaria de Aportantes.</li>
-        <li><strong>Recuperación en Tasaciones:</strong> Valor total de activos subió +2,5% alcanzando 21.054 miles de UF al cierre de 2025.</li>
-        <li><strong>Desapalancamiento Acelerado:</strong> Reducción del -31% de pasivos financieros desde 2024, con prepago del bono corporativo UF 1,5 mm.</li>
-        <li><strong>Estabilidad de Flujos:</strong> Contratos con WALT promedio de 5,0 años y 94% de ingresos correspondientes a rentas fijas.</li>
-        <li><strong>Mercado Inmobiliario Favorable:</strong> Vacancia de oficinas en Santiago muestra descenso continuo desde 8,1% a 7,1%.</li>
-      </ul>
-
-      <div style="display: flex; justify-content: flex-end; gap: var(--space-sm);">
-        <button class="nav-btn" onclick="window.print()" style="background: var(--accent-primary); border-color: var(--accent-primary);">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-          Imprimir / Exportar PDF
-        </button>
-      </div>
-    </div>
   </div>
 
   <script type="module" src="/src/main.js"></script>
