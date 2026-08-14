@@ -12,19 +12,31 @@ import {
 
 export class BTGAIEngine {
   constructor() {
-    this.provider = localStorage.getItem('btg_ai_provider') || 'groq'; // 'groq', 'openai', 'openrouter', 'gemini'
     this.apiKey = localStorage.getItem('btg_ai_api_key') || '';
-    this.model = localStorage.getItem('btg_ai_model') || 'llama-3.3-70b-versatile';
+    
+    // Auto-detect provider from key prefix
+    this.provider = localStorage.getItem('btg_ai_provider') || this.detectProvider(this.apiKey);
+    this.model = localStorage.getItem('btg_ai_model') || (this.provider === 'gemini' ? 'gemini-1.5-flash' : 'llama-3.3-70b-versatile');
     this.messages = [];
   }
 
+  detectProvider(key) {
+    if (!key) return 'gemini';
+    const k = key.trim();
+    if (k.startsWith('AQ.') || k.startsWith('AIza')) return 'gemini';
+    if (k.startsWith('gsk_')) return 'groq';
+    if (k.startsWith('sk-or-')) return 'openrouter';
+    if (k.startsWith('sk-')) return 'openai';
+    return 'gemini';
+  }
+
   setCredentials(provider, apiKey, model) {
-    this.provider = provider;
-    this.apiKey = apiKey;
-    this.model = model;
-    localStorage.setItem('btg_ai_provider', provider);
-    localStorage.setItem('btg_ai_api_key', apiKey);
-    localStorage.setItem('btg_ai_model', model);
+    this.apiKey = apiKey.trim();
+    this.provider = provider || this.detectProvider(this.apiKey);
+    this.model = model || (this.provider === 'gemini' ? 'gemini-1.5-flash' : 'llama-3.3-70b-versatile');
+    localStorage.setItem('btg_ai_provider', this.provider);
+    localStorage.setItem('btg_ai_api_key', this.apiKey);
+    localStorage.setItem('btg_ai_model', this.model);
   }
 
   getCredentials() {
@@ -114,7 +126,23 @@ Tu rol es razonar en tiempo real, realizar cálculos financieros rigurosos (TIR,
     let headers = { 'Content-Type': 'application/json' };
     let body = {};
 
-    if (this.provider === 'groq') {
+    if (this.provider === 'gemini') {
+      const geminiModel = this.model || 'gemini-1.5-flash';
+      url = `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${encodeURIComponent(this.apiKey)}`;
+      headers['x-goog-api-key'] = this.apiKey;
+      body = {
+        system_instruction: {
+          parts: [{ text: systemPrompt }]
+        },
+        contents: [
+          { role: 'user', parts: [{ text: userPrompt }] }
+        ],
+        generationConfig: {
+          temperature: 0.2,
+          maxOutputTokens: 1500,
+        }
+      };
+    } else if (this.provider === 'groq') {
       url = 'https://api.groq.com/openai/v1/chat/completions';
       headers['Authorization'] = `Bearer ${this.apiKey}`;
       body = {
@@ -150,14 +178,6 @@ Tu rol es razonar en tiempo real, realizar cálculos financieros rigurosos (TIR,
           { role: 'user', content: userPrompt },
         ],
         temperature: 0.2,
-      };
-    } else if (this.provider === 'gemini') {
-      url = `https://generativelanguage.googleapis.com/v1beta/models/${this.model || 'gemini-1.5-flash'}:generateContent?key=${this.apiKey}`;
-      headers = { 'Content-Type': 'application/json' };
-      body = {
-        contents: [
-          { role: 'user', parts: [{ text: `${systemPrompt}\n\nPregunta del usuario:\n${userPrompt}` }] }
-        ],
       };
     }
 
