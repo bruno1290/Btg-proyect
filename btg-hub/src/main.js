@@ -854,6 +854,158 @@ function renderMarketSection() {
   }
 }
 
+import { BTGAIEngine } from './ai-engine.js';
+
+// ── 16. AI Real Estate Copilot Chat ──────────────────────
+const aiEngine = new BTGAIEngine();
+
+function initAICopilot() {
+  const triggerBtn = document.getElementById('btnOpenAICopilot');
+  const closeBtn = document.getElementById('btnCloseAIChat');
+  const clearBtn = document.getElementById('btnClearAIChat');
+  const drawer = document.getElementById('aiChatDrawer');
+  const chatForm = document.getElementById('aiChatForm');
+  const chatInput = document.getElementById('aiChatInput');
+  const messagesContainer = document.getElementById('aiChatMessages');
+  const promptChips = document.querySelectorAll('#aiSuggestions .ai-prompt-chip');
+
+  if (!triggerBtn || !drawer || !chatForm || !chatInput || !messagesContainer) return;
+
+  // Toggle drawer
+  triggerBtn.addEventListener('click', () => {
+    drawer.classList.toggle('active');
+    if (drawer.classList.contains('active')) {
+      setTimeout(() => chatInput.focus(), 150);
+    }
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => drawer.classList.remove('active'));
+  }
+
+  // Clear chat
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      messagesContainer.innerHTML = `
+        <div class="ai-msg-assistant">
+          <div class="ai-response-card blue">
+            <div class="ai-response-header">
+              <h5 class="ai-response-title">🤖 Conversación Reiniciada</h5>
+              <span class="tag blue">Listo</span>
+            </div>
+            <div class="ai-response-text">
+              Hazme cualquier pregunta sobre sensibilidades de vacancia, ventas de activos, flujo de caja o valorizaciones.
+            </div>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  // Quick prompt chips
+  promptChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const prompt = chip.dataset.prompt;
+      if (!prompt) return;
+      chatInput.value = prompt;
+      handleUserSubmit(prompt);
+    });
+  });
+
+  // Form submit
+  chatForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const prompt = chatInput.value.trim();
+    if (!prompt) return;
+    handleUserSubmit(prompt);
+  });
+
+  async function handleUserSubmit(prompt) {
+    chatInput.value = '';
+
+    // Append user message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'ai-msg-user';
+    userMsg.textContent = prompt;
+    messagesContainer.appendChild(userMsg);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    // Append typing indicator
+    const typingMsg = document.createElement('div');
+    typingMsg.className = 'ai-msg-assistant';
+    typingMsg.id = 'aiTypingIndicator';
+    typingMsg.innerHTML = `
+      <div class="ai-typing-indicator">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span style="margin-left: 6px;">Analizando modelos y datos financieros...</span>
+      </div>
+    `;
+    messagesContainer.appendChild(typingMsg);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    // Process via AI Engine
+    try {
+      const res = await aiEngine.processQuery(prompt);
+
+      // Remove typing indicator
+      const typingEl = document.getElementById('aiTypingIndicator');
+      if (typingEl) typingEl.remove();
+
+      // Append assistant response
+      const assistantMsg = document.createElement('div');
+      assistantMsg.className = 'ai-msg-assistant';
+
+      const colorClass = res.badgeColor || 'blue';
+      const kpisHtml = (res.kpis || []).map(k => `
+        <div class="ai-kpi-chip">
+          <div class="chip-label">${k.label}</div>
+          <div class="chip-val" style="${k.positive ? 'color: var(--accent-success);' : k.negative ? 'color: var(--accent-danger);' : ''}">${k.value}</div>
+          <div style="font-size: 0.6rem; color: var(--text-muted);">${k.change}</div>
+        </div>
+      `).join('');
+
+      // Simple Markdown converter for lists and bold
+      const formattedContent = res.content
+        .replace(/### (.*?)\n/g, '<h3>$1</h3>')
+        .replace(/#### (.*?)\n/g, '<h4>$1</h4>')
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/\n\n/g, '<br/><br/>');
+
+      assistantMsg.innerHTML = `
+        <div class="ai-response-card ${colorClass}">
+          <div class="ai-response-header">
+            <h5 class="ai-response-title">${res.title}</h5>
+            <span class="tag ${colorClass}">${res.badge || 'Análisis'}</span>
+          </div>
+          ${res.summary ? `<div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 8px;">${res.summary}</div>` : ''}
+          ${kpisHtml ? `<div class="ai-response-kpis">${kpisHtml}</div>` : ''}
+          <div class="ai-response-text">${formattedContent}</div>
+          ${res.recommendation ? `<div class="ai-recommendation-box">${res.recommendation}</div>` : ''}
+        </div>
+      `;
+
+      messagesContainer.appendChild(assistantMsg);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    } catch (err) {
+      const typingEl = document.getElementById('aiTypingIndicator');
+      if (typingEl) typingEl.remove();
+
+      const errMsg = document.createElement('div');
+      errMsg.className = 'ai-msg-assistant';
+      errMsg.innerHTML = `
+        <div class="ai-response-card" style="border-left-color: var(--accent-danger);">
+          <div class="ai-response-title" style="color: var(--accent-danger);">Error de procesamiento</div>
+          <div class="ai-response-text">No pude procesar la consulta en este momento. Intenta reformularla.</div>
+        </div>
+      `;
+      messagesContainer.appendChild(errMsg);
+    }
+  }
+}
+
 // ── INITIALIZATION ───────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   // Navigation & Scroll
@@ -861,6 +1013,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Executive Summary Modal
   initExecutiveModal();
+
+  // AI Real Estate Copilot
+  initAICopilot();
 
   // Animated counters
   initCounters();
@@ -925,3 +1080,4 @@ document.addEventListener('DOMContentLoaded', () => {
     if (c12) renderAmortizationChart(c12.getContext('2d'), debtStructure);
   }, 300);
 });
+
