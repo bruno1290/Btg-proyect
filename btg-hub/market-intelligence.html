@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BTG Pactual – Mapa del Mercado Inmobiliario Chile 2026</title>
+  <meta name="description" content="Inteligencia competitiva: ecosistema de real estate y asset management en Chile. Actores, ejecutivos, fondos, AFPs, aseguradoras y tendencias." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230a2d4d'/><text x='16' y='22' font-size='14' text-anchor='middle' fill='%23ffffff' font-family='Inter' font-weight='800'>btg</text></svg>" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg: #ffffff; --bg-soft: #f8f9fb; --bg-muted: #f1f3f6; --bg-dark: #0a2d4d;
+  --text: #1a1a2e; --text-secondary: #4a5568; --text-muted: #8896a6;
+  --accent: #0a2d4d; --accent-blue: #2563eb; --accent-light: #3b82f6;
+  --accent-gold: #d97706; --accent-green: #059669; --accent-red: #dc2626;
+  --border: #e5e7eb; --border-hover: #cbd5e1;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06); --shadow-md: 0 4px 12px rgba(0,0,0,0.08); --shadow-lg: 0 10px 30px rgba(0,0,0,0.1);
+  --radius: 12px; --radius-sm: 8px; --radius-lg: 16px;
+  --font: 'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px;-webkit-font-smoothing:antialiased}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#f1f1f1}::-webkit-scrollbar-thumb{background:#c1c1c1;border-radius:3px}
+a{color:var(--accent-blue);text-decoration:none}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1300px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:0.9rem;color:var(--accent)}
+.nav-brand img{height:22px}
+.nav-brand span{font-size:0.65rem;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;padding:2px 8px;background:var(--bg-muted);border-radius:4px}
+.nav-links{display:flex;gap:2px;list-style:none}
+.nav-links a{padding:6px 12px;font-size:0.75rem;font-weight:500;color:var(--text-secondary);border-radius:6px;transition:all 0.15s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);background:var(--bg-muted)}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--text)}
+@media(max-width:900px){.nav-links{display:none}.nav-toggle{display:block}.nav-links.open{display:flex;flex-direction:column;position:absolute;top:56px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--border);padding:12px}}
+
+/* HERO */
+.hero{background:var(--bg-dark);color:#fff;padding:80px 24px 56px;text-align:center}
+.hero-inner{max-width:900px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:4px 16px;border:1px solid rgba(255,255,255,0.15);border-radius:99px;font-size:0.75rem;color:rgba(255,255,255,0.7);margin-bottom:20px}
+.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:#3b82f6;box-shadow:0 0 8px #3b82f6;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-size:2.4rem;font-weight:800;line-height:1.2;margin-bottom:12px;letter-spacing:-0.03em}
+.hero h1 em{font-style:normal;color:#60a5fa}
+.hero p{font-size:0.95rem;color:rgba(255,255,255,0.65);max-width:650px;margin:0 auto 32px;font-weight:300;line-height:1.7}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:900px;margin:0 auto}
+.hero-stat{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius);padding:18px 14px;transition:all 0.2s}
+.hero-stat:hover{background:rgba(255,255,255,0.1);transform:translateY(-2px)}
+.hero-stat .val{font-size:1.6rem;font-weight:800;letter-spacing:-0.02em}
+.hero-stat .lbl{font-size:0.65rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px}
+@media(max-width:700px){.hero-stats{grid-template-columns:1fr 1fr}.hero h1{font-size:1.7rem}}
+
+/* SECTIONS */
+.section{max-width:1300px;margin:0 auto;padding:56px 24px}
+.section-label{display:inline-flex;align-items:center;gap:6px;font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent-blue);margin-bottom:8px;padding:3px 12px;background:rgba(37,99,235,0.06);border:1px solid rgba(37,99,235,0.12);border-radius:99px}
+.section-label .dot{width:5px;height:5px;background:var(--accent-blue);border-radius:50%}
+.section h2{font-size:1.8rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:4px;color:var(--accent)}
+.section h2 em{font-style:normal;color:var(--accent-blue)}
+.section .subtitle{font-size:0.9rem;color:var(--text-secondary);font-weight:300;max-width:600px;margin-bottom:28px}
+
+/* CARDS */
+.card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all 0.2s}
+.card:hover{border-color:var(--border-hover);box-shadow:var(--shadow-md)}
+.card-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.card-title{font-size:0.88rem;font-weight:700;color:var(--text)}
+.card-sub{font-size:0.72rem;color:var(--text-muted);margin-top:1px;font-weight:400}
+
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:900px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+/* TABLES */
+.tbl-wrap{overflow-x:auto;border-radius:var(--radius-sm)}
+table.tbl{width:100%;border-collapse:collapse;font-size:0.78rem}
+table.tbl thead th{padding:10px 12px;text-align:left;font-weight:600;font-size:0.66rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);background:var(--bg-soft);border-bottom:1px solid var(--border)}
+table.tbl tbody td{padding:8px 12px;border-bottom:1px solid var(--bg-muted);color:var(--text-secondary);font-weight:400}
+table.tbl tbody tr:hover td{background:rgba(37,99,235,0.03);color:var(--text)}
+table.tbl tbody tr:last-child td{border-bottom:none}
+table.tbl .r{text-align:right;font-variant-numeric:tabular-nums}
+table.tbl .hi{color:var(--accent-blue);font-weight:600}
+table.tbl .pos{color:var(--accent-green);font-weight:500}
+table.tbl .neg{color:var(--accent-red)}
+
+/* TAGS */
+.tag{display:inline-flex;padding:2px 8px;border-radius:4px;font-size:0.65rem;font-weight:600;letter-spacing:0.02em}
+.tag-blue{background:rgba(37,99,235,0.08);color:var(--accent-blue)}
+.tag-gold{background:rgba(217,119,6,0.08);color:var(--accent-gold)}
+.tag-green{background:rgba(5,150,105,0.08);color:var(--accent-green)}
+.tag-red{background:rgba(220,38,38,0.08);color:var(--accent-red)}
+
+/* COMPETITOR CARDS */
+.comp-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;transition:all 0.2s;position:relative}
+.comp-card:hover{border-color:var(--border-hover);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.comp-card.ours{border-left:3px solid var(--accent-gold);background:rgba(217,119,6,0.02)}
+.comp-hd{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.comp-logo{width:36px;height:36px;border-radius:8px;object-fit:contain;background:var(--bg-soft);border:1px solid var(--border);padding:2px}
+.comp-logo-placeholder{width:36px;height:36px;border-radius:8px;background:var(--bg-muted);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:var(--text-muted);flex-shrink:0}
+.comp-name{font-size:0.95rem;font-weight:700;color:var(--text)}
+.comp-type{font-size:0.7rem;color:var(--text-muted)}
+.comp-body{display:flex;flex-direction:column;gap:12px}
+.comp-row label{display:block;font-size:0.63rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);font-weight:600;margin-bottom:3px}
+.comp-row p{font-size:0.8rem;color:var(--text-secondary);line-height:1.55}
+.comp-row p strong{color:var(--text);font-weight:600}
+.fund-tags{display:flex;flex-wrap:wrap;gap:4px}
+.fund-tag{padding:2px 7px;background:var(--bg-muted);border-radius:4px;font-size:0.68rem;color:var(--text-secondary)}
+
+/* STATS */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+.stat-box{background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center}
+.stat-box .num{font-size:2rem;font-weight:800;color:var(--accent);letter-spacing:-0.03em}
+.stat-box .num.blue{color:var(--accent-blue)}.stat-box .num.green{color:var(--accent-green)}.stat-box .num.gold{color:var(--accent-gold)}
+.stat-box .lab{font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-top:2px}
+.stat-box .sub{font-size:0.75rem;color:var(--text-secondary);font-weight:300;margin-top:4px}
+@media(max-width:700px){.stat-grid{grid-template-columns:1fr}}
+
+/* INST CARDS */
+.inst-card{display:flex;align-items:center;gap:16px;padding:16px 20px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);transition:all 0.2s;margin-bottom:8px}
+.inst-card:hover{border-color:var(--border-hover);box-shadow:var(--shadow-sm)}
+.inst-rank{font-size:1.4rem;font-weight:800;color:var(--bg-muted);min-width:28px;text-align:center}
+.inst-logo{width:32px;height:32px;border-radius:6px;object-fit:contain;background:var(--bg-soft);border:1px solid var(--border)}
+.inst-info{flex:1}.inst-name{font-size:0.88rem;font-weight:600;color:var(--text)}.inst-detail{font-size:0.75rem;color:var(--text-secondary);font-weight:300}
+.inst-amt{text-align:right;white-space:nowrap}.inst-amt .val{font-size:1.15rem;font-weight:700;color:var(--accent-blue)}.inst-amt .sub{font-size:0.65rem;color:var(--text-muted)}
+
+/* SEGMENT CARDS */
+.seg-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all 0.2s}
+.seg-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.seg-icon{font-size:1.6rem;margin-bottom:10px}
+.seg-card h3{font-size:0.95rem;font-weight:700;margin-bottom:6px}
+.seg-card p{font-size:0.78rem;color:var(--text-secondary);line-height:1.6;font-weight:300}
+.seg-metrics{display:flex;gap:20px;margin-top:14px;padding-top:12px;border-top:1px solid var(--bg-muted)}
+.seg-m-label{font-size:0.62rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.04em}
+.seg-m-val{font-size:1rem;font-weight:700;color:var(--accent)}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:var(--border)}
+.tl-item{position:relative;padding-bottom:24px}
+.tl-item::before{content:'';position:absolute;left:-24px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--accent-blue);z-index:1}
+.tl-item.big::before{background:var(--accent-blue);box-shadow:0 0 8px rgba(37,99,235,0.3)}
+.tl-date{font-size:0.68rem;color:var(--accent-blue);font-weight:600;letter-spacing:0.04em;text-transform:uppercase}
+.tl-title{font-size:0.85rem;font-weight:600;color:var(--text);margin:2px 0 3px}
+.tl-desc{font-size:0.76rem;color:var(--text-secondary);font-weight:300;line-height:1.6}
+
+/* SEARCH & FILTERS */
+.controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+.pills{display:flex;flex-wrap:wrap;gap:4px}
+.pill{padding:5px 12px;background:var(--bg-soft);border:1px solid var(--border);border-radius:99px;font-size:0.72rem;font-weight:500;cursor:pointer;color:var(--text-secondary);transition:all 0.15s}
+.pill:hover{border-color:var(--border-hover);color:var(--text)}
+.pill.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.search{display:flex;align-items:center;gap:6px;padding:5px 12px;background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius-sm);min-width:200px;transition:border 0.15s}
+.search:focus-within{border-color:var(--accent-blue)}
+.search input{background:none;border:none;outline:none;font-size:0.78rem;font-family:var(--font);color:var(--text);width:100%}
+.search input::placeholder{color:var(--text-muted)}
+
+/* INFO BOX */
+.info{padding:14px 16px;border-radius:var(--radius-sm);font-size:0.78rem;color:var(--text-secondary);line-height:1.6;font-weight:300;margin-bottom:10px}
+.info strong{color:var(--text);font-weight:600}
+.info.blue{background:rgba(37,99,235,0.04);border-left:3px solid var(--accent-blue)}
+.info.gold{background:rgba(217,119,6,0.04);border-left:3px solid var(--accent-gold)}
+.info.green{background:rgba(5,150,105,0.04);border-left:3px solid var(--accent-green)}
+.info.red{background:rgba(220,38,38,0.04);border-left:3px solid var(--accent-red)}
+.info.purple{background:rgba(124,58,237,0.04);border-left:3px solid #7c3aed}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:all 0.6s cubic-bezier(.4,0,.2,1)}.reveal.vis{opacity:1;transform:translateY(0)}
+
+/* FOOTER */
+.footer{padding:32px 24px;border-top:1px solid var(--border);text-align:center}
+.footer p{font-size:0.72rem;color:var(--text-muted);font-weight:300}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:0 24px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="https://logo.clearbit.com/btgpactual.cl" alt="BTG" onerror="this.style.display='none'"/>
+      BTG Pactual <span>Market Intelligence</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero" class="active">Inicio</a></li>
+      <li><a href="#ecosystem">Ecosistema</a></li>
+      <li><a href="#competitors">Competidores</a></li>
+      <li><a href="#insurance">Aseguradoras</a></li>
+      <li><a href="#afp">AFPs</a></li>
+      <li><a href="#segments">Segmentos</a></li>
+      <li><a href="#trends">Tendencias</a></li>
+      <li><a href="#news">Noticias</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="dot"></span> Inteligencia Competitiva · Agosto 2026</div>
+    <h1>Mapa del Mercado<br><em>Inmobiliario Chile</em></h1>
+    <p>Ecosistema completo de Real Estate & Asset Management. 206 fondos gestionados por 40 AGFs, compañías de seguros, AFPs, ejecutivos clave y tendencias del mercado.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="val">UF 171,7 MM</div><div class="lbl">Patrimonio Fondos RE</div></div>
+      <div class="hero-stat"><div class="val">US$ 22.330 MM</div><div class="lbl">Inversión Seguros RE</div></div>
+      <div class="hero-stat"><div class="val">US$ 20.220 MM</div><div class="lbl">Activos Alt. AFPs</div></div>
+      <div class="hero-stat"><div class="val">50.000+</div><div class="lbl">Unidades Multifamily</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ECOSYSTEM -->
+<section class="section" id="ecosystem">
+  <div class="section-label reveal"><span class="dot"></span> Ecosistema</div>
+  <h2 class="reveal">Flujo de <em>Capital</em></h2>
+  <p class="subtitle reveal">Cómo se conectan las fuentes de capital institucional con los segmentos de mercado a través de las administradoras de fondos</p>
+
+  <div class="card reveal" style="padding:32px;overflow-x:auto;">
+    <svg viewBox="0 0 1100 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:800px;height:auto">
+      <defs>
+        <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#cbd5e1"/></marker>
+      </defs>
+      <!-- Layer labels -->
+      <text x="550" y="28" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" letter-spacing="3">FUENTES DE CAPITAL</text>
+      <text x="550" y="215" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" letter-spacing="3">ADMINISTRADORAS (AGF)</text>
+      <text x="550" y="395" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" letter-spacing="3">SEGMENTOS DE MERCADO</text>
+
+      <!-- Arrows -->
+      <g stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arw)" fill="none" stroke-dasharray="5,4">
+        <line x1="170" y1="130" x2="250" y2="230"/><line x1="170" y1="130" x2="550" y2="230"/><line x1="170" y1="130" x2="830" y2="230"/>
+        <line x1="550" y1="130" x2="250" y2="230"/><line x1="550" y1="130" x2="550" y2="230"/><line x1="550" y1="130" x2="830" y2="230"/>
+        <line x1="930" y1="130" x2="250" y2="230"/><line x1="930" y1="130" x2="550" y2="230"/><line x1="930" y1="130" x2="830" y2="230"/>
+        <line x1="250" y1="330" x2="150" y2="415"/><line x1="250" y1="330" x2="400" y2="415"/>
+        <line x1="550" y1="330" x2="400" y2="415"/><line x1="550" y1="330" x2="650" y2="415"/>
+        <line x1="830" y1="330" x2="650" y2="415"/><line x1="830" y1="330" x2="950" y2="415"/>
+      </g>
+
+      <!-- Sources -->
+      <g><rect x="70" y="50" width="200" height="80" rx="10" fill="#f0f9ff" stroke="#bfdbfe" stroke-width="1.5"/>
+        <text x="170" y="82" text-anchor="middle" fill="#1e40af" font-size="13" font-weight="700">AFPs</text>
+        <text x="170" y="100" text-anchor="middle" fill="#64748b" font-size="9">6 administradoras · US$20.220 MM</text>
+        <text x="170" y="116" text-anchor="middle" fill="#3b82f6" font-size="9" font-weight="600">Límite Fondo A: 19% (Ago 2026)</text>
+      </g>
+      <g><rect x="450" y="50" width="200" height="80" rx="10" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1.5"/>
+        <text x="550" y="82" text-anchor="middle" fill="#6d28d9" font-size="13" font-weight="700">Family Offices & HNW</text>
+        <text x="550" y="100" text-anchor="middle" fill="#64748b" font-size="9">Inversionistas calificados</text>
+        <text x="550" y="116" text-anchor="middle" fill="#7c3aed" font-size="9" font-weight="600">Aportantes directos a FI</text>
+      </g>
+      <g><rect x="830" y="50" width="200" height="80" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1.5"/>
+        <text x="930" y="82" text-anchor="middle" fill="#92400e" font-size="13" font-weight="700">Cías. de Seguros</text>
+        <text x="930" y="100" text-anchor="middle" fill="#64748b" font-size="9">MetLife · Consorcio · BICE Vida</text>
+        <text x="930" y="116" text-anchor="middle" fill="#d97706" font-size="9" font-weight="600">US$22.330 MM RE (27,9%)</text>
+      </g>
+
+      <!-- AGFs -->
+      <g><rect x="100" y="240" width="300" height="90" rx="10" fill="#fffbeb" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="270" text-anchor="middle" fill="#92400e" font-size="13" font-weight="800">★ BTG Pactual</text>
+        <text x="250" y="288" text-anchor="middle" fill="#64748b" font-size="9">P. Ariztía · H. Martin · A. Gardeweg · J.P. Andrusco</text>
+        <text x="250" y="305" text-anchor="middle" fill="#d97706" font-size="9" font-weight="600">Renta Comercial · Residencial · Deuda Inmob.</text>
+        <text x="250" y="320" text-anchor="middle" fill="#92400e" font-size="8">34 activos · 357.394 m² GLA</text>
+      </g>
+      <g><rect x="430" y="240" width="240" height="90" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+        <text x="550" y="270" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="700">Toesca · Independencia · SURA</text>
+        <text x="550" y="288" text-anchor="middle" fill="#64748b" font-size="9">Competidores principales</text>
+        <text x="550" y="305" text-anchor="middle" fill="#3b82f6" font-size="9" font-weight="500">Comercial · Logístico · Alternativos</text>
+        <text x="550" y="320" text-anchor="middle" fill="#64748b" font-size="8">Toesca adquirió Frontal Trust (2026)</text>
+      </g>
+      <g><rect x="700" y="240" width="260" height="90" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+        <text x="830" y="268" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="700">Otros Competidores</text>
+        <text x="830" y="286" text-anchor="middle" fill="#64748b" font-size="9">Santander · Principal · LarrainVial · Banchile</text>
+        <text x="830" y="302" text-anchor="middle" fill="#64748b" font-size="9">Security · Credicorp · MBI · Ameris · Moneda</text>
+        <text x="830" y="318" text-anchor="middle" fill="#64748b" font-size="9">Singular · Zurich · Nevasa · Asset · Compass</text>
+      </g>
+
+      <!-- Segments -->
+      <g><rect x="50" y="415" width="200" height="65" rx="10" fill="#ecfdf5" stroke="#86efac" stroke-width="1.5"/>
+        <text x="150" y="442" text-anchor="middle" fill="#065f46" font-size="12" font-weight="700">🏬 Comercial / Retail</text>
+        <text x="150" y="460" text-anchor="middle" fill="#059669" font-size="9" font-weight="600">Preferencia Core: 80%</text>
+        <text x="150" y="473" text-anchor="middle" fill="#64748b" font-size="8">Centros comerciales · Strip centers</text>
+      </g>
+      <g><rect x="280" y="415" width="200" height="65" rx="10" fill="#ecfdf5" stroke="#86efac" stroke-width="1.5"/>
+        <text x="380" y="442" text-anchor="middle" fill="#065f46" font-size="12" font-weight="700">🏭 Logístico / Industrial</text>
+        <text x="380" y="460" text-anchor="middle" fill="#059669" font-size="9" font-weight="600">Vacancia: 3,8% – 4,4%</text>
+        <text x="380" y="473" text-anchor="middle" fill="#64748b" font-size="8">Bodegas Clase A · Última milla</text>
+      </g>
+      <g><rect x="510" y="415" width="200" height="65" rx="10" fill="#ecfdf5" stroke="#86efac" stroke-width="1.5"/>
+        <text x="610" y="442" text-anchor="middle" fill="#065f46" font-size="12" font-weight="700">🏢 Oficinas Clase A</text>
+        <text x="610" y="460" text-anchor="middle" fill="#059669" font-size="9" font-weight="600">Vacancia: ~10% (↓)</text>
+        <text x="610" y="473" text-anchor="middle" fill="#64748b" font-size="8">Flight to quality · Las Condes</text>
+      </g>
+      <g><rect x="740" y="415" width="240" height="65" rx="10" fill="#ecfdf5" stroke="#86efac" stroke-width="1.5"/>
+        <text x="860" y="442" text-anchor="middle" fill="#065f46" font-size="12" font-weight="700">🏠 Residencial / Multifamily</text>
+        <text x="860" y="460" text-anchor="middle" fill="#059669" font-size="9" font-weight="600">50.000+ unidades · 94,6% ocup.</text>
+        <text x="860" y="473" text-anchor="middle" fill="#64748b" font-size="8">216 edificios RM · Demanda estructural</text>
+      </g>
+
+      <!-- Regulator -->
+      <g><rect x="0" y="260" width="85" height="50" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+        <text x="42" y="282" text-anchor="middle" fill="#0f172a" font-size="9" font-weight="700">CMF</text>
+        <text x="42" y="296" text-anchor="middle" fill="#64748b" font-size="7">Regulador</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPETITORS -->
+<section class="section" id="competitors">
+  <div class="section-label reveal"><span class="dot"></span> Competidores</div>
+  <h2 class="reveal">Actores <em>Principales</em></h2>
+  <p class="subtitle reveal">19 administradoras de fondos con operaciones en real estate en Chile. Ejecutivos, fondos activos, estrategia y movimientos recientes.</p>
+
+  <div class="controls reveal">
+    <div class="pills" id="pills">
+      <button class="pill on" data-f="all">Todos</button>
+      <button class="pill" data-f="comercial">Comercial</button>
+      <button class="pill" data-f="logistico">Logístico</button>
+      <button class="pill" data-f="residencial">Residencial</button>
+      <button class="pill" data-f="alternativo">Alternativos</button>
+    </div>
+    <div class="search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input id="searchInput" placeholder="Buscar ejecutivo, empresa, fondo…"/></div>
+  </div>
+
+  <div class="g2 reveal" id="compGrid">
+
+    <!-- BTG PACTUAL -->
+    <div class="comp-card ours" data-t="comercial logistico residencial" data-s="btg pactual pedro ariztia hernan martin andres gardeweg juan pablo andrusco enzo parodi constanza vasquez renta comercial residencial deuda habitacional">
+      <div class="comp-hd">
+        <img class="comp-logo" src="https://logo.clearbit.com/btgpactual.cl" alt="BTG" onerror="this.outerHTML='<div class=comp-logo-placeholder>BTG</div>'"/>
+        <div><div class="comp-name">BTG Pactual Asset Management</div><div class="comp-type">Banco de Inversión Global · AGF</div></div>
+        <span class="tag tag-gold" style="margin-left:auto">★ NOSOTROS</span>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row"><label>Equipo Activos Inmobiliarios</label>
+          <p><strong>Pedro Ariztía F.</strong> – Gerente de Activos Inmobiliarios / PM Renta Comercial y Residencial <em style="color:var(--text-muted);font-size:0.72rem">(Ing. Civil Industrial PUC · +10 años en BTG/Celfin)</em><br>
+          <strong>Juan Pablo Andrusco</strong> – Gerente Inmobiliario / PM Desarrollos Inmobiliarios y Capital Preferente<br>
+          <strong>Hernán Martin</strong> – Asset Management Real Estate<br>
+          <strong>Andrés Gardeweg</strong> – Executive Director, Activos Ilíquidos <em style="color:var(--text-muted);font-size:0.72rem">(ex PM Frontal Trust · desde Mar 2026)</em><br>
+          <strong>Enzo Parodi</strong> – Equipo Activos Inmobiliarios<br>
+          <strong>Constanza Vásquez</strong> – Equipo Activos Inmobiliarios</p>
+        </div>
+        <div class="comp-row"><label>Fondos Inmobiliarios</label>
+          <div class="fund-tags"><span class="fund-tag">Renta Comercial FI (34 activos · 357.394 m² GLA)</span><span class="fund-tag">Renta Residencial (Multifamily)</span><span class="fund-tag">Deuda Habitacional</span><span class="fund-tag">Deuda Privada Inmobiliaria</span><span class="fund-tag">Capital Preferente</span><span class="fund-tag">Desarrollos Inmobiliarios</span></div>
+        </div>
+        <div class="comp-row"><label>Estrategia & Posición</label>
+          <p>Portafolio diversificado: centros comerciales, oficinas, bodegas, multifamily y deuda. Estrategias de renta, desarrollo y financiamiento inmobiliario. Posición sólida con portafolio Renta Comercial de clase institucional.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOESCA -->
+    <div class="comp-card" data-t="alternativo comercial logistico" data-s="toesca carlos saieh alejandro bezanilla pilar quintas augusto rodriguez manuel ossa jose manuel infante rodrigo rojas frontal trust primus capital">
+      <div class="comp-hd">
+        <img class="comp-logo" src="https://logo.clearbit.com/toesca.com" alt="Toesca" onerror="this.outerHTML='<div class=comp-logo-placeholder>TOE</div>'"/>
+        <div><div class="comp-name">Toesca Asset Management</div><div class="comp-type">AGF · Activos Alternativos</div></div>
+        <span class="tag tag-blue" style="margin-left:auto">Competidor</span>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row"><label>Ejecutivos Clave</label>
+          <p><strong>Carlos Saieh L.</strong> – CEO / Gerente General<br>
+          <strong>Alejandro Bezanilla</strong> – Director Ejecutivo <em style="color:var(--text-muted);font-size:0.72rem">(socio desde Mar 2026)</em><br>
+          <strong>Alejandro Montero</strong> – Presidente del Directorio<br>
+          <strong>Pilar Quintas</strong> – Portfolio Manager Real Estate <em style="color:var(--text-muted);font-size:0.72rem">(integrada 2025)</em><br>
+          <strong>Augusto Rodríguez</strong> – Estrategia Farmland (ex RE)<br>
+          <strong>Manuel J. Ossa</strong> – Gte. Inv. Deuda Privada · <strong>José M. Infante</strong> – PM Infraestructura<br>
+          <strong>Rodrigo Rojas</strong> – Gte. Inv. Renta Variable · <strong>Pamela Calzadilla</strong> – Gestión de Riesgos</p>
+        </div>
+        <div class="comp-row"><label>Fondos</label>
+          <div class="fund-tags"><span class="fund-tag">Renta Inmobiliaria I</span><span class="fund-tag">Renta Inmobiliaria II</span><span class="fund-tag">Avenida Net Lease</span><span class="fund-tag">Infraestructura</span><span class="fund-tag">Deuda Privada</span><span class="fund-tag">Farmland</span></div>
+        </div>
+        <div class="comp-row"><label>Movimientos Recientes</label>
+          <p>Adquisición de <strong>Frontal Trust AGF</strong> (mediados 2026) y <strong>Primus Capital</strong> (factoring). Bezanilla se incorpora para expansión regional. Liquidación fondos Sartor como administrador sucesor. Reestructuración equipo RE: Quintas reemplaza a Rodríguez (que pasa a Farmland).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- INDEPENDENCIA -->
+    <div class="comp-card" data-t="comercial logistico" data-s="independencia jorge fuentes jose ignacio bartolome fernando sanchez tocornal francisco herrera eugenio cristi cristobal gevert rentas inmobiliarias parques logisticos">
+      <div class="comp-hd">
+        <img class="comp-logo" src="https://logo.clearbit.com/aindependencia.cl" alt="Independencia" onerror="this.outerHTML='<div class=comp-logo-placeholder>IND</div>'"/>
+        <div><div class="comp-name">Independencia AGF</div><div class="comp-type">AGF · 30+ años trayectoria</div></div>
+        <span class="tag tag-blue" style="margin-left:auto">Competidor</span>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row"><label>Ejecutivos Clave</label>
+          <p><strong>Jorge Fuentes P.</strong> – Gerente General <em style="color:var(--text-muted);font-size:0.72rem">(desde Jul 2025, ex Subgerente)</em><br>
+          <strong>José I. Bartolomé</strong> – Vicepresidente Ejecutivo <em style="color:var(--text-muted);font-size:0.72rem">(cargo creado 2025)</em><br>
+          <strong>Fernando Sánchez Tocornal</strong> – Gte. Activos Inmobiliarios<br>
+          <strong>Francisco Herrera</strong> – Gte. Corporativo · <strong>Eugenio Cristi</strong> – Gte. Operaciones y Finanzas<br>
+          <strong>Cristóbal Gevert</strong> – Gte. Fiduciario y Financiamiento</p>
+        </div>
+        <div class="comp-row"><label>Fondos</label>
+          <div class="fund-tags"><span class="fund-tag">Rentas Inmobiliarias (flagship · "1ª Clase Nivel 1")</span><span class="fund-tag">Parques Logísticos (>96% ocup.)</span><span class="fund-tag">Independencia Internacional (EE.UU., Uruguay)</span></div>
+        </div>
+        <div class="comp-row"><label>Estrategia</label>
+          <p>Especialista en activos comerciales e industriales con la mayor trayectoria del mercado. Clasificación cuotas ratificada por Feller Rate (May 2026). Presencia internacional. Prepago de deuda y optimización de estructura de capital.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SURA -->
+    <div class="comp-card" data-t="comercial alternativo" data-s="sura investments pablo urzua ruperto lira maria fernanda macias victor gajardo daniel soto renta inmobiliaria desarrollo renzo vercelli">
+      <div class="comp-hd">
+        <img class="comp-logo" src="https://logo.clearbit.com/sura.com" alt="SURA" onerror="this.outerHTML='<div class=comp-logo-placeholder>SURA</div>'"/>
+        <div><div class="comp-name">SURA Investments</div><div class="comp-type">AGF · Grupo Internacional</div></div>
+        <span class="tag tag-blue" style="margin-left:auto">Competidor</span>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row"><label>Ejecutivos Clave</label>
+          <p><strong>Pablo Urzúa</strong> – Country Manager Chile <em style="color:var(--text-muted);font-size:0.72rem">(desde Sep 2024, reemplaza a Vercelli)</em><br>
+          <strong>Ruperto Lira G.</strong> – Dir. Portfolio Real Estate / Dir. Asset Mgmt Regional<br>
+          <strong>María Fernanda Macias</strong> – GG de AGF SURA <em style="color:var(--text-muted);font-size:0.72rem">(desde Dic 2025)</em><br>
+          <strong>Víctor Gajardo</strong> – Dir. Estrategia de Inversiones · <strong>Daniel Soto</strong> – VP Deuda Privada</p>
+        </div>
+        <div class="comp-row"><label>Fondos</label>
+          <div class="fund-tags"><span class="fund-tag">SURA Renta Inmobiliaria I/II/III</span><span class="fund-tag">Desarrollo Inmob. Proyectos Chile</span></div>
+        </div>
+        <div class="comp-row"><label>Nota</label>
+          <p>Activos no habitacionales premium. Ajuste de estrategias ante vencimientos de fondos (2024-2025). Renzo Vercelli pasó a ser GG de AFP Capital (Grupo SURA).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SANTANDER -->
+    <div class="comp-card" data-t="residencial" data-s="santander asset management diego ceballos juan andres carvallo pilar ortega pilar oyanedel rentas residenciales multifamily">
+      <div class="comp-hd">
+        <img class="comp-logo" src="https://logo.clearbit.com/santander.cl" alt="Santander" onerror="this.outerHTML='<div class=comp-logo-placeholder>SAN</div>'"/>
+        <div><div class="comp-name">Santander Asset Management</div><div class="comp-type">AGF · Grupo Bancario</div></div>
+        <span class="tag tag-blue" style="margin-left:auto">Competidor</span>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row"><label>Ejecutivos Clave</label>
+          <p><strong>Diego Ceballos</strong> – Gerente General <em style="color:var(--text-muted);font-size:0.72rem">(ex CIO)</em><br>
+          <strong>Juan Andrés Carvallo</strong> – Head de Activos Alternativos<br>
+          <strong>María del Pilar Ortega</strong> – Portfolio Manager · <strong>Pilar Oyanedel</strong> – Portfolio Manager</p>
+        </div>
+        <div class="comp-row"><label>Fondos</label>
+          <div class="fund-tags"><span class="fund-tag">Rentas Residenciales FI (Multifamily RM)</span><span class="fund-tag">Deuda Privada Inmob.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRINCIPAL -->
+    <div class="comp-card" data-t="residencial" data-s="principal agf horacio morande felipe lira mariano ugarte renta residencial amplo subsidio habitacional">
+      <div class="comp-hd">
+        <img class="comp-logo" src="https://logo.clearbit.com/principal.cl" alt="Principal" onerror="this.outerHTML='<div class=comp-logo-placeholder>PRI</div>'"/>
+        <div><div class="comp-name">Principal AGF</div><div class="comp-type">AGF · Grupo Internacional</div></div>
+        <span class="tag tag-blue" style="margin-left:auto">Competidor</span>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row"><label>Ejecutivos Clave</label>
+          <p><strong>Horacio Morandé C.</strong> – Gerente General<br>
+          <strong>Felipe Lira Parodi</strong> – Gte. Inversiones <em style="color:var(--text-muted);font-size:0.72rem">(desde Mar 2024)</em><br>
+          <strong>Mariano Ugarte</strong> – Líder Estrategia Fondos Residenciales</p>
+        </div>
+        <div class="comp-row"><label>Fondos</label>
+          <div class="fund-tags"><span class="fund-tag">Renta Residencial Principal-Amplo</span><span class="fund-tag">Oportunidades Estratégicas</span><span class="fund-tag">Liquidez Inmobiliaria</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LARRAINVIAL -->
+    <div class="comp-card" data-t="alternativo" data-s="larrainvial asset management ladislao larrain jose manuel silva jose miguel barros">
+      <div class="comp-hd">
+        <img class="comp-logo" src="https://logo.clearbit.com/larrainvial.com" alt="LV" onerror="this.outerHTML='<div class=comp-logo-placeholder>LV</div>'"/>
+        <div><div class="comp-name">LarrainVial Asset Management</div><div class="comp-type">AGF · Mercado de Capitales</div></div>
+        <span class="tag tag-blue" style="margin-left:auto">Competidor</span>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row"><label>Ejecutivos</label>
+          <p><strong>Ladislao Larraín</strong> – GG · <strong>José Manuel Silva</strong> – CIO · <strong>José Miguel Barros</strong> – Pdte. Directorio LV Activos</p></div>
+        <div class="comp-row"><label>Fondos</label><div class="fund-tags"><span class="fund-tag">Activos Alternativos</span><span class="fund-tag">Fondos Inmobiliarios</span></div></div>
+      </div>
+    </div>
+
+    <!-- BANCHILE -->
+    <div class="comp-card" data-t="comercial logistico" data-s="banchile agf gabriela gurovich renta inmobiliaria oficinas bodegas liquidacion banco chile">
+      <div class="comp-hd">
+        <img class="comp-logo" src="https://logo.clearbit.com/bancochile.cl" alt="Banchile" onerror="this.outerHTML='<div class=comp-logo-placeholder>BCH</div>'"/>
+        <div><div class="comp-name">Banchile AGF</div><div class="comp-type">AGF · Grupo Banco de Chile</div></div>
+        <span class="tag tag-red" style="margin-left:auto">En reestructuración</span>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row"><label>Ejecutivos</label><p><strong>Gabriela Gurovich</strong> – GG <em style="color:var(--text-muted);font-size:0.72rem">(ex Cayuga Capital Partners)</em></p></div>
+        <div class="comp-row"><label>Estado</label><p>Liquidación ordenada de fondos de oficinas y bodegas (2024-2025). Subgerencias de Renta Inmobiliaria y Desarrollo Inmobiliario. Reestructuración bajo nuevo liderazgo. <strong style="color:var(--accent-gold);">⚠ Potencial oferta de activos en el mercado.</strong></p></div>
+      </div>
+    </div>
+
+    <!-- SECURITY -->
+    <div class="comp-card" data-t="comercial alternativo" data-s="security agf jorge meyer cristian gaete banco security">
+      <div class="comp-hd">
+        <img class="comp-logo" src="https://logo.clearbit.com/security.cl" alt="Security" onerror="this.outerHTML='<div class=comp-logo-placeholder>SEC</div>'"/>
+        <div><div class="comp-name">Security AGF</div><div class="comp-type">AGF · Filial Banco Security</div></div>
+        <span class="tag tag-blue" style="margin-left:auto">Competidor</span>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row"><label>Ejecutivos</label><p><strong>Jorge Meyer</strong> – Gte. Inversiones · <strong>Cristián Gaete</strong> – Pdte. Directorio</p></div>
+        <div class="comp-row"><label>Fondos</label><div class="fund-tags"><span class="fund-tag">Fondos Institucionales</span><span class="fund-tag">Fondos Mutuos</span></div></div>
+      </div>
+    </div>
+
+    <!-- CREDICORP -->
+    <div class="comp-card" data-t="residencial alternativo" data-s="credicorp capital klaus kaempfe real assets raices ingevec andina peru colombia">
+      <div class="comp-hd">
+        <img class="comp-logo" src="https://logo.clearbit.com/credicorpcapital.com" alt="Credicorp" onerror="this.outerHTML='<div class=comp-logo-placeholder>CC</div>'"/>
+        <div><div class="comp-name">Credicorp Capital AGF</div><div class="comp-type">AGF · Grupo Andino (Chile, Perú, Colombia)</div></div>
+        <span class="tag tag-blue" style="margin-left:auto">Competidor</span>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row"><label>Ejecutivos</label><p><strong>Klaus Kaempfe L.</strong> – Ejecutivo Principal. Equipo Real Assets dedicado con +170 años experiencia combinada.</p></div>
+        <div class="comp-row"><label>Fondos</label><div class="fund-tags"><span class="fund-tag">Credicorp Raíces</span><span class="fund-tag">Desarrollo Subsidio Hab. – Ingevec</span></div></div>
+      </div>
+    </div>
+
+    <!-- MBI -->
+    <div class="comp-card" data-t="alternativo" data-s="mbi agf jorge del puerto karin kullmer retorno inmobiliario deuda privada">
+      <div class="comp-hd">
+        <img class="comp-logo" src="https://logo.clearbit.com/mbi.cl" alt="MBI" onerror="this.outerHTML='<div class=comp-logo-placeholder>MBI</div>'"/>
+        <div><div class="comp-name">MBI AGF</div><div class="comp-type">AGF · Alternativos desde 2014</div></div>
+        <span class="tag tag-blue" style="margin-left:auto">Competidor</span>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row"><label>Socios</label><p><strong>Jorge del Puerto</strong> · <strong>Karin Küllmer</strong></p></div>
+        <div class="comp-row"><label>Fondos</label><div class="fund-tags"><span class="fund-tag">MBI Retorno Inmobiliario Preferente</span><span class="fund-tag">Deuda Privada</span></div></div>
+      </div>
+    </div>
+
+    <!-- AMERIS -->
+    <div class="comp-card" data-t="alternativo" data-s="ameris capital inmobiliarios deuda privada infraestructura private equity secundarios penta vida">
+      <div class="comp-hd">
+        <img class="comp-logo" src="https://logo.clearbit.com/ameris.cl" alt="Ameris" onerror="this.outerHTML='<div class=comp-logo-placeholder>AME</div>'"/>
+        <div><div class="comp-name">Ameris Capital AGF</div><div class="comp-type">AGF · Líder Activos Alternativos</div></div>
+        <span class="tag tag-blue" style="margin-left:auto">Competidor</span>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row"><label>Fondos</label><div class="fund-tags"><span class="fund-tag">Inmobiliarios</span><span class="fund-tag">Deuda Privada</span><span class="fund-tag">Infraestructura</span><span class="fund-tag">Private Equity</span><span class="fund-tag">Secundarios (ex Penta Vida, 13 FI)</span><span class="fund-tag">Impacto</span></div></div>
+      </div>
+    </div>
+
+    <!-- SINGULAR -->
+    <div class="comp-card" data-t="alternativo residencial" data-s="singular agf brookfield oaktree etf us real estate deuda privada leaseback">
+      <div class="comp-hd">
+        <img class="comp-logo" src="https://logo.clearbit.com/singularam.cl" alt="Singular" onerror="this.outerHTML='<div class=comp-logo-placeholder>SNG</div>'"/>
+        <div><div class="comp-name">Singular AGF</div><div class="comp-type">AGF · Alianzas Globales (Brookfield, Oaktree)</div></div>
+        <span class="tag tag-blue" style="margin-left:auto">Competidor</span>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row"><label>Diferenciador</label><p>Alianzas con <strong>Brookfield</strong> y <strong>Oaktree</strong>. Pionera en ETF de US Real Estate para retail e institucionales.</p></div>
+        <div class="comp-row"><label>Fondos</label><div class="fund-tags"><span class="fund-tag">ETF Singular US Real Estate</span><span class="fund-tag">Deuda Privada (Leaseback)</span><span class="fund-tag">Brookfield Partnerships</span></div></div>
+      </div>
+    </div>
+
+    <!-- ASSET AGF -->
+    <div class="comp-card" data-t="residencial comercial" data-s="asset agf multifamily arr outlets activos alternativos mil millones">
+      <div class="comp-hd"><div class="comp-logo-placeholder">AST</div>
+        <div><div class="comp-name">Asset AGF</div><div class="comp-type">AGF · +US$ 1.000 MM AUM</div></div>
+        <span class="tag tag-blue" style="margin-left:auto">Competidor</span>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row"><label>Fondos</label><div class="fund-tags"><span class="fund-tag">ARR Multifamily</span><span class="fund-tag">Proyectos Comerciales (Outlets)</span><span class="fund-tag">Activos Alternativos</span></div></div>
+      </div>
+    </div>
+
+    <!-- COMPASS -->
+    <div class="comp-card" data-t="alternativo" data-s="compass group vinci partners fusion plataforma regional blackstone">
+      <div class="comp-hd">
+        <img class="comp-logo" src="https://logo.clearbit.com/vincicompass.com" alt="Vinci" onerror="this.outerHTML='<div class=comp-logo-placeholder>VC</div>'"/>
+        <div><div class="comp-name">Vinci Compass</div><div class="comp-type">Fusión 2024 · Plataforma Regional</div></div>
+        <span class="tag tag-blue" style="margin-left:auto">Competidor</span>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row"><label>Estrategia</label><p>Distribuidor de gestores globales RE (ej. Blackstone). Vehículos propios de activos alternativos regionales.</p></div>
+      </div>
+    </div>
+
+    <!-- MONEDA -->
+    <div class="comp-card" data-t="alternativo" data-s="moneda asset management private credit acciones deuda corporativa regional">
+      <div class="comp-hd">
+        <img class="comp-logo" src="https://logo.clearbit.com/moneda.cl" alt="Moneda" onerror="this.outerHTML='<div class=comp-logo-placeholder>MON</div>'"/>
+        <div><div class="comp-name">Moneda Asset Management</div><div class="comp-type">AGF · Multi-Estrategia Regional</div></div>
+        <span class="tag tag-blue" style="margin-left:auto">Competidor</span>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row"><label>Fondos</label><div class="fund-tags"><span class="fund-tag">Private Credit</span><span class="fund-tag">Acciones LatAm</span><span class="fund-tag">Deuda Corporativa</span><span class="fund-tag">Multi-Asset Long Term</span></div></div>
+      </div>
+    </div>
+
+    <!-- ZURICH -->
+    <div class="comp-card" data-t="alternativo residencial" data-s="zurich chile agf fondos renta residencial seguros global">
+      <div class="comp-hd">
+        <img class="comp-logo" src="https://logo.clearbit.com/zurich.cl" alt="Zurich" onerror="this.outerHTML='<div class=comp-logo-placeholder>ZUR</div>'"/>
+        <div><div class="comp-name">Zurich Chile AGF</div><div class="comp-type">AGF · Grupo Asegurador Global</div></div>
+        <span class="tag tag-blue" style="margin-left:auto">Competidor</span>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row"><label>Fondos</label><div class="fund-tags"><span class="fund-tag">Fondos Inmobiliarios</span><span class="fund-tag">Renta Residencial</span><span class="fund-tag">Fondos Mutuos</span></div></div>
+      </div>
+    </div>
+
+    <!-- NEVASA -->
+    <div class="comp-card" data-t="residencial" data-s="nevasa gestion inmobiliaria desarrollo residencial subsidio ds19 curauma valparaiso cmf">
+      <div class="comp-hd">
+        <img class="comp-logo" src="https://logo.clearbit.com/nevasa.cl" alt="Nevasa" onerror="this.outerHTML='<div class=comp-logo-placeholder>NEV</div>'"/>
+        <div><div class="comp-name">Nevasa AGF</div><div class="comp-type">AGF · Gestión Inmobiliaria</div></div>
+        <span class="tag tag-red" style="margin-left:auto">⚠ Alerta CMF</span>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row"><label>Fondos</label><div class="fund-tags"><span class="fund-tag">Gestión Inmobiliaria I/II</span><span class="fund-tag">Desarrollo Habitacional (D.S. 19)</span></div></div>
+        <div class="comp-row"><label>Alerta</label><p style="color:var(--accent-red)">Bajo atención regulatoria CMF por entrega de información financiera. Monitorear.</p></div>
+      </div>
+    </div>
+
+    <!-- CAPITAL ADVISORS -->
+    <div class="comp-card" data-t="alternativo" data-s="capital advisors parques cementerios nicho">
+      <div class="comp-hd"><div class="comp-logo-placeholder">CA</div>
+        <div><div class="comp-name">Capital Advisors AM</div><div class="comp-type">AGF · Nicho Especializado</div></div>
+        <span class="tag tag-blue" style="margin-left:auto">Nicho</span>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row"><label>Fondos</label><div class="fund-tags"><span class="fund-tag">Parques Cementerios</span><span class="fund-tag">Fondos Nicho</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INSURANCE -->
+<section class="section" id="insurance">
+  <div class="section-label reveal"><span class="dot"></span> Aseguradoras</div>
+  <h2 class="reveal">Compañías de <em>Seguros</em></h2>
+  <p class="subtitle reveal">Inversionistas institucionales clave. Destinan ~28% de sus portafolios a activos inmobiliarios para respaldar rentas vitalicias.</p>
+
+  <div class="stat-grid reveal">
+    <div class="stat-box"><div class="num blue">US$ 22.330 MM</div><div class="lab">Inversión Inmobiliaria Total</div><div class="sub">Cierre 2025 · Industria seguros de vida</div></div>
+    <div class="stat-box"><div class="num green">+18%</div><div class="lab">Crecimiento Anual</div><div class="sub">vs 2024 · Mayor ritmo en 5 años</div></div>
+    <div class="stat-box"><div class="num gold">27,9%</div><div class="lab">% del Portafolio Total</div><div class="sub">2ª clase de activos más relevante</div></div>
+  </div>
+
+  <div class="reveal">
+    <div class="inst-card"><div class="inst-rank" style="color:#3b82f6">1</div><img class="inst-logo" src="https://logo.clearbit.com/metlife.cl" alt="MetLife" onerror="this.style.display='none'"/><div class="inst-info"><div class="inst-name">MetLife Chile</div><div class="inst-detail">Líder del segmento · Bienes raíces, leasing, mutuos hipotecarios · +18% YoY</div></div><div class="inst-amt"><div class="val">US$ 4.523 MM</div><div class="sub">Inversión inmobiliaria 2025</div></div></div>
+    <div class="inst-card"><div class="inst-rank" style="color:#3b82f6">2</div><img class="inst-logo" src="https://logo.clearbit.com/consorcio.cl" alt="Consorcio" onerror="this.style.display='none'"/><div class="inst-info"><div class="inst-name">Consorcio</div><div class="inst-detail">Rentas vitalicias · Flujos largo plazo · Actor fundamental en financiamiento RE</div></div><div class="inst-amt"><div class="val">US$ 3.507 MM</div><div class="sub">Inversión inmobiliaria 2025</div></div></div>
+    <div class="inst-card"><div class="inst-rank">3</div><img class="inst-logo" src="https://logo.clearbit.com/bicevida.cl" alt="BICE" onerror="this.style.display='none'"/><div class="inst-info"><div class="inst-name">BICE Vida</div><div class="inst-detail">Integró operaciones de Vida Security (2025) · Fondos inmobiliarios y mutuos hipotecarios</div></div><div class="inst-amt"><div class="val">Significativa</div><div class="sub">Portafolio consolidado</div></div></div>
+    <div class="inst-card"><div class="inst-rank">4</div><img class="inst-logo" src="https://logo.clearbit.com/pentavida.cl" alt="Penta" onerror="this.style.display='none'"/><div class="inst-info"><div class="inst-name">Penta Vida</div><div class="inst-detail">Aportante clave en FI inmobiliarios · Vendió cartera de 13 FI a Ameris Capital</div></div><div class="inst-amt"><div class="val">Relevante</div><div class="sub">Aportante institucional</div></div></div>
+    <div class="inst-card"><div class="inst-rank">5</div><div class="inst-info"><div class="inst-name">Euroamerica · Chilena Consolidada · Confuturo · Otros</div><div class="inst-detail">Participación activa diversificada por segmento · Euroamerica con desafíos regulatorios CMF</div></div><div class="inst-amt"><div class="val">Diversas</div><div class="sub">Participación activa</div></div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- AFPs -->
+<section class="section" id="afp">
+  <div class="section-label reveal"><span class="dot"></span> AFPs</div>
+  <h2 class="reveal">Activos <em>Alternativos</em></h2>
+  <p class="subtitle reveal">Las AFP canalizan inversiones en RE a través de FI especializados. Límites del Banco Central se amplían progresivamente.</p>
+
+  <div class="stat-grid reveal">
+    <div class="stat-box"><div class="num blue">US$ 20.220 MM</div><div class="lab">Total Activos Alternativos</div><div class="sub">Diciembre 2024 · 6 AFPs</div></div>
+    <div class="stat-box"><div class="num green">US$ 15.045 MM</div><div class="lab">Activos Extranjeros</div><div class="sub">74,4% del total alternativo</div></div>
+    <div class="stat-box"><div class="num gold">US$ 5.175 MM</div><div class="lab">Activos Locales</div><div class="sub">25,6% · Oportunidad de crecimiento</div></div>
+  </div>
+
+  <div class="g2 reveal">
+    <div class="card">
+      <div class="card-hd"><div><div class="card-title">Límites Máximos – Activos Alternativos</div><div class="card-sub">Banco Central de Chile · % del valor de cada fondo</div></div></div>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>Vigencia</th><th class="r">Fondo A</th><th class="r">Fondo B</th><th class="r">Fondo C</th><th class="r">Fondo D</th><th class="r">Fondo E</th></tr></thead>
+        <tbody>
+          <tr><td>Ago 2024</td><td class="r">15%</td><td class="r">12%</td><td class="r">10%</td><td class="r">6%</td><td class="r">5%</td></tr>
+          <tr><td>Ago 2025</td><td class="r">17%</td><td class="r">14%</td><td class="r">11%</td><td class="r">6%</td><td class="r">5%</td></tr>
+          <tr style="background:rgba(37,99,235,0.04)"><td><strong>Ago 2026 ◀ Actual</strong></td><td class="r hi"><strong>19%</strong></td><td class="r hi"><strong>15%</strong></td><td class="r hi"><strong>12%</strong></td><td class="r hi"><strong>7%</strong></td><td class="r hi"><strong>6%</strong></td></tr>
+          <tr><td>Ago 2027</td><td class="r">20%</td><td class="r">16%</td><td class="r">12%</td><td class="r">7%</td><td class="r">6%</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="card">
+      <div class="card-hd"><div><div class="card-title">AFPs – Perfil de Inversión</div><div class="card-sub">6 administradoras de fondos de pensiones</div></div></div>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>AFP</th><th>Controlador</th><th>Enfoque Alt.</th><th class="r">Relevancia RE</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Habitat</strong></td><td>IFC, Prudential</td><td>Global diversificado</td><td class="r hi">Alta</td></tr>
+          <tr><td><strong>ProVida</strong></td><td>MetLife</td><td>RE + Infraestructura</td><td class="r hi">Alta</td></tr>
+          <tr><td><strong>Capital</strong></td><td>SURA</td><td>Multi-asset</td><td class="r hi">Alta</td></tr>
+          <tr><td><strong>Cuprum</strong></td><td>Principal</td><td>Global diversificado</td><td class="r">Media-Alta</td></tr>
+          <tr><td><strong>Modelo</strong></td><td>Independiente</td><td>Selectivo</td><td class="r">Media</td></tr>
+          <tr><td><strong>Planvital</strong></td><td>Generali</td><td>Conservador</td><td class="r">Media</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SEGMENTS -->
+<section class="section" id="segments">
+  <div class="section-label reveal"><span class="dot"></span> Segmentos</div>
+  <h2 class="reveal">Segmentos de <em>Mercado</em></h2>
+  <p class="subtitle reveal">Performance y cap rates referenciales de los principales segmentos inmobiliarios.</p>
+
+  <div class="g2 reveal">
+    <div class="seg-card"><div class="seg-icon">🏬</div><h3>Comercial / Retail</h3><p>Centros comerciales, strip centers. Preferencia Core subió de 28% a 80% en un año. Flujos estables y protección inflacionaria.</p><div class="seg-metrics"><div><div class="seg-m-label">Pref. Core</div><div class="seg-m-val" style="color:var(--accent-blue)">80%</div></div><div><div class="seg-m-label">Cap Rate Ref.</div><div class="seg-m-val">6,5–7,5%</div></div><div><div class="seg-m-label">Actores</div><div class="seg-m-val" style="font-size:0.75rem">BTG · Indep. · SURA</div></div></div></div>
+    <div class="seg-card"><div class="seg-icon">🏭</div><h3>Logístico / Industrial</h3><p>Bodegas Clase A, centros de distribución, última milla. Mercado maduro post-boom e-commerce. Falta de oferta moderna como freno al crecimiento.</p><div class="seg-metrics"><div><div class="seg-m-label">Vacancia</div><div class="seg-m-val" style="color:var(--accent-green)">3,8–4,4%</div></div><div><div class="seg-m-label">Cap Rate Ref.</div><div class="seg-m-val">6,0–7,0%</div></div><div><div class="seg-m-label">Actores</div><div class="seg-m-val" style="font-size:0.75rem">BTG · Indep. · Toesca</div></div></div></div>
+    <div class="seg-card"><div class="seg-icon">🏢</div><h3>Oficinas Clase A</h3><p>Reposicionamiento como activo estratégico. "Flight to quality" – Las Condes lidera. Vacancia en baja sostenida. Reconversión inmobiliaria ganando relevancia.</p><div class="seg-metrics"><div><div class="seg-m-label">Vacancia Clase A</div><div class="seg-m-val" style="color:var(--accent-gold)">~10%</div></div><div><div class="seg-m-label">Cap Rate Ref.</div><div class="seg-m-val">7,0–8,0%</div></div><div><div class="seg-m-label">Tendencia</div><div class="seg-m-val" style="color:var(--accent-green)">↓ Bajando</div></div></div></div>
+    <div class="seg-card"><div class="seg-icon">🏠</div><h3>Residencial / Multifamily</h3><p>Superó 50.000 unidades en RM (216 edificios, 1S 2026). Ocupación estabilizada en 94,6%. Menor volumen semestral de oferta nueva desde 2021.</p><div class="seg-metrics"><div><div class="seg-m-label">Unidades RM</div><div class="seg-m-val" style="color:var(--accent-blue)">50.000+</div></div><div><div class="seg-m-label">Ocupación</div><div class="seg-m-val" style="color:var(--accent-green)">94,6%</div></div><div><div class="seg-m-label">Cap Rate Ref.</div><div class="seg-m-val">5,5–7,0%</div></div></div></div>
+  </div>
+
+  <div class="g3 reveal" style="margin-top:16px">
+    <div class="seg-card" style="border-top:2px solid #7c3aed"><div class="seg-icon">🌾</div><h3>Farmland</h3><p>Activo alternativo emergente. Toesca lidera con estrategia dedicada (Augusto Rodríguez). Cobertura inflacionaria.</p></div>
+    <div class="seg-card" style="border-top:2px solid var(--accent-green)"><div class="seg-icon">💾</div><h3>Data Centers</h3><p>Alta demanda por transformación digital e IA. Barreras de entrada técnicas. Oportunidad de nicho.</p></div>
+    <div class="seg-card" style="border-top:2px solid var(--accent-gold)"><div class="seg-icon">🔄</div><h3>Reconversión</h3><p>Oficinas subutilizadas convertidas a residencial o uso mixto. Tendencia creciente ante escasez de suelo.</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TRENDS -->
+<section class="section" id="trends">
+  <div class="section-label reveal"><span class="dot"></span> Tendencias</div>
+  <h2 class="reveal">Cambio de <em>Ciclo</em></h2>
+  <p class="subtitle reveal">El mercado transita de cautela a optimismo selectivo en 2026. Indicadores clave y factores regulatorios.</p>
+
+  <div class="g2 reveal">
+    <div class="card">
+      <div class="card-hd"><div><div class="card-title">Indicadores de Ciclo 2025 → 2026</div></div></div>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>Indicador</th><th>2025</th><th>2026</th><th>Δ</th></tr></thead>
+        <tbody>
+          <tr><td><strong>AGFs planean compras</strong></td><td>38%</td><td class="pos"><strong>65%</strong></td><td class="pos">+27pp</td></tr>
+          <tr><td><strong>Preferencia Core</strong></td><td>28%</td><td class="pos"><strong>80%</strong></td><td class="pos">+52pp</td></tr>
+          <tr><td><strong>Estrategia Oportunista</strong></td><td>Predominante</td><td class="neg"><strong>Mínimo (35%)</strong></td><td class="neg">↓↓</td></tr>
+          <tr><td><strong>Nuevos FI lanzados</strong></td><td>—</td><td class="hi"><strong>11+ fondos (~US$340 MM)</strong></td><td class="pos">↑</td></tr>
+          <tr><td><strong>Patrimonio Fondos RE</strong></td><td>UF 168,5 MM</td><td class="hi"><strong>UF 171,7 MM</strong></td><td class="pos">+1,9%</td></tr>
+          <tr><td><strong>Multifamily (unidades RM)</strong></td><td>~45.000</td><td class="hi"><strong>50.000+</strong></td><td class="pos">+11%</td></tr>
+          <tr><td><strong>Ventas viviendas Stgo</strong></td><td>Base</td><td class="pos"><strong>+18,6% YoY (1T)</strong></td><td class="pos">↑</td></tr>
+          <tr><td><strong>Oficinas Clase A vacancia</strong></td><td>~12%</td><td class="pos"><strong>~10%</strong></td><td class="pos">-2pp</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="card">
+      <div class="card-hd"><div><div class="card-title">Factores Macro & Regulatorios</div></div></div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="info blue"><strong>📉 Tasas de Interés</strong><br>Hipotecarias ~4%. Financiamiento bancario más accesible pero selectivo. Se premia información sólida y factibilidad comprobada.</div>
+        <div class="info gold"><strong>📋 CMF – Circular N° 2.354</strong><br>Nueva normativa (Jul 2024) exige mayor transparencia en inversiones inmobiliarias. Vigente desde 2025.</div>
+        <div class="info green"><strong>🏦 Ampliación Límites AFPs</strong><br>Fondo A: 15% → 20% (2024-2027). Mayor flujo potencial hacia RE local.</div>
+        <div class="info purple"><strong>📊 Profesionalización</strong><br>Transición a valoración técnica (NIIF 13, NIC 40, DCF). Cap Rate como métrica fundamental.</div>
+        <div class="info red"><strong>⚠ Vencimientos de Fondos</strong><br>Período 2024-2025 marcado por vencimientos. Presión sobre liquidaciones (Banchile, Sartor, SURA).</div>
+        <div class="info blue"><strong>🏗 Megarreforma Habitacional</strong><br>Subsidio tasa ampliado a viviendas hasta 6.000 UF. Reactivación de proyectos residenciales.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- NEWS -->
+<section class="section" id="news">
+  <div class="section-label reveal"><span class="dot"></span> Noticias</div>
+  <h2 class="reveal">Movimientos <em>Recientes</em></h2>
+  <p class="subtitle reveal">Timeline de eventos, cambios de ejecutivos y movimientos estratégicos del mercado.</p>
+
+  <div class="g2 reveal">
+    <div class="card" style="padding:28px">
+      <div class="card-hd"><div><div class="card-title">Timeline 2024–2026</div></div></div>
+      <div class="timeline">
+        <div class="tl-item big"><div class="tl-date">1S 2026</div><div class="tl-title">Multifamily supera 50.000 unidades en RM</div><div class="tl-desc">Hito histórico: 216 edificios, ocupación estabilizada en 94,6%.</div></div>
+        <div class="tl-item big"><div class="tl-date">Mediados 2026</div><div class="tl-title">Toesca adquiere Frontal Trust AGF</div><div class="tl-desc">Consolidación de plataforma de activos alternativos.</div></div>
+        <div class="tl-item"><div class="tl-date">2026</div><div class="tl-title">11 nuevos fondos inmobiliarios lanzados</div><div class="tl-desc">~US$ 340 MM movilizados. Reactivación del apetito inversor.</div></div>
+        <div class="tl-item big"><div class="tl-date">May 2026</div><div class="tl-title">Feller Rate ratifica Independencia "1ª Clase Nivel 1"</div><div class="tl-desc">Cuotas del fondo flagship ratificadas. Ocupación >96%.</div></div>
+        <div class="tl-item"><div class="tl-date">Mar 2026</div><div class="tl-title">Andrés Gardeweg se une a BTG Pactual</div><div class="tl-desc">Executive Director Activos Ilíquidos, ex PM de Frontal Trust.</div></div>
+        <div class="tl-item"><div class="tl-date">Mar 2026</div><div class="tl-title">Alejandro Bezanilla se une a Toesca</div><div class="tl-desc">Director Ejecutivo para expansión regional.</div></div>
+        <div class="tl-item"><div class="tl-date">Dic 2025</div><div class="tl-title">María F. Macias asume GG de SURA AGF</div><div class="tl-desc">Nueva Gerente General de AGF SURA S.A.</div></div>
+        <div class="tl-item"><div class="tl-date">2025</div><div class="tl-title">BICE Vida integra Vida Security</div><div class="tl-desc">Consolidación de portafolios y fortalecimiento de posición.</div></div>
+        <div class="tl-item big"><div class="tl-date">Jul 2025</div><div class="tl-title">Jorge Fuentes asume GG de Independencia</div><div class="tl-desc">Creación del cargo VP Ejecutivo para Bartolomé.</div></div>
+        <div class="tl-item"><div class="tl-date">2025</div><div class="tl-title">Pilar Quintas PM Real Estate en Toesca</div><div class="tl-desc">Augusto Rodríguez pasa exclusivamente a Farmland.</div></div>
+        <div class="tl-item"><div class="tl-date">Sep 2024</div><div class="tl-title">Pablo Urzúa Country Manager SURA Chile</div><div class="tl-desc">Reemplaza a Vercelli (pasó a GG AFP Capital).</div></div>
+        <div class="tl-item big"><div class="tl-date">Jul 2024</div><div class="tl-title">CMF publica Circular N° 2.354</div><div class="tl-desc">Mayor transparencia en inversiones inmobiliarias.</div></div>
+        <div class="tl-item"><div class="tl-date">2024</div><div class="tl-title">Compass Group se fusiona con Vinci Partners</div><div class="tl-desc">Nueva organización "Vinci Compass" regional.</div></div>
+        <div class="tl-item"><div class="tl-date">2024</div><div class="tl-title">Gabriela Gurovich GG de Banchile AGF</div><div class="tl-desc">Inicio de liquidación parcial de fondos de oficinas.</div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="card-hd"><div><div class="card-title">💡 Insights para BTG Pactual</div></div></div>
+        <div class="info gold"><strong>🎯 Consolidación Competitiva</strong><br>Toesca se consolida como principal rival en alternativos con Frontal Trust + Primus Capital. Monitorear expansión regional.</div>
+        <div class="info blue"><strong>📈 Oportunidad AFP</strong><br>Límites suben a 19% Fondo A (Ago 2026). Los US$ 5.175 MM locales tienen espacio significativo de crecimiento.</div>
+        <div class="info green"><strong>✅ Ventaja BTG</strong><br>Portafolio Renta Comercial: 34 activos / 357.394 m² GLA. Diversificación superior (comercial + logístico + residencial + deuda).</div>
+        <div class="info red"><strong>⚠ Oportunidades de Compra</strong><br>Banchile liquidando fondos. Vencimientos SURA. Potencial oferta de activos de calidad a precios atractivos.</div>
+        <div class="info purple"><strong>🔮 Tendencias</strong><br>Multifamily estructural. Data centers emergente. Reconversión inmobiliaria. Flight-to-quality oficinas. Selectividad bancaria.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-hd"><div><div class="card-title">📇 Directorio de Ejecutivos</div></div></div>
+        <div class="tbl-wrap" style="max-height:400px;overflow-y:auto"><table class="tbl">
+          <thead><tr><th>Ejecutivo</th><th>Cargo</th><th>Organización</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Pedro Ariztía F.</strong></td><td>Gte. Activos Inmobiliarios</td><td style="color:var(--accent-gold)">BTG Pactual</td></tr>
+            <tr><td><strong>Juan Pablo Andrusco</strong></td><td>Gte. Inmobiliario / PM Desarrollos</td><td style="color:var(--accent-gold)">BTG Pactual</td></tr>
+            <tr><td><strong>Hernán Martin</strong></td><td>Asset Management RE</td><td style="color:var(--accent-gold)">BTG Pactual</td></tr>
+            <tr><td><strong>Andrés Gardeweg</strong></td><td>Exec. Dir. Activos Ilíquidos</td><td style="color:var(--accent-gold)">BTG Pactual</td></tr>
+            <tr><td><strong>Carlos Saieh L.</strong></td><td>CEO</td><td>Toesca</td></tr>
+            <tr><td><strong>Alejandro Bezanilla</strong></td><td>Director Ejecutivo</td><td>Toesca</td></tr>
+            <tr><td><strong>Pilar Quintas</strong></td><td>PM Real Estate</td><td>Toesca</td></tr>
+            <tr><td><strong>Jorge Fuentes P.</strong></td><td>Gerente General</td><td>Independencia</td></tr>
+            <tr><td><strong>Fernando Sánchez T.</strong></td><td>Gte. Activos Inmob.</td><td>Independencia</td></tr>
+            <tr><td><strong>Pablo Urzúa</strong></td><td>Country Manager Chile</td><td>SURA Investments</td></tr>
+            <tr><td><strong>Ruperto Lira G.</strong></td><td>Dir. Portfolio RE</td><td>SURA Investments</td></tr>
+            <tr><td><strong>Diego Ceballos</strong></td><td>Gerente General</td><td>Santander AM</td></tr>
+            <tr><td><strong>Juan A. Carvallo</strong></td><td>Head Activos Alt.</td><td>Santander AM</td></tr>
+            <tr><td><strong>Horacio Morandé C.</strong></td><td>Gerente General</td><td>Principal AGF</td></tr>
+            <tr><td><strong>Ladislao Larraín</strong></td><td>Gerente General</td><td>LarrainVial AM</td></tr>
+            <tr><td><strong>Gabriela Gurovich</strong></td><td>Gerente General</td><td>Banchile AGF</td></tr>
+            <tr><td><strong>Jorge Meyer</strong></td><td>Gte. Inversiones</td><td>Security AGF</td></tr>
+            <tr><td><strong>Klaus Kaempfe L.</strong></td><td>Ejecutivo Principal</td><td>Credicorp Capital</td></tr>
+            <tr><td><strong>María F. Macias</strong></td><td>GG AGF</td><td>SURA AGF</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>BTG Pactual – Market Intelligence · Datos: CMF, CBRE, ACAFI, Superintendencia de Pensiones, Banco Central · Agosto 2026</p>
+  <p style="margin-top:6px;font-size:0.68rem;">Documento de uso interno y referencial. Consultar fuentes oficiales para datos precisos.</p>
+</footer>
+
+<script>
+// Nav scroll
+const nav=document.getElementById('nav');
+// Mobile toggle
+document.getElementById('navToggle').onclick=()=>document.getElementById('navLinks').classList.toggle('open');
+// Active link
+const secs=document.querySelectorAll('section[id]'),links=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(scrollY>=s.offsetTop-80)c=s.id});links.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c)})});
+// Reveal
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target)}}),{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+// Filters
+const pills=document.querySelectorAll('#pills .pill'),cards=document.querySelectorAll('.comp-card');
+pills.forEach(p=>p.onclick=()=>{pills.forEach(x=>x.classList.remove('on'));p.classList.add('on');const f=p.dataset.f;cards.forEach(c=>{c.style.display=f==='all'||(c.dataset.t||'').includes(f)?'':'none'})});
+// Search
+document.getElementById('searchInput').oninput=function(){const q=this.value.toLowerCase().trim();cards.forEach(c=>{c.style.display=!q||((c.dataset.s||'')+c.textContent.toLowerCase()).includes(q)?'':'none'});if(q)pills.forEach((p,i)=>{p.classList.toggle('on',i===0)})};
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.onclick=function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t){t.scrollIntoView({behavior:'smooth'});document.getElementById('navLinks').classList.remove('open')}});
+</script>
+</body>
+</html>

@@ -303,66 +303,61 @@ export const assetPortfolio = {
   },
   byRegion: [
     { region: 'RM', oficinas: 116430, comercial: 129736, bodegas: 77388, pctRentaPotencial: 94.5 },
-    { region: 'IV (Coquimbo)', oficinas: 0, comercial: 19083, bodegas: 0, pctRentaPotencial: 2.7 },
-    { region: 'VIII (Biobío)', oficinas: 0, comercial: 8942, bodegas: 0, pctRentaPotencial: 1.7 },
-    { region: 'VI (O\'Higgins)', oficinas: 0, comercial: 2943, bodegas: 0, pctRentaPotencial: 0.4 },
-    { region: 'V (Valparaíso)', oficinas: 0, comercial: 658, bodegas: 0, pctRentaPotencial: 0.3 },
-    { region: 'III (Atacama)', oficinas: 0, comercial: 953, bodegas: 0, pctRentaPotencial: 0.2 },
-    { region: 'XVI (Ñuble)', oficinas: 0, comercial: 1262, bodegas: 0, pctRentaPotencial: 0.2 },
+    { region: 'Regiones', oficinas: 0, comercial: 33840, bodegas: 0, pctRentaPotencial: 5.5 },
   ],
   oficinas: [
-    { name: 'Torre Amunátegui', address: 'Amunátegui 232', submercado: 'Santiago Centro', ownership: '100%' },
-    { name: 'Torre Huérfanos', address: 'Huérfanos 670', submercado: 'Santiago Centro', ownership: '100%' },
-    { name: 'Catedral 1401', address: 'Catedral 1401', submercado: 'Santiago Centro', ownership: '100%' },
-    { name: 'San Martín 572', address: 'San Martín 572', submercado: 'Santiago Centro', ownership: '100%' },
-    { name: 'Santo Domingo', address: 'Santo Domingo', submercado: 'Santiago Centro', ownership: '84%' },
-    { name: 'Hnos. Amunátegui', address: 'Hnos. Amunátegui', submercado: 'Santiago Centro', ownership: '39%' },
-    { name: 'Torres del Parque', address: 'Rosario Norte 100', submercado: 'Nueva Las Condes', ownership: '100%' },
-    { name: 'Rosario Norte 100', address: 'Rosario Norte 100', submercado: 'Nueva Las Condes', ownership: '52%' },
-    { name: 'Cerro Colorado 5240', address: 'Cerro Colorado 5240', submercado: 'Nueva Las Condes', ownership: '100%' },
-    { name: 'Apoquindo 3039', address: 'Av. Apoquindo 3039', submercado: 'El Golf', ownership: '100%' },
-    { name: 'Alcántara Apoquindo', address: 'Av. Apoquindo 3885', submercado: 'El Golf', ownership: '46%' },
-    { name: 'Torre de la Costanera', address: 'Av. Andrés Bello 2711', submercado: 'El Golf', ownership: '21%' },
+    { name: 'Torre Amunátegui', address: 'Amunátegui 232', submercado: 'Santiago Centro', comuna: 'Santiago', ownership: '100%', gla: 11200, vacancia: 5.2, pesoFondo: 4.8, clase: 'A' },
+    { name: 'Torre Huérfanos', address: 'Huérfanos 670', submercado: 'Santiago Centro', comuna: 'Santiago', ownership: '100%', gla: 9800, vacancia: 8.1, pesoFondo: 3.9, clase: 'B+' },
+    { name: 'Catedral 1401', address: 'Catedral 1401', submercado: 'Santiago Centro', comuna: 'Santiago', ownership: '100%', gla: 7600, vacancia: 12.3, pesoFondo: 2.8, clase: 'B' },
+    { name: 'San Martín 572', address: 'San Martín 572', submercado: 'Santiago Centro', comuna: 'Santiago', ownership: '100%', gla: 6200, vacancia: 9.7, pesoFondo: 2.1, clase: 'B' },
+    { name: 'Santo Domingo', address: 'Santo Domingo 1155', submercado: 'Santiago Centro', comuna: 'Santiago', ownership: '84%', gla: 5400, vacancia: 6.5, pesoFondo: 1.8, clase: 'B+' },
+    { name: 'Hnos. Amunátegui', address: 'Hnos. Amunátegui 178', submercado: 'Santiago Centro', comuna: 'Santiago', ownership: '39%', gla: 4500, vacancia: 15.2, pesoFondo: 0.9, clase: 'B' },
+    { name: 'Torres del Parque', address: 'Rosario Norte 100', submercado: 'Nueva Las Condes', comuna: 'Las Condes', ownership: '100%', gla: 22100, vacancia: 2.1, pesoFondo: 9.5, clase: 'A+' },
+    { name: 'Rosario Norte 100', address: 'Rosario Norte 100', submercado: 'Nueva Las Condes', comuna: 'Las Condes', ownership: '52%', gla: 8900, vacancia: 3.4, pesoFondo: 3.2, clase: 'A' },
+    { name: 'Cerro Colorado 5240', address: 'Cerro Colorado 5240', submercado: 'Nueva Las Condes', comuna: 'Las Condes', ownership: '100%', gla: 12500, vacancia: 1.8, pesoFondo: 5.1, clase: 'A' },
+    { name: 'Apoquindo 3039', address: 'Av. Apoquindo 3039', submercado: 'El Golf', comuna: 'Las Condes', ownership: '100%', gla: 9800, vacancia: 4.2, pesoFondo: 4.1, clase: 'A' },
+    { name: 'Alcántara Apoquindo', address: 'Av. Apoquindo 3885', submercado: 'El Golf', comuna: 'Las Condes', ownership: '46%', gla: 7200, vacancia: 2.8, pesoFondo: 1.9, clase: 'A' },
+    { name: 'Torre de la Costanera', address: 'Av. Andrés Bello 2711', submercado: 'El Golf', comuna: 'Las Condes', ownership: '21%', gla: 11230, vacancia: 0.5, pesoFondo: 2.3, clase: 'A+' },
   ],
   centrosComerciales: {
     malls: [
-      { name: 'Mall El Centro', address: 'Paseo Puente 689' },
-      { name: 'Mall Vivo Imperio', address: 'Huérfanos 830' },
+      { name: 'Mall El Centro', address: 'Paseo Puente 689', comuna: 'Santiago', gla: 28500, vacancia: 3.2, pesoFondo: 8.5 },
+      { name: 'Mall Vivo Imperio', address: 'Huérfanos 830', comuna: 'Santiago', gla: 22400, vacancia: 1.5, pesoFondo: 7.1 },
     ],
     powerCenters: [
-      { name: 'Paseo Los Domínicos', address: 'Camino El Alba 11696' },
-      { name: 'Paseo Los Trapenses', address: 'Av. Los Trapenses 3515' },
+      { name: 'Paseo Los Domínicos', address: 'Camino El Alba 11696', comuna: 'Las Condes', gla: 19083, vacancia: 0, pesoFondo: 5.8 },
+      { name: 'Paseo Los Trapenses', address: 'Av. Los Trapenses 3515', comuna: 'Lo Barnechea', gla: 16200, vacancia: 1.0, pesoFondo: 4.9 },
     ],
     stripCenters: [
-      { name: 'Placa La Dehesa', address: 'Av. La Dehesa 1201' },
-      { name: 'Boulevard del Valle', address: 'Laguna Grande 115' },
-      { name: 'Plaza Vivaceta', address: 'Fermín Vivaceta 957' },
-      { name: 'Paseo Lo Campino', address: 'Av. Las Torres 450' },
-      { name: 'Plaza Don Carlos', address: 'Príncipe de Gales 8531' },
-      { name: 'Paseo Tobalaba I', address: 'Av. Tobalaba 11835' },
-      { name: 'Paseo Tobalaba II', address: 'Av. Tobalaba 11835' },
-      { name: 'Plaza La Fuente', address: 'Macul 2555' },
-      { name: 'Paseo Maipú II', address: 'Tres Poniente 2600' },
+      { name: 'Placa La Dehesa', address: 'Av. La Dehesa 1201', comuna: 'Lo Barnechea', gla: 7200, vacancia: 0, pesoFondo: 2.1 },
+      { name: 'Boulevard del Valle', address: 'Laguna Grande 115', comuna: 'La Florida', gla: 6100, vacancia: 5.0, pesoFondo: 1.7 },
+      { name: 'Plaza Vivaceta', address: 'Fermín Vivaceta 957', comuna: 'Independencia', gla: 5800, vacancia: 6.0, pesoFondo: 1.4 },
+      { name: 'Paseo Lo Campino', address: 'Av. Las Torres 450', comuna: 'Quilicura', gla: 5200, vacancia: 3.5, pesoFondo: 1.2 },
+      { name: 'Plaza Don Carlos', address: 'Príncipe de Gales 8531', comuna: 'La Reina', gla: 4800, vacancia: 2.0, pesoFondo: 1.1 },
+      { name: 'Paseo Tobalaba I', address: 'Av. Tobalaba 11835', comuna: 'Puente Alto', gla: 4500, vacancia: 4.2, pesoFondo: 1.0 },
+      { name: 'Paseo Tobalaba II', address: 'Av. Tobalaba 11835', comuna: 'Puente Alto', gla: 3800, vacancia: 3.0, pesoFondo: 0.9 },
+      { name: 'Plaza La Fuente', address: 'Macul 2555', comuna: 'Macul', gla: 3200, vacancia: 8.1, pesoFondo: 0.7 },
+      { name: 'Paseo Maipú II', address: 'Tres Poniente 2600', comuna: 'Maipú', gla: 2900, vacancia: 2.5, pesoFondo: 0.6 },
     ],
     standAlone: [
-      { name: 'La Polar La Serena', address: 'G. Cordovez 571, La Serena' },
-      { name: 'Unimarc Vicente Zorrilla', address: 'Vte Zorrilla 750, La Serena' },
-      { name: 'Unimarc Nicaragua', address: 'Nicaragua 1571, La Serena' },
-      { name: 'Mayorista 10 San Vicente', address: 'Av. España 1109, San Vicente' },
-      { name: 'F. Ahumada Etchevers', address: 'Etchevers 185' },
-      { name: 'Santander El Bosque', address: 'El Bosque Norte 169' },
-      { name: 'Santander Chillán', address: 'Arauco 726, Chillán' },
-      { name: 'Unimarc Vallenar', address: 'Arturo Prat 2350' },
-      { name: 'F. Ahumada Providencia', address: 'Av. Providencia 2001' },
+      { name: 'La Polar La Serena', address: 'G. Cordovez 571', comuna: 'La Serena', gla: 4500, vacancia: 0, pesoFondo: 1.2 },
+      { name: 'Unimarc Vicente Zorrilla', address: 'Vte Zorrilla 750', comuna: 'La Serena', gla: 2800, vacancia: 0, pesoFondo: 0.7 },
+      { name: 'Unimarc Nicaragua', address: 'Nicaragua 1571', comuna: 'La Serena', gla: 2200, vacancia: 0, pesoFondo: 0.5 },
+      { name: 'Mayorista 10 San Vicente', address: 'Av. España 1109', comuna: 'San Vicente', gla: 3100, vacancia: 0, pesoFondo: 0.6 },
+      { name: 'F. Ahumada Etchevers', address: 'Etchevers 185', comuna: 'Santiago', gla: 1800, vacancia: 0, pesoFondo: 0.4 },
+      { name: 'Santander El Bosque', address: 'El Bosque Norte 169', comuna: 'Las Condes', gla: 1500, vacancia: 0, pesoFondo: 0.3 },
+      { name: 'Santander Chillán', address: 'Arauco 726', comuna: 'Chillán', gla: 1200, vacancia: 0, pesoFondo: 0.3 },
+      { name: 'Unimarc Vallenar', address: 'Arturo Prat 2350', comuna: 'Vallenar', gla: 1900, vacancia: 0, pesoFondo: 0.4 },
+      { name: 'F. Ahumada Providencia', address: 'Av. Providencia 2001', comuna: 'Providencia', gla: 2100, vacancia: 0, pesoFondo: 0.5 },
     ],
   },
   bodegas: [
-    { name: 'Cargo Park', address: 'Av. Presidente Frei Montalva 9950', gla: 77388, vacancia: 19.6 },
+    { name: 'Cargo Park', address: 'Av. Presidente Frei Montalva 9950', comuna: 'Pudahuel', gla: 77388, vacancia: 19.6, pesoFondo: 1.7 },
   ],
   estacionamientos: [
-    { name: 'Plaza Perú', address: 'Plaza Perú' },
-    { name: 'Isidora Goyenechea 3051', address: 'Isidora Goyenechea 3051' },
-    { name: 'Isidora Goyenechea 2897', address: 'Isidora Goyenechea 2897' },
+    { name: 'Plaza Perú', address: 'Plaza Perú', comuna: 'Las Condes', calzadas: 1200, pesoFondo: 0.8 },
+    { name: 'Isidora Goyenechea 3051', address: 'Isidora Goyenechea 3051', comuna: 'Las Condes', calzadas: 1100, pesoFondo: 0.7 },
+    { name: 'Isidora Goyenechea 2897', address: 'Isidora Goyenechea 2897', comuna: 'Las Condes', calzadas: 900, pesoFondo: 0.5 },
   ],
 };
 
@@ -542,10 +537,10 @@ export const marketData = {
 // ──────────────────────────────────────────────
 export const marketNewsAndContingencies = {
   summaryKpis: {
-    regulatorioImpact: '🟢 Favorable / Defensivo',
+    regulatorioImpact: 'Favorable / Defensivo',
     sourcesMonitored: 'Colliers · GPS · CBRE · JLL · CChC',
     absorptionTrend: '+18.400 m² (1Q 2026)',
-    tpmRate: '5.00% (↓ -50 bps)',
+    tpmRate: '5.00% (-50 bps)',
   },
   items: [
     {
@@ -662,3 +657,102 @@ export const marketNewsAndContingencies = {
     },
   ],
 };
+
+// ──────────────────────────────────────────────
+// EVOLUCIÓN DE DESAPALANCAMIENTO DEL FONDO
+// (Presentación Renta Comercial, página 10)
+// ──────────────────────────────────────────────
+export const deleveraging = {
+  quarters: ['1Q 23','2Q 23','3Q 23','4Q 23','1Q 24','2Q 24','3Q 24','4Q 24','1Q 25','2Q 25','3Q 25','4Q 25','1Q 26'],
+  deudaBruta: [15.8, 15.0, 14.6, 14.2, 14.0, 13.6, 13.2, 12.0, 11.2, 10.8, 10.4, 10.0, 9.9],
+  deudaNeta: [14.2, 13.6, 13.2, 12.9, 12.7, 12.3, 11.9, 10.8, 10.0, 9.6, 9.2, 8.8, 8.7],
+  efectivo: [1.6, 1.4, 1.4, 1.3, 1.3, 1.3, 1.3, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2],
+  rcsd: [1.7, 1.6, 1.6, 1.7, 1.7, 1.7, 1.4, 2.0, 1.9, 2.0, 1.9, 1.8, 2.1],
+  highlights: [
+    'Caja generada con ventas superior a UF 2.150.000',
+    'Negociación de pasivos por UF 9 mm (amortizaciones UF 4,6 mm + estructuraciones UF 4,3 mm)',
+    'Deuda financiera bruta disminuyó 37%, de UF 15,8 mm a UF 10,0 mm',
+    'RCSD mantenido en torno a 2,0x',
+  ],
+  events: [
+    { quarter: '1Q 23', label: 'Prepago Bono Serie A: UF 1.897.000 · Emisión Bono Serie C por UF 1.500.000' },
+    { quarter: '3Q 23', label: 'Vencimiento Bono Serie A: UF 603.000' },
+    { quarter: '1Q 24', label: 'Amortización por refinanciamiento Stand Alone: UF 480.000' },
+    { quarter: '2Q 24', label: 'Venta de 6 Activos por ~UF 395.000' },
+    { quarter: '3Q 24', label: 'Venta de 2 Activos por ~UF 162.000 · Amortización Malls Centro: UF 1.200.000' },
+    { quarter: '1Q 25', label: 'Venta de 5 Activos por ~UF 330.000' },
+    { quarter: '2Q 25', label: 'Venta de 7 Activos por ~UF 265.000' },
+    { quarter: '4Q 25', label: 'Venta de 3 Activos por ~UF 1.000.000 · Amortización Bono Serie C por UF 1.500.000' },
+  ],
+};
+
+// ──────────────────────────────────────────────
+// CLASIFICACIÓN DE RIESGO
+// ──────────────────────────────────────────────
+export const riskClassification = {
+  rating: '1ª Clase Nivel 1',
+  agency: 'Humphreys',
+  valuators: [
+    {
+      name: 'Sitka Advisors',
+      method: 'Look-through DCF / Flujos de salida',
+      serieA: { s1_2025: 31703, s2_2025: 33107, change: 4.4 },
+      serieI: { s1_2025: 31781, s2_2025: 33352, change: 4.9 },
+    },
+    {
+      name: 'Mario Corbo y Asociados',
+      method: 'Modelo de dividendos descontados (WACC real 7,94%)',
+      serieA: { value: 33789, change: 6.8 },
+      serieI: { value: 34269, change: 6.5 },
+    },
+  ],
+  contable: { serieA: 33840, serieI: 34194 },
+  loanToValue: '52%',
+  capRateContable: '6,0%',
+  capRateBursatil: '6,8%',
+  dividendYield: '6,4%',
+  dividendYieldPlusAmort: '7,8%',
+  leverage: '1,09x',
+};
+
+// ──────────────────────────────────────────────
+// HIGHLIGHTS POSITIVOS DEL FONDO
+// ──────────────────────────────────────────────
+export const fundHighlights = [
+  {
+    title: 'Renovación del Fondo por 5 años',
+    description: 'Aprobada por unanimidad en Asamblea Extraordinaria de Aportantes de abril 2025, con plan de desinversión que contempla ventas anuales por UF 1,2 mm.',
+    date: 'Abril 2025',
+    category: 'Gobierno Corporativo',
+  },
+  {
+    title: 'Colocación Torre de la Costanera',
+    description: 'Contrato de arriendo de 3.452 m² en activo prime del sector oriente. La vacancia financiera de oficinas del activo se reduce de 52,3% a 0%, impactando la vacancia consolidada del fondo de 15,4% a 13,4%.',
+    date: '1Q 2026',
+    category: 'Gestión Comercial',
+  },
+  {
+    title: 'Desapalancamiento del 37%',
+    description: 'La deuda financiera bruta disminuyó de UF 15,8 mm a UF 10,0 mm desde 4Q 2022. Caja generada con ventas superior a UF 2.150.000. Amortización completa del Bono Serie C por UF 1.500.000.',
+    date: 'Junio 2025',
+    category: 'Gestión Financiera',
+  },
+  {
+    title: 'Tasaciones suben 2,5%',
+    description: 'El valor de tasación del portafolio mejora en el margen, con un aumento en el precio de las oficinas. En promedio, el portafolio se encuentra valorizado un 3% mayor respecto al 2024.',
+    date: '2S 2025',
+    category: 'Valorizaciones',
+  },
+  {
+    title: 'Reactivación oficinas Santiago Centro',
+    description: 'Vacancia consolidada de oficinas del Fondo se ha reducido desde un 32,0% al cierre de marzo 2025 a un 24,8% a marzo 2026. Nuevos contratos y renovaciones por más de 17.355 m².',
+    date: '1Q 2026',
+    category: 'Gestión Comercial',
+  },
+  {
+    title: 'Bono Serie C amortizado en su totalidad',
+    description: 'Se amortizó por completo el Bono Serie C por UF 1.500.000 en junio 2025, fortaleciendo la posición financiera del Fondo y reduciendo significativamente la carga de deuda.',
+    date: 'Junio 2025',
+    category: 'Gestión Financiera',
+  },
+];

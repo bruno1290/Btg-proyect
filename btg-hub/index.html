@@ -4,28 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BTG Pactual Renta Comercial – Hub</title>
-  <meta name="description" content="Dashboard interactivo del Fondo BTG Pactual Renta Comercial. Portafolio inmobiliario, indicadores financieros, tasaciones, arrendatarios y simulador de valor cuota." />
+  <meta name="description" content="Dashboard interactivo del Fondo BTG Pactual Renta Comercial. Portafolio inmobiliario, indicadores financieros, clasificación de riesgo y evolución de desapalancamiento." />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230a2d4d'/><text x='16' y='22' font-size='14' text-anchor='middle' fill='%23ffffff' font-family='Inter' font-weight='800'>btg</text></svg>" />
+  <link rel="stylesheet" href="./src/styles/main.css" />
 </head>
 <body>
 
-  <!-- ═══ NAVIGATION (Minimalist) ═══ -->
+  <!-- NAV -->
   <nav class="navbar" id="navbar">
     <div id="nav-gradient"></div>
     <div class="navbar-inner">
-      <a href="#hero" class="navbar-brand" style="display: flex; align-items: center; gap: 8px;">
-        <img src="/logo-fi.png" alt="BTG Pactual FI Renta Comercial" style="height: 26px; width: auto; object-fit: contain;" />
-        <span class="brand-sub">Hub</span>
+      <a href="#hero" class="navbar-brand" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+        <div style="width: 16px; height: 16px; background-color: #2b8cff; border-radius: 50%;"></div>
+        <span class="brand-text">FI Renta<strong>Comercial</strong></span>
       </a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#dashboard" class="active">Dashboard</a></li>
+        <li><a href="#hero" class="active">Resumen</a></li>
+        <li><a href="#dashboard">Financiero</a></li>
         <li><a href="#portfolio">Portafolio</a></li>
-        <li><a href="#valuations">Tasaciones</a></li>
+        <li><a href="#deleveraging">Desapalancamiento</a></li>
+        <li><a href="#risk">Clasificación de Riesgo</a></li>
         <li><a href="#tenants">Arrendatarios</a></li>
-        <li><a href="#debt">Deuda</a></li>
-        <li><a href="#market">Mercado</a></li>
-        <li><a href="#simulator">Simulador</a></li>
-        <li><a href="#news">Noticias & Mercado</a></li>
+        <li><a href="#highlights">Highlights</a></li>
       </ul>
       <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -33,72 +33,72 @@
     </div>
   </nav>
 
-  <!-- ═══ HERO SECTION (Minimalist) ═══ -->
-  <section class="hero section official-hero" id="hero" style="background-image: linear-gradient(rgba(6, 26, 46, 0.82), rgba(6, 26, 46, 0.96)), url('https://btgpactual.cl/rentacomercial/wp-content/uploads/2023/10/banner_home_RC.jpg'); background-size: cover; background-position: center; min-height: 80vh; padding: 120px 20px 60px;">
-    <div class="hero-badge" style="margin-bottom: var(--space-md);">
-      <span class="live-dot"></span>
-      Datos al 1Q 2026 · RUN CMF 7224-9
+  <!-- HERO -->
+  <section class="hero section official-hero" id="hero" style="background-image: linear-gradient(rgba(11, 37, 64, 0.4), rgba(11, 37, 64, 0.7)), url('https://btgpactual.cl/rentacomercial/wp-content/uploads/2023/10/banner_home_RC.jpg'); background-size: cover; background-position: center; min-height: 70vh; padding: 130px 20px 60px; display: flex; flex-direction: column; justify-content: space-between;">
+    <div style="max-width: 1200px; margin: 0 auto; width: 100%;">
+      <h1 style="font-size: 3.2rem; font-weight: 500; line-height: 1.2; color: #ffffff; max-width: 800px; margin-bottom: 16px; font-family: 'Inter', sans-serif;">
+        Portafolio diversificado<br/>
+        de centros comerciales,<br/>
+        oficinas y bodegas
+      </h1>
     </div>
 
-    <h1 style="font-size: 2.6rem; font-weight: 800; line-height: 1.25; max-width: 850px; margin: 0 auto var(--space-md);">
-      Portafolio diversificado de <br/>
-      <span class="gradient">centros comerciales, oficinas y bodegas</span>
-    </h1>
-
-    <p class="hero-subtitle" style="font-size: 1rem; max-width: 650px; color: #b8cfe0; margin: 0 auto var(--space-2xl);">
-      BTG Pactual Renta Comercial Fondo de Inversión · 34 activos · 357.394 m² GLA
-    </p>
-
-    <!-- Hero KPIs (Clean 4 Grid) -->
-    <div class="hero-kpis" id="heroKpis" style="margin: 0 auto var(--space-xl); max-width: 900px;">
-      <div class="hero-kpi">
-        <div class="kpi-label">Patrimonio Neto</div>
-        <div class="kpi-value" data-counter="355182">M$0</div>
+    <!-- Hero Cards -->
+    <div class="hero-cards" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 40px auto 0; width: 100%;">
+      <div class="hero-card" style="background: #0b2540; padding: 24px; border-radius: 8px; color: white; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px;">
+        <h3 style="font-size: 1.2rem; font-weight: 500; margin-bottom: 16px;">¿Por qué invertir?</h3>
+        <p style="font-size: 0.85rem; line-height: 1.5; color: rgba(255,255,255,0.9); margin-bottom: 24px;">
+          Este fondo ofrece la oportunidad de invertir en renta inmobiliaria en Chile con acceso a un portafolio diversificado de alta calidad.
+        </p>
+        <a href="#" style="color: white; text-decoration: none; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          Ver más
+        </a>
       </div>
-      <div class="hero-kpi">
-        <div class="kpi-label">GLA Total</div>
-        <div class="kpi-value" data-counter="357394" data-suffix=" m²">0 m²</div>
+      
+      <div class="hero-card" style="background: #0b2540; padding: 24px; border-radius: 8px; color: white; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px;">
+        <h3 style="font-size: 1.2rem; font-weight: 500; margin-bottom: 16px;">¿En qué invertimos?</h3>
+        <p style="font-size: 0.85rem; line-height: 1.5; color: rgba(255,255,255,0.9); margin-bottom: 24px;">
+          Nos especializamos en rentas inmobiliarias en Chile, ofreciendo un portafolio premium y diversificado compuesto por oficinas, centros comerciales y bodegas.
+        </p>
+        <a href="#" style="color: white; text-decoration: none; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          Ver más
+        </a>
       </div>
-      <div class="hero-kpi">
-        <div class="kpi-label">Valor Cuota Serie A</div>
-        <div class="kpi-value" data-counter="33840" data-prefix="$">$0</div>
+      
+      <div class="hero-card" style="background: #0b2540; padding: 24px; border-radius: 8px; color: white; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px;">
+        <h3 style="font-size: 1.2rem; font-weight: 500; margin-bottom: 16px;">¿Cómo invertir?</h3>
+        <p style="font-size: 0.85rem; line-height: 1.5; color: rgba(255,255,255,0.9); margin-bottom: 24px;">
+          Invertir en renta inmobiliaria es un proceso sencillo. Puedes hacerlo 100% online a través de nuestra plataforma digital o con la ayuda de tu corredor de bolsa habitual.
+        </p>
+        <a href="#" style="color: white; text-decoration: none; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          Ver más
+        </a>
       </div>
-      <div class="hero-kpi">
-        <div class="kpi-label">DSCR</div>
-        <div class="kpi-value" data-counter="2.08" data-decimal="true" data-suffix="x">0x</div>
-      </div>
-    <div class="hero-highlights" style="margin-top: var(--space-sm);">
-      <span class="highlight-badge accent-green">✓ Renovación del Fondo por 5 años</span>
-      <span class="highlight-badge accent-gold">↗ Tasación activos +2,5%</span>
-      <span class="highlight-badge">📊 Sitka: $35.390 · MCYA: $37.288</span>
-      <span class="highlight-badge accent-green">💰 Desapalancamiento -31%</span>
     </div>
   </section>
 
-  <!-- ═══ DASHBOARD FINANCIERO ═══ -->
+  <!-- DASHBOARD FINANCIERO -->
   <section class="section" id="dashboard">
     <div class="section-header reveal">
-      <div class="section-label"><span class="dot"></span> Sección 01</div>
+      <div class="section-label"><span class="dot"></span> Seccion 01</div>
       <h2 class="section-title">Dashboard <span class="gradient">Financiero</span></h2>
       <p class="section-subtitle">Estados financieros consolidados al 31 de marzo de 2026</p>
     </div>
 
-    <!-- Balance Sheet Summary -->
-    <div class="grid-4 reveal reveal-delay-1" id="balanceCards">
-      <!-- Dynamically populated -->
-    </div>
+    <div class="grid-4 reveal reveal-delay-1" id="balanceCards"></div>
 
     <div style="height: var(--space-xl)"></div>
 
-    <!-- Charts Row 1 -->
     <div class="grid-2 reveal reveal-delay-2">
       <div class="card">
         <div class="card-header">
           <div>
-            <div class="card-title">Evolución del Patrimonio</div>
-            <div class="card-subtitle">Miles de millones CLP (2013–1Q 2026)</div>
+            <div class="card-title">Evolucion del Patrimonio</div>
+            <div class="card-subtitle">Miles de millones CLP (2013-1Q 2026)</div>
           </div>
-          <div class="card-icon blue">📊</div>
         </div>
         <div class="chart-container">
           <canvas id="chartPatrimonio"></canvas>
@@ -110,7 +110,6 @@
             <div class="card-title">NOI vs Cobertura de Deuda (DSCR)</div>
             <div class="card-subtitle">Ratio de Cobertura de Servicio de Deuda</div>
           </div>
-          <div class="card-icon green">📈</div>
         </div>
         <div class="chart-container">
           <canvas id="chartNoiDscr"></canvas>
@@ -120,15 +119,13 @@
 
     <div style="height: var(--space-xl)"></div>
 
-    <!-- Charts Row 2 -->
     <div class="grid-2 reveal reveal-delay-3">
       <div class="card">
         <div class="card-header">
           <div>
             <div class="card-title">Deuda Financiera Neta / NOI</div>
-            <div class="card-subtitle">Evolución del apalancamiento (veces)</div>
+            <div class="card-subtitle">Evolucion del apalancamiento (veces)</div>
           </div>
-          <div class="card-icon gold">📉</div>
         </div>
         <div class="chart-container">
           <canvas id="chartDebtNoi"></canvas>
@@ -140,7 +137,6 @@
             <div class="card-title">Deuda Financiera Neta / Patrimonio</div>
             <div class="card-subtitle">Ratio de apalancamiento patrimonial (veces)</div>
           </div>
-          <div class="card-icon purple">💎</div>
         </div>
         <div class="chart-container">
           <canvas id="chartDebtEquity"></canvas>
@@ -149,58 +145,43 @@
     </div>
   </section>
 
-  <!-- ═══ PORTAFOLIO DE ACTIVOS ═══ -->
+  <!-- PORTAFOLIO DE ACTIVOS -->
   <section class="section" id="portfolio">
     <div class="section-header reveal">
-      <div class="section-label"><span class="dot"></span> Sección 02</div>
+      <div class="section-label"><span class="dot"></span> Seccion 02</div>
       <h2 class="section-title">Portafolio de <span class="gradient">Activos</span></h2>
-      <p class="section-subtitle">Malla societaria y distribución de 34 activos inmobiliarios en Chile</p>
+      <p class="section-subtitle">34 activos inmobiliarios distribuidos en Chile · 357.394 m² arrendables</p>
     </div>
 
-    <!-- Corporate Structure with 3D Holographic Projector -->
-    <div class="card reveal reveal-delay-1" style="margin-bottom: var(--space-xl)">
-      <div class="card-header">
-        <div>
-          <div class="card-title">Estructura Societaria & Proyector 3D de Activos</div>
-          <div class="card-subtitle">Pasa el cursor o haz clic en cualquier sociedad para proyectar sus activos en 3D interactivo</div>
-        </div>
-        <div class="tag blue">5 Sociedades · 34 Activos</div>
-      </div>
-      <div class="structure-diagram" id="structureDiagram">
-        <!-- Dynamically populated -->
-      </div>
-      <!-- 3D Hologram & Controlled Assets Inspector -->
-      <div id="hologramInspector">
-        <!-- Dynamically populated by main.js with 3D Canvas -->
-      </div>
-    </div>
-
-    <!-- Asset Summary -->
-    <div class="grid-3 reveal reveal-delay-2" id="assetSummaryCards">
+    <!-- Asset Summary Calugas (Clickable) -->
+    <div class="grid-3 reveal reveal-delay-1" id="portfolioCalugas">
       <!-- Dynamically populated -->
+    </div>
+
+    <!-- Expandable Asset Detail Panels -->
+    <div id="portfolioExpanded" class="portfolio-expanded-container reveal">
+      <!-- Dynamically populated when a caluga is clicked -->
     </div>
 
     <div style="height: var(--space-xl)"></div>
 
-    <!-- Asset Distribution by Region -->
-    <div class="grid-2 reveal reveal-delay-3">
+    <!-- Charts Row -->
+    <div class="grid-2 reveal reveal-delay-2">
       <div class="card">
         <div class="card-header">
           <div>
-            <div class="card-title">Distribución por Región</div>
+            <div class="card-title">Distribucion por Region</div>
             <div class="card-subtitle">Superficie arrendable y renta potencial</div>
           </div>
         </div>
         <div class="table-wrapper">
-          <table class="data-table" id="regionTable">
-            <!-- Dynamically populated -->
-          </table>
+          <table class="data-table" id="regionTable"></table>
         </div>
       </div>
       <div class="card">
         <div class="card-header">
           <div>
-            <div class="card-title">Composición del Portafolio</div>
+            <div class="card-title">Composicion del Portafolio</div>
             <div class="card-subtitle">Por tipo de activo</div>
           </div>
         </div>
@@ -209,57 +190,104 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- EVOLUCION DE DESAPALANCAMIENTO -->
+  <section class="section" id="deleveraging">
+    <div class="section-header reveal">
+      <div class="section-label"><span class="dot"></span> Seccion 03</div>
+      <h2 class="section-title">Evolucion de <span class="gradient">Desapalancamiento</span></h2>
+      <p class="section-subtitle">En un contexto desafiante, el Fondo ha logrado disminuir su apalancamiento y mantener ratios estables</p>
+    </div>
+
+    <!-- Deleveraging KPIs -->
+    <div class="grid-4 reveal reveal-delay-1" id="deleveragingKpis"></div>
 
     <div style="height: var(--space-xl)"></div>
 
-    <!-- Asset Details Grid with Filters -->
-    <div class="card reveal reveal-delay-2">
-      <div class="card-header">
-        <div>
-          <div class="card-title">Detalle de Activos – Oficinas</div>
-          <div class="card-subtitle">12 edificios en 3 submercados de Santiago</div>
+    <!-- Deleveraging Chart + Highlights -->
+    <div class="grid-2-1 reveal reveal-delay-2">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Deuda Financiera y RCSD</div>
+            <div class="card-subtitle">Evolucion trimestral desde 1Q 2023 a 1Q 2026</div>
+          </div>
+          <div class="metric-change positive">-37% Deuda Bruta</div>
         </div>
-        <div class="tag blue">116.430 m²</div>
-      </div>
-
-      <!-- Controls: Filter pills and Search -->
-      <div class="controls-bar">
-        <div class="filter-pills" id="officeFilterPills">
-          <button class="filter-pill active" data-filter="all">Todos (12)</button>
-          <button class="filter-pill" data-filter="El Bosque 500">El Bosque 500</button>
-          <button class="filter-pill" data-filter="Nueva Las Condes">Nueva Las Condes</button>
-          <button class="filter-pill" data-filter="Santiago Centro">Santiago Centro</button>
-          <button class="filter-pill" data-filter="Providencia">Providencia / Apoquindo</button>
-        </div>
-        <div class="search-box">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7a9bb5" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="officeSearchInput" placeholder="Buscar edificio o calle..." />
+        <div class="chart-container" style="height: 360px;">
+          <canvas id="chartDeleveraging"></canvas>
         </div>
       </div>
-
-      <div class="table-wrapper">
-        <table class="data-table" id="oficinasTable">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Hitos Clave</div>
+            <div class="card-subtitle">Desde 4Q 2022 a 4Q 2025</div>
+          </div>
+        </div>
+        <div id="deleveragingHighlights" class="deleveraging-highlights">
           <!-- Dynamically populated -->
-        </table>
+        </div>
+        <div id="deleveragingEvents" class="deleveraging-events" style="margin-top: var(--space-lg);">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+
+    <div style="height: var(--space-xl)"></div>
+
+    <!-- Debt Structure -->
+    <div class="grid-4 reveal reveal-delay-3" id="debtKpis"></div>
+    <div style="height: var(--space-xl)"></div>
+    <div class="grid-2 reveal reveal-delay-3">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Composicion de Deuda</div>
+            <div class="card-subtitle">Por tipo de instrumento</div>
+          </div>
+        </div>
+        <div class="chart-container square">
+          <canvas id="chartDebtComposition"></canvas>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Perfil de Amortizacion</div>
+            <div class="card-subtitle">Miles de UF por ano</div>
+          </div>
+        </div>
+        <div class="chart-container">
+          <canvas id="chartAmortization"></canvas>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ TASACIONES & VALORIZACIONES ═══ -->
-  <section class="section" id="valuations">
+  <!-- CLASIFICACION DE RIESGO & VALORIZACIONES -->
+  <section class="section" id="risk">
     <div class="section-header reveal">
-      <div class="section-label"><span class="dot"></span> Sección 03</div>
-      <h2 class="section-title">Tasaciones & <span class="gradient">Valorizaciones</span></h2>
-      <p class="section-subtitle">Evolución de tasaciones y comparación de valorizaciones independientes Sitka vs MCYA</p>
+      <div class="section-label"><span class="dot"></span> Seccion 04</div>
+      <h2 class="section-title">Clasificacion de <span class="gradient">Riesgo</span></h2>
+      <p class="section-subtitle">Valorizaciones independientes y clasificacion de cuotas del Fondo</p>
     </div>
 
-    <!-- Tasaciones Chart -->
-    <div class="grid-2 reveal reveal-delay-1">
+    <!-- Risk Rating Badge -->
+    <div class="reveal reveal-delay-1" id="riskRatingSection">
+      <!-- Dynamically populated -->
+    </div>
+
+    <div style="height: var(--space-xl)"></div>
+
+    <!-- Tasaciones & Cap Rates -->
+    <div class="grid-2 reveal reveal-delay-2">
       <div class="card">
         <div class="card-header">
           <div>
             <div class="card-title">Tasaciones por Tipo de Activo</div>
-            <div class="card-subtitle">Valor en UF millones (2019–2025)</div>
+            <div class="card-subtitle">Valor en UF millones (2019-2025)</div>
           </div>
           <div class="metric-change positive">+2.5% Total</div>
         </div>
@@ -270,8 +298,8 @@
       <div class="card">
         <div class="card-header">
           <div>
-            <div class="card-title">Cap Rate Régimen (%)</div>
-            <div class="card-subtitle">Por tipo de activo (2019–2025)</div>
+            <div class="card-title">Cap Rate Regimen (%)</div>
+            <div class="card-subtitle">Por tipo de activo (2019-2025)</div>
           </div>
         </div>
         <div class="chart-container">
@@ -287,36 +315,31 @@
       <div class="card-header">
         <div>
           <div class="card-title">Detalle de Tasaciones por Clase</div>
-          <div class="card-subtitle">Cushman & Wakefield y Real Data – Valor en UF millones</div>
+          <div class="card-subtitle">Cushman & Wakefield y Real Data - Valor en UF millones</div>
         </div>
       </div>
       <div class="table-wrapper">
-        <table class="data-table" id="tasacionesTable">
-          <!-- Dynamically populated -->
-        </table>
+        <table class="data-table" id="tasacionesTable"></table>
       </div>
     </div>
 
     <div style="height: var(--space-xl)"></div>
 
-    <!-- Valuation Comparison: Sitka vs MCYA -->
+    <!-- Valuation Comparison -->
     <div class="reveal reveal-delay-3">
       <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: var(--space-lg); color: var(--text-primary)">
-        Valorizaciones Independientes – 2° Semestre 2025
+        Valorizaciones Independientes - 2do Semestre 2025
       </h3>
-      <div class="comparison-grid" id="valuationComparison">
-        <!-- Dynamically populated -->
-      </div>
+      <div class="comparison-grid" id="valuationComparison"></div>
     </div>
 
     <div style="height: var(--space-xl)"></div>
 
-    <!-- Quota Value Chart -->
     <div class="card reveal reveal-delay-2">
       <div class="card-header">
         <div>
-          <div class="card-title">Evolución Valor Cuota</div>
-          <div class="card-subtitle">Contable vs Sitka vs MCYA (2° Sem 2025)</div>
+          <div class="card-title">Evolucion Valor Cuota</div>
+          <div class="card-subtitle">Contable vs Sitka vs MCYA (2do Sem 2025)</div>
         </div>
       </div>
       <div class="chart-container short">
@@ -325,16 +348,15 @@
     </div>
   </section>
 
-  <!-- ═══ ARRENDATARIOS & CONTRATOS ═══ -->
+  <!-- ARRENDATARIOS & CONTRATOS -->
   <section class="section" id="tenants">
     <div class="section-header reveal">
-      <div class="section-label"><span class="dot"></span> Sección 04</div>
+      <div class="section-label"><span class="dot"></span> Seccion 05</div>
       <h2 class="section-title">Arrendatarios & <span class="gradient">Contratos</span></h2>
-      <p class="section-subtitle">Análisis de la cartera de arrendatarios y perfil de vencimiento de contratos</p>
+      <p class="section-subtitle">Analisis de la cartera de arrendatarios y perfil de vencimiento de contratos</p>
     </div>
 
     <div class="grid-2 reveal reveal-delay-1">
-      <!-- Top Tenants Table -->
       <div class="card">
         <div class="card-header">
           <div>
@@ -347,17 +369,13 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7a9bb5" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input type="text" id="tenantSearchInput" placeholder="Buscar arrendatario..." />
         </div>
-        <div id="tenantBars">
-          <!-- Dynamically populated -->
-        </div>
+        <div id="tenantBars"></div>
       </div>
-
-      <!-- Activity Composition -->
       <div class="card">
         <div class="card-header">
           <div>
-            <div class="card-title">Composición por Actividad</div>
-            <div class="card-subtitle">Distribución de ingresos por sector económico</div>
+            <div class="card-title">Composicion por Actividad</div>
+            <div class="card-subtitle">Distribucion de ingresos por sector economico</div>
           </div>
         </div>
         <div class="chart-container square">
@@ -369,382 +387,118 @@
     <div style="height: var(--space-xl)"></div>
 
     <div class="grid-2 reveal reveal-delay-2">
-      <!-- Contract Profile -->
       <div class="card">
         <div class="card-header">
           <div>
             <div class="card-title">Perfil de Vencimiento de Contratos</div>
-            <div class="card-subtitle">Por tipo de activo y año</div>
+            <div class="card-subtitle">Por tipo de activo y ano</div>
           </div>
-          <div class="tag green">WALT: 5,0 años</div>
+          <div class="tag green">WALT: 5,0 anos</div>
         </div>
         <div class="chart-container">
           <canvas id="chartContractProfile"></canvas>
         </div>
       </div>
-
-      <!-- Key Metrics -->
       <div class="card">
         <div class="card-header">
           <div>
             <div class="card-title">Indicadores Clave de Arriendo</div>
-            <div class="card-subtitle">Métricas de estabilidad contractual</div>
+            <div class="card-subtitle">Metricas de estabilidad contractual</div>
           </div>
         </div>
-        <div id="tenantMetrics">
-          <!-- Dynamically populated -->
-        </div>
+        <div id="tenantMetrics"></div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ DEUDA & DESAPALANCAMIENTO ═══ -->
-  <section class="section" id="debt">
+  <!-- HIGHLIGHTS DEL FONDO -->
+  <section class="section" id="highlights">
     <div class="section-header reveal">
-      <div class="section-label"><span class="dot"></span> Sección 05</div>
-      <h2 class="section-title">Deuda & <span class="gradient">Desapalancamiento</span></h2>
-      <p class="section-subtitle">Estructura, composición y perfil de amortización de la deuda financiera del Fondo</p>
+      <div class="section-label"><span class="dot"></span> Seccion 06</div>
+      <h2 class="section-title">Highlights del <span class="gradient">Fondo</span></h2>
+      <p class="section-subtitle">Ultimas noticias y logros destacados de BTG Pactual Renta Comercial</p>
     </div>
 
-    <!-- Debt KPIs -->
-    <div class="grid-4 reveal reveal-delay-1" id="debtKpis">
+    <div class="highlights-grid reveal reveal-delay-1" id="highlightsGrid">
       <!-- Dynamically populated -->
     </div>
-
-    <div style="height: var(--space-xl)"></div>
-
-    <div class="grid-2 reveal reveal-delay-2">
-      <!-- Debt Composition -->
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title">Composición de Deuda</div>
-            <div class="card-subtitle">Por tipo de instrumento</div>
-          </div>
-        </div>
-        <div class="chart-container square">
-          <canvas id="chartDebtComposition"></canvas>
-        </div>
-      </div>
-
-      <!-- Amortization Profile -->
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title">Perfil de Amortización</div>
-            <div class="card-subtitle">Miles de UF por año</div>
-          </div>
-        </div>
-        <div class="chart-container">
-          <canvas id="chartAmortization"></canvas>
-        </div>
-      </div>
-    </div>
   </section>
 
-  <!-- ═══ MERCADO BURSÁTIL ═══ -->
-  <section class="section" id="market">
-    <div class="section-header reveal">
-      <div class="section-label"><span class="dot"></span> Sección 06</div>
-      <h2 class="section-title">Información <span class="gradient">Bursátil</span></h2>
-      <p class="section-subtitle">Desempeño en mercado secundario, volumen transado y comparación con peers</p>
-    </div>
-
-    <div class="grid-3 reveal reveal-delay-1" id="marketKpis">
-      <!-- Dynamically populated -->
-    </div>
-
-    <div style="height: var(--space-xl)"></div>
-
-    <div class="grid-2 reveal reveal-delay-2">
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title">Volumen Transado (MM CLP)</div>
-            <div class="card-subtitle">BTG vs Peers comparables</div>
-          </div>
-        </div>
-        <div class="table-wrapper">
-          <table class="data-table" id="volumeTable">
-            <!-- Dynamically populated -->
-          </table>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title">Vacancia Mercado de Oficinas</div>
-            <div class="card-subtitle">Santiago · Tendencia 1Q 2026</div>
-          </div>
-          <div class="metric-change positive">↓ 8,1% → 7,1%</div>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: var(--space-lg); margin-top: var(--space-xl);" id="vacancySection">
-          <!-- Dynamically populated -->
-        </div>
-      </div>
-    </div>
+  <!-- PRE-FOOTER SUBSCRIBE -->
+  <section class="subscribe-section" style="background: #0b2540; padding: 40px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1);">
+    <h2 style="color: white; font-size: 1.8rem; margin-bottom: 24px; font-weight: 500;">Suscríbete para recibir información del fondo</h2>
+    <form style="display: flex; max-width: 600px; margin: 0 auto; border-radius: 4px; overflow: hidden;">
+      <input type="email" placeholder="tu correo electrónico" style="flex: 1; padding: 12px 16px; background: #1c3b5d; border: none; color: white; outline: none; font-size: 0.9rem;">
+      <button type="submit" style="background: white; color: #0b2540; border: none; padding: 12px 24px; font-weight: 600; font-size: 0.9rem; cursor: pointer;">quiero recibir actualizaciones del fondo</button>
+    </form>
   </section>
 
-  <!-- ═══ SIMULADOR ═══ -->
-  <section class="section" id="simulator">
-    <div class="section-header reveal">
-      <div class="section-label"><span class="dot"></span> Sección 07</div>
-      <h2 class="section-title">Simulador <span class="gradient">Interactivo</span></h2>
-      <p class="section-subtitle">Ajusta las variables y observa el impacto estimado en el valor cuota del Fondo</p>
-    </div>
-
-    <div class="grid-2-1 reveal reveal-delay-1">
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title">Variables de Simulación</div>
-            <div class="card-subtitle">Mueve los sliders o selecciona un escenario predefinido</div>
-          </div>
-        </div>
-        <!-- Preset buttons -->
-        <div class="simulator-presets">
-          <button class="preset-btn active" data-preset="base">Escenario Base</button>
-          <button class="preset-btn" data-preset="optimistic">Escenario Optimista (+10%)</button>
-          <button class="preset-btn" data-preset="conservative">Escenario Conservador (-10%)</button>
-          <button class="preset-btn" data-preset="stress">Stress Test (-20%)</button>
-        </div>
-        <div class="simulator-controls" id="simulatorControls">
-          <!-- Dynamically populated -->
-        </div>
-      </div>
-      <div class="card">
-        <div class="simulator-result" id="simulatorResult">
-          <!-- Dynamically populated -->
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ NOTICIAS & CONTINGENCIAS DE MERCADO ═══ -->
-  <section class="section" id="news">
-    <div class="section-header reveal">
-      <div class="section-label"><span class="dot"></span> Sección 08</div>
-      <h2 class="section-title">Noticias & <span class="gradient">Contingencias de Mercado</span></h2>
-      <p class="section-subtitle">Monitoreo estratégico de consultoras líderes (Colliers, GPS, CBRE, JLL), reformas tributarias y políticas públicas con análisis de impacto directo en el Fondo</p>
-    </div>
-
-    <!-- Summary KPI Row -->
-    <div class="grid-4 reveal reveal-delay-1" id="newsKpisContainer" style="margin-bottom: var(--space-xl);">
-      <!-- Dynamically populated -->
-    </div>
-
-    <!-- Controls: Filter Pills & Search -->
-    <div class="controls-bar reveal reveal-delay-2" style="margin-bottom: var(--space-xl);">
-      <div class="filter-pills" id="newsFilterPills">
-        <button class="filter-pill active" data-filter="all">Todas las Fuentes (6)</button>
-        <button class="filter-pill" data-filter="regulatorio">Políticas Públicas & IVA</button>
-        <button class="filter-pill" data-filter="colliers">Colliers International</button>
-        <button class="filter-pill" data-filter="gps">GPS Property</button>
-        <button class="filter-pill" data-filter="cbre">CBRE Logistics</button>
-        <button class="filter-pill" data-filter="banco-central">Banco Central / TPM</button>
-      </div>
-      <div class="search-box">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7a9bb5" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" id="newsSearchInput" placeholder="Buscar noticia, reforma o activo..." />
-      </div>
-    </div>
-
-    <!-- News & Contingencies Grid -->
-    <div class="news-grid reveal reveal-delay-3" id="newsCardsGrid">
-      <!-- Dynamically populated by main.js -->
-    </div>
-  </section>
-
-  <!-- ═══ FOOTER (Official BTG Pactual Style) ═══ -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-top" style="display: grid; grid-template-columns: 280px 1fr 220px; gap: var(--space-2xl); align-items: start;">
-        <!-- Brand -->
+  <!-- FOOTER -->
+  <footer class="footer" style="background: #0b2540; padding: 60px 20px 20px; font-family: 'Inter', sans-serif;">
+    <div class="footer-inner" style="max-width: 1200px; margin: 0 auto;">
+      
+      <div class="footer-top" style="display: grid; grid-template-columns: 200px repeat(4, 1fr) 200px; gap: 20px; margin-bottom: 40px; align-items: start;">
+        <!-- Logo -->
         <div class="footer-logo">
-          <img src="/btg-logo-white.png" alt="BTG Pactual Asset Management" style="height: 52px; width: auto; object-fit: contain; margin-bottom: 12px;" />
-          <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: var(--space-sm); line-height: 1.6;">
-            Fondo de Inversión BTG Pactual Renta Comercial (RUN CMF 7224-9). Administrado por BTG Pactual Chile S.A. Administradora General de Fondos.
-          </p>
+          <img src="./src/assets/btg-logo-white.png" alt="BTG Pactual Asset Management" style="height: 45px; width: auto; object-fit: contain;" />
+        </div>
+        
+        <!-- Cols -->
+        <div>
+          <h5 style="font-size: 0.75rem; font-weight: 700; color: #ffffff; text-transform: uppercase; margin-bottom: 16px;">HOME</h5>
+          <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.75rem; display: flex; flex-direction: column; gap: 10px; color: rgba(255,255,255,0.7);">
+            <li><a href="#" style="color: inherit; text-decoration: none;">¿Por qué invertir?</a></li>
+            <li><a href="#" style="color: inherit; text-decoration: none;">¿En qué invertimos?</a></li>
+            <li><a href="#" style="color: inherit; text-decoration: none;">¿Cómo invertir?</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h5 style="font-size: 0.75rem; font-weight: 700; color: #ffffff; text-transform: uppercase; margin-bottom: 16px;">ACERCA DEL FONDO</h5>
+          <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.75rem; display: flex; flex-direction: column; gap: 10px; color: rgba(255,255,255,0.7);">
+            <li><a href="#" style="color: inherit; text-decoration: none;">Descripción</a></li>
+            <li><a href="#" style="color: inherit; text-decoration: none;">Características</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h5 style="font-size: 0.75rem; font-weight: 700; color: #ffffff; text-transform: uppercase; margin-bottom: 16px;">PORTAFOLIO DE ACTIVOS</h5>
+          <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.75rem; display: flex; flex-direction: column; gap: 10px; color: rgba(255,255,255,0.7);">
+            <li><a href="#" style="color: inherit; text-decoration: none;">Activos en el mapa</a></li>
+            <li><a href="#" style="color: inherit; text-decoration: none;">Activos por características</a></li>
+          </ul>
         </div>
 
-        <!-- Multi-Column Links -->
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl);" class="footer-columns">
-          <div>
-            <h5 style="font-size: 0.82rem; font-weight: 700; color: #ffffff; text-transform: uppercase; margin-bottom: var(--space-md);">Acerca del Fondo</h5>
-            <ul style="list-style: none; font-size: 0.75rem; display: flex; flex-direction: column; gap: 8px; color: var(--text-secondary);">
-              <li><a href="#dashboard" style="color: inherit; text-decoration: none;">Dashboard Financiero</a></li>
-              <li><a href="#portfolio" style="color: inherit; text-decoration: none;">Estructura Societaria</a></li>
-              <li><a href="#news" style="color: inherit; text-decoration: none;">Contingencias de Mercado</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h5 style="font-size: 0.82rem; font-weight: 700; color: #ffffff; text-transform: uppercase; margin-bottom: var(--space-md);">Portafolio de Activos</h5>
-            <ul style="list-style: none; font-size: 0.75rem; display: flex; flex-direction: column; gap: 8px; color: var(--text-secondary);">
-              <li><a href="#portfolio" style="color: inherit; text-decoration: none;">Proyección 3D de Activos</a></li>
-              <li><a href="#tenants" style="color: inherit; text-decoration: none;">Top 20 Arrendatarios</a></li>
-              <li><a href="#valuations" style="color: inherit; text-decoration: none;">Tasaciones & Cap Rates</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h5 style="font-size: 0.82rem; font-weight: 700; color: #ffffff; text-transform: uppercase; margin-bottom: var(--space-md);">Inversionistas</h5>
-            <ul style="list-style: none; font-size: 0.75rem; display: flex; flex-direction: column; gap: 8px; color: var(--text-secondary);">
-              <li><a href="#simulator" style="color: inherit; text-decoration: none;">Simulador de Valor Cuota</a></li>
-              <li><a href="https://www.mercadosenlinea.cl/invertir/instrumento/fondo-de-inversion/cfibtgrca" target="_blank" rel="noopener" style="color: var(--accent-tertiary); text-decoration: none;">Mercados en Línea ↗</a></li>
-              <li><a href="https://www.rentacomercial.cl" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">www.rentacomercial.cl ↗</a></li>
-            </ul>
-          </div>
+        <div>
+          <h5 style="font-size: 0.75rem; font-weight: 700; color: #ffffff; text-transform: uppercase; margin-bottom: 16px;">GOBIERNO CORPORATIVO</h5>
+          <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.75rem; display: flex; flex-direction: column; gap: 10px; color: rgba(255,255,255,0.7);">
+            <li><a href="#" style="color: inherit; text-decoration: none;">INFORMACIÓN PARA INVERSIONISTAS</a></li>
+          </ul>
         </div>
 
-        <!-- Contact info -->
-        <div class="footer-contact" style="text-align: right;">
-          <div style="font-size: 1.15rem; font-weight: 800; color: #ffffff; margin-bottom: 4px;">800 386 800</div>
-          <div style="font-size: 0.8rem; margin-bottom: var(--space-md);"><a href="mailto:rentacomercial@btgpactual.com" style="color: var(--accent-light-blue); text-decoration: none;">rentacomercial@btgpactual.com</a></div>
-          <a href="https://www.mercadosenlinea.cl/invertir/instrumento/fondo-de-inversion/cfibtgrca" target="_blank" class="btn-invertir-top" style="display: inline-block;">
-            Invertir en el Fondo ↗
-          </a>
+        <!-- Contact -->
+        <div class="footer-contact" style="text-align: right; color: rgba(255,255,255,0.9); font-size: 0.75rem; line-height: 1.6;">
+          <div>800 386 800</div>
+          <div><a href="mailto:rentacomercial@btgpactual.com" style="color: inherit; text-decoration: none;">rentacomercial@btgpactual.com</a></div>
         </div>
       </div>
-
-      <div class="footer-bottom" style="margin-top: var(--space-2xl); padding-top: var(--space-lg); border-top: 1px solid var(--border-subtle);">
-        <div class="footer-text">
-          <p style="font-size: 0.8rem; font-weight: 600; color: #ffffff; margin-bottom: 8px;">BTG Pactual Renta Comercial – Intelligence Hub · 2026</p>
-          <p class="disclaimer" style="font-size: 0.7rem; line-height: 1.6; color: var(--text-muted); text-align: justify;">
-            Este material no debe servir como la única fuente de información en el proceso de decisión de los inversionistas, quienes, antes de tomar cualquier decisión, deben realizar una evaluación a fondo del producto y sus riesgos y contrastarlos con sus objetivos personales y su perfil de riesgo. Es importante tener en cuenta que “La rentabilidad o ganancia obtenida en el pasado por este fondo, no garantiza que ella se repita en el futuro. Los valores de las cuotas de los fondos son variables”. BTG Pactual no asegura o garantiza de ningún modo el resultado o rendimiento de las inversiones; y por lo tanto, esta información no constituye en caso alguna garantía o declaración respecto del éxito, la rentabilidad, el rendimiento, el resultado, la consecuencia o el beneficio esperado o proyectado. Infórmese de las características esenciales de la inversión en este fondo, las que se encuentran contenidas en su reglamento interno.
-          </p>
-        </div>
+      
+      <!-- Disclaimer -->
+      <div class="footer-bottom" style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+        <p class="disclaimer" style="font-size: 0.65rem; line-height: 1.5; color: rgba(255,255,255,0.4); text-align: justify; margin: 0;">
+          Este material no debe servir como la única fuente de información en el proceso de decisión de los inversionistas, quienes, antes de tomar cualquier decisión, deben realizar una evaluación a fondo del producto y sus riesgos y contrastarlos con sus objetivos personales y su perfil de riesgo. Es importante tener en cuenta que "La rentabilidad o ganancia obtenida en el pasado por este fondo, no garantiza que ella se repita en el futuro. Los valores de las cuotas de los fondos son variables". BTG Pactual no asegura o garantiza de ningún modo el resultado o rendimiento de las inversiones; y por lo tanto, esta información no constituye en caso alguna garantía o declaración respecto del éxito, la rentabilidad, el rendimiento, el resultado, la consecuencia o el beneficio esperado o proyectado. Infórmese de las características esenciales de la inversión en este fondo, las que se encuentran contenidas en su reglamento interno.
+        </p>
       </div>
+      
     </div>
   </footer>
 
-  <!-- ═══ FLOATING ACTIONS BAR (AI COPILOT + BACK TO TOP) ═══ -->
+
+  <!-- FLOATING ACTIONS -->
   <div class="floating-actions-bar">
-    <button class="ai-copilot-trigger" id="btnOpenAICopilot" aria-label="Abrir Asistente Financiero IA">
-      <span class="sparkle-icon">✨</span>
-      <span>BTG Copilot</span>
-      <span class="ai-badge">IA</span>
-    </button>
     <button class="back-to-top" id="btnBackToTop" aria-label="Volver arriba">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
     </button>
-  </div>
-
-  <!-- ═══ AI COPILOT CHAT DRAWER ═══ -->
-  <div class="ai-chat-drawer" id="aiChatDrawer">
-    <!-- Header -->
-    <div class="ai-chat-header">
-      <div class="ai-chat-header-title">
-        <span class="status-dot"></span>
-        <div>
-          <h4>BTG Real Estate Copilot</h4>
-          <span style="font-size: 0.65rem; color: var(--text-muted);">IA Financiera & Modelo de Sensibilidad</span>
-        </div>
-      </div>
-      <div class="ai-chat-header-actions">
-        <button class="ai-chat-btn-icon" id="btnAISettings" title="Configurar modelo LLM en vivo">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-        </button>
-        <button class="ai-chat-btn-icon" id="btnClearAIChat" title="Limpiar conversación">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-        </button>
-        <button class="ai-chat-btn-icon" id="btnCloseAIChat" title="Cerrar chat">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- Live LLM Settings Overlay -->
-    <div class="ai-settings-panel" id="aiSettingsPanel" style="display: none;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-        <h5 style="margin: 0; font-size: 0.88rem; color: #ffffff; font-weight: 700;">⚙️ Conexión de IA en Vivo (LLM)</h5>
-        <button class="ai-chat-btn-icon" id="btnCloseAISettings">&times;</button>
-      </div>
-      <p style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4;">
-        Conecta un modelo LLM en vivo (Groq, OpenAI, DeepSeek o Gemini). Si no ingresas clave, se usará el motor financiero matemático local.
-      </p>
-
-      <div style="display: flex; flex-direction: column; gap: 10px;">
-        <div>
-          <label style="font-size: 0.7rem; color: var(--text-secondary); font-weight: 600; display: block; margin-bottom: 4px;">Proveedor de IA:</label>
-          <select id="aiProviderSelect" style="width: 100%; background: var(--bg-deep); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 6px 10px; color: #ffffff; font-size: 0.78rem; outline: none;">
-            <option value="groq">Groq (Ultra-Rápido · Llama 3.3 70B / DeepSeek R1)</option>
-            <option value="openai">OpenAI (GPT-4o / GPT-4o-mini)</option>
-            <option value="openrouter">OpenRouter (DeepSeek R1 / Claude / Llama 3)</option>
-            <option value="gemini">Google Gemini (Gemini 1.5 Flash)</option>
-          </select>
-        </div>
-
-        <div>
-          <label style="font-size: 0.7rem; color: var(--text-secondary); font-weight: 600; display: block; margin-bottom: 4px;">API Key:</label>
-          <input type="password" id="aiApiKeyInput" placeholder="sk-..." style="width: 100%; background: var(--bg-deep); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 6px 10px; color: #ffffff; font-size: 0.78rem; outline: none;" />
-        </div>
-
-        <div>
-          <label style="font-size: 0.7rem; color: var(--text-secondary); font-weight: 600; display: block; margin-bottom: 4px;">Nombre del Modelo:</label>
-          <input type="text" id="aiModelInput" value="llama-3.3-70b-versatile" style="width: 100%; background: var(--bg-deep); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 6px 10px; color: #ffffff; font-size: 0.78rem; outline: none;" />
-        </div>
-
-        <div style="display: flex; gap: 8px; margin-top: 6px;">
-          <button id="btnSaveAISettings" style="flex: 1; padding: 7px; background: var(--accent-primary); border: none; border-radius: var(--radius-sm); color: #ffffff; font-size: 0.75rem; font-weight: 700; cursor: pointer;">
-            Guardar Configuración
-          </button>
-          <button id="btnClearAIKey" style="padding: 7px 12px; background: rgba(239, 68, 68, 0.2); border: 1px solid var(--accent-danger); border-radius: var(--radius-sm); color: var(--accent-danger); font-size: 0.72rem; cursor: pointer;">
-            Desconectar
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Messages Container -->
-    <div class="ai-chat-messages" id="aiChatMessages">
-      <div class="ai-msg-assistant">
-        <div class="ai-response-card blue">
-          <div class="ai-response-header">
-            <h5 class="ai-response-title">🤖 ¡Hola! Soy el Copilot de Renta Comercial</h5>
-            <span class="tag blue">Modelo 1Q 2026</span>
-          </div>
-          <div class="ai-response-text">
-            Estoy entrenado con los <strong>11 documentos, estados financieros, modelos DCF de Sitka/MCYA y tasaciones</strong> del fondo.
-            <br/><br/>
-            Puedo calcular <strong>TIRs, sensibilidades de vacancia, ventas de activos o incrementos de renta</strong> en tiempo real.
-          </div>
-          <div class="ai-recommendation-box" style="margin-top: 10px;">
-            💡 <em>Prueba hacer clic en las preguntas rápidas abajo o escribe tu propia consulta.</em>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Quick Prompt Suggestions -->
-    <div class="ai-chat-suggestions" id="aiSuggestions">
-      <button class="ai-prompt-chip" data-prompt="¿Cuáles son los drivers financieros para llegar a una TIR del 20%?">
-        🎯 Drivers para llegar a TIR 20%
-      </button>
-      <button class="ai-prompt-chip" data-prompt="¿Cuál sería la TIR del inversionista si la vacancia aumenta a 50% en Cargo Park?">
-        🏢 Vacancia 50% en Cargo Park
-      </button>
-      <button class="ai-prompt-chip" data-prompt="¿Qué impacto tendría si se vendiera Cargo Park a valor de tasación?">
-        💰 Venta de Cargo Park
-      </button>
-      <button class="ai-prompt-chip" data-prompt="¿Qué pasa si la renta/m² aumenta 10% en 2 oficinas de Torre Costanera?">
-        📈 Renta +10% en Torre Costanera
-      </button>
-      <button class="ai-prompt-chip" data-prompt="Compara la valorización de Sitka vs MCYA para la Serie A">
-        🔍 Sitka vs MCYA Serie A
-      </button>
-      <button class="ai-prompt-chip" data-prompt="¿Cuál es el perfil de vencimientos de deuda y covenants DSCR?">
-        🛡️ Deuda & DSCR
-      </button>
-    </div>
-
-    <!-- Input Bar -->
-    <form class="ai-chat-input-bar" id="aiChatForm">
-      <input type="text" id="aiChatInput" placeholder="Pregunta sobre TIR, vacancia, venta de activos o rentas..." autocomplete="off" />
-      <button type="submit" class="ai-btn-send" id="aiBtnSend" aria-label="Enviar mensaje">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-      </button>
-    </form>
   </div>
 
   <script type="module" src="/src/main.js"></script>

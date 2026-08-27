@@ -7,21 +7,21 @@ Chart.register(...registerables);
 
 // ── Shared Theme Config ──────────────────────────────────
 const COLORS = {
-  primary: '#2b8cff',
-  primaryFaded: 'rgba(43, 140, 255, 0.18)',
-  secondary: '#5ba3ff',
-  secondaryFaded: 'rgba(91, 163, 255, 0.15)',
-  tertiary: '#f0b429',
-  tertiaryFaded: 'rgba(240, 180, 41, 0.15)',
-  blue: '#2b8cff',
-  blueFaded: 'rgba(43, 140, 255, 0.15)',
-  danger: '#ef4444',
-  dangerFaded: 'rgba(239, 68, 68, 0.15)',
-  success: '#34d399',
-  text: '#ffffff',
-  textMuted: '#7a9bb5',
-  gridLine: 'rgba(255, 255, 255, 0.05)',
-  bg: '#061a2e',
+  primary: '#0a2d4d',
+  primaryFaded: 'rgba(10, 45, 77, 0.15)',
+  secondary: '#2563eb',
+  secondaryFaded: 'rgba(37, 99, 235, 0.15)',
+  tertiary: '#d97706',
+  tertiaryFaded: 'rgba(217, 119, 6, 0.15)',
+  blue: '#2563eb',
+  blueFaded: 'rgba(37, 99, 235, 0.15)',
+  danger: '#dc2626',
+  dangerFaded: 'rgba(220, 38, 38, 0.15)',
+  success: '#059669',
+  text: '#0a2d4d',
+  textMuted: '#64748b',
+  gridLine: 'rgba(0, 0, 0, 0.06)',
+  bg: '#ffffff',
 };
 
 const CHART_DEFAULTS = {
@@ -45,10 +45,10 @@ const CHART_DEFAULTS = {
       },
     },
     tooltip: {
-      backgroundColor: 'rgba(10, 14, 26, 0.95)',
-      titleColor: COLORS.text,
-      bodyColor: COLORS.textMuted,
-      borderColor: 'rgba(148, 163, 184, 0.1)',
+      backgroundColor: '#0a2d4d',
+      titleColor: '#ffffff',
+      bodyColor: '#cbd5e1',
+      borderColor: 'rgba(255, 255, 255, 0.1)',
       borderWidth: 1,
       cornerRadius: 8,
       padding: 12,
@@ -331,9 +331,9 @@ export function renderPortfolioComposition(ctx) {
   return new Chart(ctx, {
     type: 'doughnut',
     data: {
-      labels: ['Oficinas', 'Centros Comerciales', 'Bodegas'],
+      labels: ['Oficinas', 'Centros Comerciales', 'Bodegas & Estac.'],
       datasets: [{
-        data: [116430, 163576, 77388],
+        data: [42.4, 55.9, 1.7],
         backgroundColor: [COLORS.blue, COLORS.primary, COLORS.tertiary],
         borderColor: COLORS.bg,
         borderWidth: 3,
@@ -345,6 +345,14 @@ export function renderPortfolioComposition(ctx) {
       cutout: '65%',
       plugins: {
         ...opts.plugins,
+        tooltip: {
+          ...opts.plugins.tooltip,
+          callbacks: {
+            label: function(context) {
+              return ' ' + context.label + ': ' + context.raw + '% de renta';
+            }
+          }
+        },
         legend: {
           ...opts.plugins.legend,
           position: 'bottom',
@@ -379,14 +387,17 @@ export function renderTenantActivityChart(ctx, tenants) {
       cutout: '60%',
       plugins: {
         ...opts.plugins,
+        tooltip: {
+          ...opts.plugins.tooltip,
+          callbacks: {
+            label: function(context) {
+              return ' ' + context.label + ': ' + context.raw + '%';
+            }
+          }
+        },
         legend: {
           ...opts.plugins.legend,
-          position: 'right',
-          labels: {
-            ...opts.plugins.legend.labels,
-            font: { family: 'Inter', size: 10, weight: '500' },
-            padding: 8,
-          },
+          display: false,
         },
       },
     },
@@ -542,6 +553,110 @@ export function renderValuationCompChart(ctx, valuations) {
           ...opts.scales.y,
           ticks: { ...opts.scales.y.ticks, callback: (v) => `$${v.toLocaleString()}` },
           suggestedMin: 30000,
+        },
+      },
+    },
+  });
+}
+
+// ── 11. DELEVERAGING CHART ───────────────────────────────
+export function renderDeleveragingChart(canvasId, deleveraging) {
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+  const opts = mergeDefaults({});
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: deleveraging.quarters,
+      datasets: [
+        {
+          label: 'Deuda Financiera Bruta',
+          data: deleveraging.deudaBruta,
+          backgroundColor: '#0a2d4d',
+          borderRadius: 4,
+          order: 2,
+          yAxisID: 'y',
+        },
+        {
+          label: 'Deuda Financiera Neta',
+          data: deleveraging.deudaNeta,
+          backgroundColor: '#2563eb',
+          borderRadius: 4,
+          order: 3,
+          yAxisID: 'y',
+        },
+        {
+          label: 'Efectivo y Equivalente',
+          data: deleveraging.efectivo,
+          backgroundColor: '#d97706',
+          borderRadius: 4,
+          order: 4,
+          yAxisID: 'y',
+        },
+        {
+          type: 'line',
+          label: 'RCSD (der.)',
+          data: deleveraging.rcsd,
+          borderColor: '#6b7280',
+          backgroundColor: 'transparent',
+          borderWidth: 2,
+          borderDash: [6, 3],
+          pointBackgroundColor: '#6b7280',
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          order: 1,
+          yAxisID: 'y1',
+        },
+      ],
+    },
+    options: {
+      ...opts,
+      scales: {
+        x: {
+          ...opts.scales.x,
+          stacked: false,
+        },
+        y: {
+          ...opts.scales.y,
+          position: 'left',
+          title: {
+            display: true,
+            text: 'Deuda Financiera UF (millones)',
+            color: COLORS.textMuted,
+            font: { family: 'Inter', size: 10, weight: '500' },
+          },
+          ticks: {
+            ...opts.scales.y.ticks,
+            callback: (v) => `${v}`,
+          },
+          suggestedMin: 5,
+          suggestedMax: 17,
+        },
+        y1: {
+          position: 'right',
+          ticks: {
+            color: COLORS.textMuted,
+            font: { family: 'Inter', size: 10 },
+            callback: (v) => `${v.toFixed(1)}x`,
+          },
+          grid: { display: false },
+          border: { display: false },
+          suggestedMin: 1.0,
+          suggestedMax: 2.5,
+          title: {
+            display: true,
+            text: 'RCSD',
+            color: COLORS.textMuted,
+            font: { family: 'Inter', size: 10, weight: '500' },
+          },
+        },
+      },
+      plugins: {
+        ...opts.plugins,
+        legend: {
+          ...opts.plugins.legend,
+          position: 'bottom',
         },
       },
     },
