@@ -720,8 +720,8 @@ export function renderComunaConcentrationChart(ctx, portfolioData) {
     .map(c => ({ name: c, ...comunaMap[c] }))
     .sort((a, b) => b.total - a.total);
 
-  // Tomar top comunas
-  const topComunas = sortedComunas.slice(0, 10);
+  // Tomar top 3 comunas
+  const topComunas = sortedComunas.slice(0, 3);
 
   // 4. Preparar datos para Chart.js
   const labels = topComunas.map(c => c.name);
@@ -740,19 +740,19 @@ export function renderComunaConcentrationChart(ctx, portfolioData) {
           label: 'Comercial',
           data: dataComercial,
           backgroundColor: COLORS.tertiary,
-          borderRadius: 2,
+          borderRadius: 4,
         },
         {
           label: 'Oficinas',
           data: dataOficinas,
           backgroundColor: COLORS.blue,
-          borderRadius: 2,
+          borderRadius: 4,
         },
         {
           label: 'Bodegas',
           data: dataBodegas,
           backgroundColor: COLORS.success,
-          borderRadius: 2,
+          borderRadius: 4,
         }
       ]
     },
@@ -762,12 +762,12 @@ export function renderComunaConcentrationChart(ctx, portfolioData) {
       scales: {
         x: {
           ...opts.scales.x,
-          stacked: true,
+          stacked: false,
           title: { display: true, text: 'Peso en el Fondo (%)', color: COLORS.textMuted, font: {family: 'Inter', size: 10} }
         },
         y: {
           ...opts.scales.y,
-          stacked: true
+          stacked: false
         }
       },
       plugins: {
@@ -775,8 +775,8 @@ export function renderComunaConcentrationChart(ctx, portfolioData) {
         datalabels: {
           display: true,
           color: '#ffffff',
-          font: { weight: 'bold', size: 10 },
-          formatter: (value) => value > 1.5 ? value.toFixed(1) + '%' : null
+          font: { weight: 'bold', size: 11 },
+          formatter: (value) => value > 0 ? value.toFixed(1) + '%' : null
         },
         tooltip: {
           ...opts.plugins.tooltip,
