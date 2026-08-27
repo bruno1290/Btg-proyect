@@ -690,14 +690,14 @@ export function renderDeleveragingChart(canvasId, deleveraging) {
 export function renderComunaConcentrationChart(ctx, portfolioData) {
   // 1. Agrupar activos y clasificarlos
   const allAssets = [];
-  if (portfolioData.oficinas?.items) {
-    portfolioData.oficinas.items.forEach(i => allAssets.push({ ...i, classType: 'Oficinas' }));
+  if (Array.isArray(portfolioData.oficinas)) {
+    portfolioData.oficinas.forEach(i => allAssets.push({ ...i, classType: 'Oficinas' }));
   }
-  if (portfolioData.comercial?.items) {
-    portfolioData.comercial.items.forEach(i => allAssets.push({ ...i, classType: 'Comercial' }));
+  if (Array.isArray(portfolioData.comercial)) {
+    portfolioData.comercial.forEach(i => allAssets.push({ ...i, classType: 'Comercial' }));
   }
-  if (portfolioData.bodegas?.items) {
-    portfolioData.bodegas.items.forEach(i => allAssets.push({ ...i, classType: 'Bodegas' }));
+  if (Array.isArray(portfolioData.bodegas)) {
+    portfolioData.bodegas.forEach(i => allAssets.push({ ...i, classType: 'Bodegas' }));
   }
 
   // 2. Agrupar por comuna
