@@ -3,7 +3,8 @@
 // ============================================================
 
 import { Chart, registerables } from 'chart.js';
-Chart.register(...registerables);
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+Chart.register(...registerables, ChartDataLabels);
 
 // ── Shared Theme Config ──────────────────────────────────
 const COLORS = {
@@ -59,6 +60,7 @@ const CHART_DEFAULTS = {
       boxHeight: 8,
       boxPadding: 4,
     },
+    datalabels: { display: false },
   },
   scales: {
     x: {
@@ -346,6 +348,12 @@ export function renderPortfolioComposition(ctx) {
       scales: { x: { display: false }, y: { display: false } },
       plugins: {
         ...opts.plugins,
+        datalabels: {
+          display: true,
+          color: '#ffffff',
+          font: { weight: 'bold', size: 12 },
+          formatter: (value) => value + '%'
+        },
         tooltip: {
           ...opts.plugins.tooltip,
           callbacks: {
@@ -389,6 +397,12 @@ export function renderTenantActivityChart(ctx, tenants) {
       scales: { x: { display: false }, y: { display: false } },
       plugins: {
         ...opts.plugins,
+        datalabels: {
+          display: true,
+          color: '#ffffff',
+          font: { weight: 'bold', size: 11 },
+          formatter: (value) => value > 4 ? Math.round(value) + '%' : null
+        },
         tooltip: {
           ...opts.plugins.tooltip,
           callbacks: {
@@ -470,6 +484,12 @@ export function renderDebtCompositionChart(ctx, debtStructure) {
       scales: { x: { display: false }, y: { display: false } },
       plugins: {
         ...opts.plugins,
+        datalabels: {
+          display: true,
+          color: '#ffffff',
+          font: { weight: 'bold', size: 12 },
+          formatter: (value) => value + '%'
+        },
         legend: {
           ...opts.plugins.legend,
           position: 'bottom',
