@@ -17,7 +17,7 @@ import {
   renderPortfolioComposition, renderTenantActivityChart,
   renderContractProfileChart, renderDebtCompositionChart,
   renderAmortizationChart, renderValuationCompChart,
-  renderDeleveragingChart,
+  renderDeleveragingChart, renderComunaConcentrationChart,
 } from './charts.js';
 
 // ── Helper: Format numbers ──────────────────────────────
@@ -769,11 +769,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const c10 = document.getElementById('chartContractProfile');
     if (c10) renderContractProfileChart(c10.getContext('2d'), tenants);
 
-    const c11 = document.getElementById('chartDebtComposition');
-    if (c11) renderDebtCompositionChart(c11.getContext('2d'), debtStructure);
+    const c11 = document.getElementById('chartComunas');
+    if (c11) renderComunaConcentrationChart(c11.getContext('2d'), assetPortfolio);
 
-    const c12 = document.getElementById('chartAmortization');
-    if (c12) renderAmortizationChart(c12.getContext('2d'), debtStructure);
+    const c12 = document.getElementById('chartDebtComposition');
+    if (c12) renderDebtCompositionChart(c12.getContext('2d'), debtStructure);
+
+    const c13 = document.getElementById('chartAmortization');
+    if (c13) renderAmortizationChart(c13.getContext('2d'), debtStructure);
 
     // New deleveraging chart
     renderDeleveragingChart('chartDeleveraging', deleveraging);

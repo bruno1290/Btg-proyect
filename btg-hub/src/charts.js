@@ -685,3 +685,116 @@ export function renderDeleveragingChart(canvasId, deleveraging) {
     },
   });
 }
+
+// ── 13. Comuna Concentration (Horizontal Stacked Bar) ─────
+export function renderComunaConcentrationChart(ctx, portfolioData) {
+  // 1. Agrupar activos y clasificarlos
+  const allAssets = [];
+  if (portfolioData.oficinas?.items) {
+    portfolioData.oficinas.items.forEach(i => allAssets.push({ ...i, classType: 'Oficinas' }));
+  }
+  if (portfolioData.comercial?.items) {
+    portfolioData.comercial.items.forEach(i => allAssets.push({ ...i, classType: 'Comercial' }));
+  }
+  if (portfolioData.bodegas?.items) {
+    portfolioData.bodegas.items.forEach(i => allAssets.push({ ...i, classType: 'Bodegas' }));
+  }
+
+  // 2. Agrupar por comuna
+  const comunaMap = {};
+  allAssets.forEach(a => {
+    const com = a.comuna || 'Desconocida';
+    if (!comunaMap[com]) {
+      comunaMap[com] = { total: 0, Oficinas: 0, Comercial: 0, Bodegas: 0, assets: [] };
+    }
+    const weight = a.pesoFondo || 0;
+    if(weight > 0) {
+      comunaMap[com].total += weight;
+      comunaMap[com][a.classType] += weight;
+      comunaMap[com].assets.push({ name: a.name, weight, classType: a.classType });
+    }
+  });
+
+  // 3. Ordenar comunas de mayor a menor peso
+  const sortedComunas = Object.keys(comunaMap)
+    .map(c => ({ name: c, ...comunaMap[c] }))
+    .sort((a, b) => b.total - a.total);
+
+  // Tomar top comunas
+  const topComunas = sortedComunas.slice(0, 10);
+
+  // 4. Preparar datos para Chart.js
+  const labels = topComunas.map(c => c.name);
+  const dataOficinas = topComunas.map(c => c.Oficinas);
+  const dataComercial = topComunas.map(c => c.Comercial);
+  const dataBodegas = topComunas.map(c => c.Bodegas);
+  const assetBreakdown = topComunas.map(c => c.assets.sort((a,b) => b.weight - a.weight));
+
+  const opts = mergeDefaults({});
+  return new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Comercial',
+          data: dataComercial,
+          backgroundColor: COLORS.tertiary,
+          borderRadius: 2,
+        },
+        {
+          label: 'Oficinas',
+          data: dataOficinas,
+          backgroundColor: COLORS.blue,
+          borderRadius: 2,
+        },
+        {
+          label: 'Bodegas',
+          data: dataBodegas,
+          backgroundColor: COLORS.success,
+          borderRadius: 2,
+        }
+      ]
+    },
+    options: {
+      ...opts,
+      indexAxis: 'y',
+      scales: {
+        x: {
+          ...opts.scales.x,
+          stacked: true,
+          title: { display: true, text: 'Peso en el Fondo (%)', color: COLORS.textMuted, font: {family: 'Inter', size: 10} }
+        },
+        y: {
+          ...opts.scales.y,
+          stacked: true
+        }
+      },
+      plugins: {
+        ...opts.plugins,
+        datalabels: {
+          display: true,
+          color: '#ffffff',
+          font: { weight: 'bold', size: 10 },
+          formatter: (value) => value > 1.5 ? value.toFixed(1) + '%' : null
+        },
+        tooltip: {
+          ...opts.plugins.tooltip,
+          callbacks: {
+            footer: function(tooltipItems) {
+               const idx = tooltipItems[0].dataIndex;
+               const datasetLabel = tooltipItems[0].dataset.label;
+               const assetsInClass = assetBreakdown[idx].filter(a => a.classType === datasetLabel);
+               if(assetsInClass.length === 0) return '';
+               return 'Activos:\n' + assetsInClass.map(a => '• ' + a.name + ' (' + a.weight.toFixed(1) + '%)').join('\n');
+            }
+          }
+        },
+        legend: {
+          ...opts.plugins.legend,
+          position: 'bottom'
+        }
+      }
+    }
+  });
+}
