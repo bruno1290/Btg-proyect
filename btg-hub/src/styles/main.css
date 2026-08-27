@@ -206,6 +206,48 @@ body::before {
   border-color: transparent;
 }
 
+.live-quote {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-left: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled .live-quote {
+  background: rgba(241, 245, 249, 0.9);
+  border-color: transparent;
+  color: var(--text-primary);
+}
+
+.quote-label {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.navbar.scrolled .quote-label {
+  color: var(--text-muted);
+}
+
+.quote-value {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.quote-var {
+  font-weight: 600;
+  font-size: 0.7rem;
+}
+
+.quote-var.positive { color: #10b981; }
+.quote-var.negative { color: #ef4444; }
+
 .navbar.scrolled .brand-text,
 .navbar.scrolled .brand-text strong {
   color: #0a2d4d;

@@ -30,6 +30,38 @@ function fmtMM(n) {
   return `M$${Math.round(n).toLocaleString('es-CL')}`;
 }
 
+// ── Live Quote Fetcher ────────────────────────────────────
+async function fetchLiveQuote() {
+  try {
+    const res = await fetch('/api/quote');
+    const json = await res.json();
+    if (json.success && json.data) {
+      const { price, variation } = json.data;
+      const quoteEl = document.getElementById('liveQuote');
+      const valEl = document.getElementById('quoteValue');
+      const varEl = document.getElementById('quoteVar');
+      
+      if (quoteEl && valEl && varEl) {
+        valEl.textContent = `$${price.toLocaleString('es-CL', {minimumFractionDigits: 1, maximumFractionDigits: 1})}`;
+        
+        if (variation > 0) {
+          varEl.textContent = `▲ ${variation.toFixed(2)}%`;
+          varEl.className = 'quote-var positive';
+        } else if (variation < 0) {
+          varEl.textContent = `▼ ${Math.abs(variation).toFixed(2)}%`;
+          varEl.className = 'quote-var negative';
+        } else {
+          varEl.textContent = `0.00%`;
+          varEl.className = 'quote-var';
+        }
+        quoteEl.style.display = 'flex';
+      }
+    }
+  } catch (err) {
+    console.error('Failed to fetch live quote:', err);
+  }
+}
+
 // ── 1. NAVBAR & Back-to-Top ──────────────────────────────
 function initNavbarAndScroll() {
   const navbar = document.getElementById('navbar');
@@ -715,6 +747,7 @@ function renderFundHighlights() {
 document.addEventListener('DOMContentLoaded', () => {
   // Navigation & Scroll
   initNavbarAndScroll();
+  fetchLiveQuote();
 
   // Animated counters
   initCounters();
