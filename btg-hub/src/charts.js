@@ -334,7 +334,7 @@ export function renderPortfolioComposition(ctx) {
       labels: ['Oficinas', 'Centros Comerciales', 'Bodegas & Estac.'],
       datasets: [{
         data: [42.4, 55.9, 1.7],
-        backgroundColor: [COLORS.blue, COLORS.primary, COLORS.tertiary],
+        backgroundColor: [COLORS.blue, COLORS.tertiary, COLORS.success],
         borderColor: COLORS.bg,
         borderWidth: 3,
         hoverOffset: 8,
@@ -343,6 +343,7 @@ export function renderPortfolioComposition(ctx) {
     options: {
       ...opts,
       cutout: '65%',
+      scales: { x: { display: false }, y: { display: false } },
       plugins: {
         ...opts.plugins,
         tooltip: {
@@ -385,6 +386,7 @@ export function renderTenantActivityChart(ctx, tenants) {
     options: {
       ...opts,
       cutout: '60%',
+      scales: { x: { display: false }, y: { display: false } },
       plugins: {
         ...opts.plugins,
         tooltip: {
@@ -465,6 +467,7 @@ export function renderDebtCompositionChart(ctx, debtStructure) {
     options: {
       ...opts,
       cutout: '65%',
+      scales: { x: { display: false }, y: { display: false } },
       plugins: {
         ...opts.plugins,
         legend: {

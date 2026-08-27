@@ -479,9 +479,9 @@ export const tenants = {
 // ──────────────────────────────────────────────
 export const debtStructure = {
   composition: [
-    { type: 'Leasing', pct: 40, color: '#2b8cff' },
-    { type: 'Mutuo Hipotecario', pct: 29, color: '#5ba3ff' },
-    { type: 'Pagaré', pct: 31, color: '#f0b429' },
+    { type: 'Leasing', pct: 40, color: '#0a2d4d' },
+    { type: 'Mutuo Hipotecario', pct: 29, color: '#2563eb' },
+    { type: 'Pagaré', pct: 31, color: '#d97706' },
   ],
   structure: [
     { type: 'Amortizing', pct: 18 },
