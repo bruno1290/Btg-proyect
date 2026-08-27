@@ -693,8 +693,12 @@ export function renderComunaConcentrationChart(ctx, portfolioData) {
   if (Array.isArray(portfolioData.oficinas)) {
     portfolioData.oficinas.forEach(i => allAssets.push({ ...i, classType: 'Oficinas' }));
   }
-  if (Array.isArray(portfolioData.comercial)) {
-    portfolioData.comercial.forEach(i => allAssets.push({ ...i, classType: 'Comercial' }));
+  if (portfolioData.centrosComerciales) {
+    const cc = portfolioData.centrosComerciales;
+    if (Array.isArray(cc.malls)) cc.malls.forEach(i => allAssets.push({ ...i, classType: 'Comercial' }));
+    if (Array.isArray(cc.powerCenters)) cc.powerCenters.forEach(i => allAssets.push({ ...i, classType: 'Comercial' }));
+    if (Array.isArray(cc.stripCenters)) cc.stripCenters.forEach(i => allAssets.push({ ...i, classType: 'Comercial' }));
+    if (Array.isArray(cc.standAlone)) cc.standAlone.forEach(i => allAssets.push({ ...i, classType: 'Comercial' }));
   }
   if (Array.isArray(portfolioData.bodegas)) {
     portfolioData.bodegas.forEach(i => allAssets.push({ ...i, classType: 'Bodegas' }));
