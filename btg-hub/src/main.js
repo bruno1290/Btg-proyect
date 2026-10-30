@@ -360,7 +360,10 @@ function renderPortfolioExpanded() {
         ${assets.map(a => `
           <div class="asset-detail-card" onclick="openAssetModal('${a.name}', '${a.comuna}', '${a.address}', '${typeof a.gla === 'number' ? a.gla.toLocaleString('es-CL') + ' m²' : a.gla}', '${a.vacancia}%', '${a.pesoFondo}%')">
             <div class="asset-detail-name">${a.name}</div>
-            <div class="asset-detail-address">${a.comuna}</div>
+            <div class="asset-detail-address" style="display: flex; align-items: center; gap: 4px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.address + ', ' + a.comuna + ', Chile')}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" style="color: var(--text-secondary); text-decoration: none; font-size: 0.75rem; transition: color 0.2s;" onmouseover="this.style.color='#2563eb'; this.style.textDecoration='underline'" onmouseout="this.style.color='var(--text-secondary)'; this.style.textDecoration='none'">${a.address}, ${a.comuna}</a>
+            </div>
             <div class="asset-detail-meta" style="margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
               <div style="display: flex; flex-direction: column;">
                 <span style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase;">Peso Fondo</span>
@@ -385,7 +388,11 @@ window.openAssetModal = function(name, comuna, address, gla, vacancia, pesoFondo
       <div style="background: #ffffff; width: 90%; max-width: 500px; border-radius: 12px; padding: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); position: relative;">
         <button onclick="document.getElementById('assetModalOverlay').remove()" style="position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-secondary);">&times;</button>
         <h2 style="margin: 0 0 4px 0; font-size: 1.2rem; color: var(--text-primary); font-weight: 700;">${name}</h2>
-        <p style="margin: 0 0 20px 0; font-size: 0.85rem; color: var(--text-secondary);">${address}, ${comuna}</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address + ', ' + comuna + ', Chile')}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px; margin: 0 0 20px 0; font-size: 0.85rem; color: #2563eb; text-decoration: none; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          ${address}, ${comuna}
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
         
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
           <div style="background: var(--bg-secondary); padding: 12px; border-radius: 8px;">
@@ -419,7 +426,7 @@ function renderRegionTable() {
   table.innerHTML = `
     <thead>
       <tr>
-        <th>Region</th>
+        <th>Región</th>
         <th class="text-right">Oficinas (m²)</th>
         <th class="text-right">Comercial (m²)</th>
         <th class="text-right">Bodegas (m²)</th>
@@ -447,7 +454,7 @@ function renderDeleveragingSection() {
   if (kpisContainer) {
     const kpiData = [
       { label: 'Deuda Bruta Actual', value: 'UF 9,9 mm', sub: 'Desde UF 15,8 mm en 4Q 2022' },
-      { label: 'Reduccion Deuda', value: '-37%', sub: 'Deuda financiera bruta' },
+      { label: 'Reducción Deuda', value: '-37%', sub: 'Deuda financiera bruta' },
       { label: 'Caja por Ventas', value: 'UF 2,15 mm', sub: 'Generada desde 4Q 2022' },
       { label: 'RCSD', value: `${kpis.dscr}x`, sub: 'Ratio cobertura de deuda' },
     ];
@@ -492,9 +499,9 @@ function renderDebtKpis() {
   if (!container) return;
 
   const kpiData = [
-    { label: 'Duration', value: `${debtStructure.duration} anos`, sub: `@ UF + ${debtStructure.rate}%` },
+    { label: 'Duration', value: `${debtStructure.duration} años`, sub: `@ UF + ${debtStructure.rate}%` },
     { label: 'Estructura Bullet', value: `${debtStructure.structure[1].pct}%`, sub: 'vs 18% Amortizing' },
-    { label: 'Reduccion Deuda', value: `-${debtStructure.debtReduction}%`, sub: '1T 2024 → 1T 2026' },
+    { label: 'Reducción Deuda', value: `-${debtStructure.debtReduction}%`, sub: '1T 2024 → 1T 2026' },
     { label: 'DSCR', value: `${kpis.dscr}x`, sub: 'Ratio cobertura de deuda' },
   ];
 
@@ -516,7 +523,7 @@ function renderRiskClassification() {
   container.innerHTML = `
     <div class="risk-rating-panel">
       <div class="risk-rating-badge">
-        <div class="risk-badge-label">Clasificacion de Cuota</div>
+        <div class="risk-badge-label">Clasificación de Cuota</div>
         <div class="risk-badge-value">${rc.rating}</div>
         <div class="risk-badge-agency">${rc.agency}</div>
       </div>
@@ -530,7 +537,7 @@ function renderRiskClassification() {
           <div class="metric-value small">${rc.capRateContable}</div>
         </div>
         <div class="risk-metric">
-          <div class="metric-label">Cap Rate Bursatil</div>
+          <div class="metric-label">Cap Rate Bursátil</div>
           <div class="metric-value small">${rc.capRateBursatil}</div>
         </div>
         <div class="risk-metric">
@@ -705,12 +712,12 @@ function renderTenantMetrics() {
   if (!container) return;
 
   const metrics = [
-    { label: 'WALT (anos a termino)', value: '5,0', desc: 'Weighted Average Lease Term' },
+    { label: 'WALT (años a término)', value: '5,0', desc: 'Weighted Average Lease Term' },
     { label: 'Ingresos fijos', value: '94%', desc: 'Porcentaje de rentas fijas vs variables' },
-    { label: 'Top 20 concentracion', value: '44,7%', desc: 'Los 20 principales representan menos del 50%' },
+    { label: 'Top 20 concentración', value: '44,7%', desc: 'Los 20 principales representan menos del 50%' },
     { label: 'Vacancia financiera', value: `${kpis.vacanciaConsolidada}%`, desc: 'Vacancia consolidada del fondo' },
-    { label: 'Diversificacion sectorial', value: '12 sectores', desc: 'Servicios, Retail, Financiero, Salud, etc.' },
-    { label: 'Vencimiento promedio', value: '5,0 anos', desc: 'A fecha de termino de contrato' },
+    { label: 'Diversificación sectorial', value: '12 sectores', desc: 'Servicios, Retail, Financiero, Salud, etc.' },
+    { label: 'Vencimiento promedio', value: '5,0 años', desc: 'A fecha de término de contrato' },
   ];
 
   container.innerHTML = `
