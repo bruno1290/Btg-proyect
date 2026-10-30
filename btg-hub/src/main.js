@@ -426,7 +426,7 @@ function renderRegionTable() {
   table.innerHTML = `
     <thead>
       <tr>
-        <th>Region</th>
+        <th>Región</th>
         <th class="text-right">Oficinas (m²)</th>
         <th class="text-right">Comercial (m²)</th>
         <th class="text-right">Bodegas (m²)</th>
@@ -537,7 +537,7 @@ function renderRiskClassification() {
           <div class="metric-value small">${rc.capRateContable}</div>
         </div>
         <div class="risk-metric">
-          <div class="metric-label">Cap Rate Bursatil</div>
+          <div class="metric-label">Cap Rate Bursátil</div>
           <div class="metric-value small">${rc.capRateBursatil}</div>
         </div>
         <div class="risk-metric">
